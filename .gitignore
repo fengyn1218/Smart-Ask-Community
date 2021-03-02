@@ -27,7 +27,7 @@ target/
 MANIFEST.MF
 
 # IDEA artifacts and output dirs
-*.iml
+# *.iml
 *.ipr
 *.iws
 .idea
