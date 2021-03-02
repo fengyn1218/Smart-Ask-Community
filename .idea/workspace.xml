@@ -19,11 +19,47 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a8ccea8e-3aa7-4d96-b3cd-85dec80d9b4c" name="Default Changelist" comment="" />
+    <list default="true" id="a8ccea8e-3aa7-4d96-b3cd-85dec80d9b4c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/checkstyle-idea.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_11_4.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_11_4.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_11_4.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jdk8_2_11_4.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jsr310_2_11_4.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_module_jackson_module_parameter_names_2_11_4.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_core_9_0_43.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_websocket_9_0_43.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_jakarta_el_3_0_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_json_2_4_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_tomcat_2_4_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_web_2_4_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_web_5_3_4.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_webmvc_5_3_4.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-api/src/main/java/com/feng/community/CommunityApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-api/src/main/java/com/feng/community/controller/AdminController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/java/com/feng/community/admin/service/AdminService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/java/com/feng/community/admin/service/impl/AdminServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Smart-Ask-Community.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Smart-Ask-Community.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smart-ask-community-api/smart-ask-community-api.iml" beforeDir="false" afterPath="$PROJECT_DIR$/smart-ask-community-api/smart-ask-community-api.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smart-ask-community-component/smart-ask-community-component.iml" beforeDir="false" afterPath="$PROJECT_DIR$/smart-ask-community-component/smart-ask-community-component.iml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -48,8 +84,13 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -65,7 +106,7 @@
   </component>
   <component name="RunManager">
     <configuration name="CommunityApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <module name="Smart-Ask-Community" />
+      <module name="smart-ask-community-api" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.feng.community.CommunityApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -84,6 +125,7 @@
       <updated>1614680067867</updated>
       <workItem from="1614680071718" duration="1617000" />
       <workItem from="1614684532248" duration="8000" />
+      <workItem from="1614685163283" duration="2470000" />
     </task>
     <servers />
   </component>
@@ -103,13 +145,62 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="709" y="246" key="#com.intellij.ide.util.MemberChooser" timestamp="1614687220842">
+      <screen x="0" y="25" width="1792" height="1021" />
+    </state>
+    <state x="709" y="246" key="#com.intellij.ide.util.MemberChooser/0.25.1792.1021@0.25.1792.1021" timestamp="1614687220842" />
+    <state x="514" y="228" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog" timestamp="1614687301614">
+      <screen x="0" y="25" width="1792" height="1021" />
+    </state>
+    <state x="514" y="228" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog/0.25.1792.1021@0.25.1792.1021" timestamp="1614687301614" />
+    <state width="1750" height="380" key="GridCell.Tab.0.bottom" timestamp="1614687551142">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state width="1750" height="309" key="GridCell.Tab.0.bottom/-2560.-191.2560.1440/0.0.1792.1120@0.0.1792.1120" timestamp="1614686124302" />
+    <state width="1750" height="380" key="GridCell.Tab.0.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1614687551142" />
+    <state width="1750" height="380" key="GridCell.Tab.0.center" timestamp="1614687551138">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state width="1750" height="309" key="GridCell.Tab.0.center/-2560.-191.2560.1440/0.0.1792.1120@0.0.1792.1120" timestamp="1614686124294" />
+    <state width="1750" height="380" key="GridCell.Tab.0.center/0.0.1792.1120@0.0.1792.1120" timestamp="1614687551138" />
+    <state width="1750" height="380" key="GridCell.Tab.0.left" timestamp="1614687551136">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state width="1750" height="309" key="GridCell.Tab.0.left/-2560.-191.2560.1440/0.0.1792.1120@0.0.1792.1120" timestamp="1614686124289" />
+    <state width="1750" height="380" key="GridCell.Tab.0.left/0.0.1792.1120@0.0.1792.1120" timestamp="1614687551136" />
+    <state width="1750" height="380" key="GridCell.Tab.0.right" timestamp="1614687551141">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state width="1750" height="309" key="GridCell.Tab.0.right/-2560.-191.2560.1440/0.0.1792.1120@0.0.1792.1120" timestamp="1614686124296" />
+    <state width="1750" height="380" key="GridCell.Tab.0.right/0.0.1792.1120@0.0.1792.1120" timestamp="1614687551141" />
+    <state width="1750" height="309" key="GridCell.Tab.1.bottom" timestamp="1614687550830">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state width="1750" height="309" key="GridCell.Tab.1.bottom/-2560.-191.2560.1440/0.0.1792.1120@0.0.1792.1120" timestamp="1614686124312" />
+    <state width="1750" height="309" key="GridCell.Tab.1.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1614687550830" />
+    <state width="1750" height="309" key="GridCell.Tab.1.center" timestamp="1614687550828">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state width="1750" height="309" key="GridCell.Tab.1.center/-2560.-191.2560.1440/0.0.1792.1120@0.0.1792.1120" timestamp="1614686124309" />
+    <state width="1750" height="309" key="GridCell.Tab.1.center/0.0.1792.1120@0.0.1792.1120" timestamp="1614687550828" />
+    <state width="1750" height="309" key="GridCell.Tab.1.left" timestamp="1614687550826">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state width="1750" height="309" key="GridCell.Tab.1.left/-2560.-191.2560.1440/0.0.1792.1120@0.0.1792.1120" timestamp="1614686124304" />
+    <state width="1750" height="309" key="GridCell.Tab.1.left/0.0.1792.1120@0.0.1792.1120" timestamp="1614687550826" />
+    <state width="1750" height="309" key="GridCell.Tab.1.right" timestamp="1614687550829">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state width="1750" height="309" key="GridCell.Tab.1.right/-2560.-191.2560.1440/0.0.1792.1120@0.0.1792.1120" timestamp="1614686124310" />
+    <state width="1750" height="309" key="GridCell.Tab.1.right/0.0.1792.1120@0.0.1792.1120" timestamp="1614687550829" />
     <state x="302" y="234" key="new project wizard" timestamp="1614680518399">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state x="302" y="234" key="new project wizard/-2560.-191.2560.1440/0.0.1792.1120@0.0.1792.1120" timestamp="1614680518399" />
-    <state x="561" y="272" width="670" height="676" key="search.everywhere.popup" timestamp="1614681399183">
-      <screen x="0" y="0" width="1792" height="1120" />
+    <state x="561" y="273" width="670" height="617" key="search.everywhere.popup" timestamp="1614687276218">
+      <screen x="0" y="25" width="1792" height="1021" />
     </state>
     <state x="561" y="272" width="670" height="676" key="search.everywhere.popup/-2560.-191.2560.1440/0.0.1792.1120@0.0.1792.1120" timestamp="1614681399183" />
+    <state x="561" y="273" width="670" height="617" key="search.everywhere.popup/0.25.1792.1021@0.25.1792.1021" timestamp="1614687276218" />
   </component>
 </project>

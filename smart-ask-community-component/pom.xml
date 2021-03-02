@@ -9,6 +9,8 @@
         <version>${revision}</version>
     </parent>
 
+    <packaging>jar</packaging>
+
 
     <artifactId>smart-ask-community-component</artifactId>
 
