@@ -6,7 +6,7 @@
     <parent>
         <artifactId>community</artifactId>
         <groupId>com.feng</groupId>
-        <version>${feng.version}</version>
+        <version>${revision}</version>
     </parent>
 
 

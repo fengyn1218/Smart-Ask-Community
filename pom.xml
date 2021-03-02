@@ -19,7 +19,7 @@
 
     <groupId>com.feng</groupId>
     <artifactId>community</artifactId>
-    <version>${feng.version}</version>
+    <version>${revision}</version>
     <name>community</name>
 
     <description>Smart-Ask-Community</description>
@@ -27,7 +27,7 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <feng.version>1.0.0-SNAPSHOT</feng.version>
+        <revision>1.0.0-SNAPSHOT</revision>
     </properties>
 
 
@@ -58,7 +58,7 @@
             <dependency>
                 <groupId>com.feng</groupId>
                 <artifactId>smart-ask-community-component</artifactId>
-                <version>${feng.version}</version>
+                <version>${revision}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
