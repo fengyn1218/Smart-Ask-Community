@@ -19,7 +19,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a8ccea8e-3aa7-4d96-b3cd-85dec80d9b4c" name="Default Changelist" comment="" />
+    <list default="true" id="a8ccea8e-3aa7-4d96-b3cd-85dec80d9b4c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -52,10 +55,16 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Global Libraries" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.import" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="CommunityApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
@@ -76,7 +85,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1614680067867</updated>
-      <workItem from="1614680071718" duration="922000" />
+      <workItem from="1614680071718" duration="1617000" />
     </task>
     <servers />
   </component>
@@ -99,5 +108,9 @@
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state x="302" y="234" key="new project wizard/-2560.-191.2560.1440/0.0.1792.1120@0.0.1792.1120" timestamp="1614680518399" />
+    <state x="561" y="272" width="670" height="676" key="search.everywhere.popup" timestamp="1614681399183">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state x="561" y="272" width="670" height="676" key="search.everywhere.popup/-2560.-191.2560.1440/0.0.1792.1120@0.0.1792.1120" timestamp="1614681399183" />
   </component>
 </project>
