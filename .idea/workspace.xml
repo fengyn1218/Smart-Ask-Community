@@ -20,33 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a8ccea8e-3aa7-4d96-b3cd-85dec80d9b4c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/checkstyle-idea.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_11_4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_11_4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_11_4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jdk8_2_11_4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jsr310_2_11_4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_module_jackson_module_parameter_names_2_11_4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_core_9_0_43.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_websocket_9_0_43.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_jakarta_el_3_0_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_json_2_4_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_tomcat_2_4_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_web_2_4_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_web_5_3_4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_webmvc_5_3_4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/smart-ask-community-api/src/main/java/com/feng/community/CommunityApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/smart-ask-community-api/src/main/java/com/feng/community/controller/AdminController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/java/com/feng/community/admin/service/AdminService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/java/com/feng/community/admin/service/impl/AdminServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Smart-Ask-Community.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Smart-Ask-Community.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smart-ask-community-api/smart-ask-community-api.iml" beforeDir="false" afterPath="$PROJECT_DIR$/smart-ask-community-api/smart-ask-community-api.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smart-ask-community-component/smart-ask-community-component.iml" beforeDir="false" afterPath="$PROJECT_DIR$/smart-ask-community-component/smart-ask-community-component.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smart-ask-community-api/src/main/java/com/feng/community/CommunityApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/feng/community/CommunityApplication.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,7 +78,20 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Spring Boot.CommunityApplication (1)">
+    <configuration name="CommunityApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="Smart-Ask-Community" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.feng.community.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.feng.community.CommunityApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="CommunityApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="smart-ask-community-api" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.feng.community.CommunityApplication" />
@@ -112,6 +99,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.CommunityApplication (1)" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -125,7 +117,7 @@
       <updated>1614680067867</updated>
       <workItem from="1614680071718" duration="1617000" />
       <workItem from="1614684532248" duration="8000" />
-      <workItem from="1614685163283" duration="2470000" />
+      <workItem from="1614685163283" duration="3014000" />
     </task>
     <servers />
   </component>
@@ -153,46 +145,62 @@
       <screen x="0" y="25" width="1792" height="1021" />
     </state>
     <state x="514" y="228" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog/0.25.1792.1021@0.25.1792.1021" timestamp="1614687301614" />
-    <state width="1750" height="380" key="GridCell.Tab.0.bottom" timestamp="1614687551142">
+    <state width="1750" height="309" key="GridCell.Tab.0.bottom" timestamp="1614688060461">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state width="1750" height="309" key="GridCell.Tab.0.bottom/-2560.-191.2560.1440/0.0.1792.1120@0.0.1792.1120" timestamp="1614686124302" />
-    <state width="1750" height="380" key="GridCell.Tab.0.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1614687551142" />
-    <state width="1750" height="380" key="GridCell.Tab.0.center" timestamp="1614687551138">
+    <state width="1750" height="309" key="GridCell.Tab.0.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1614688060461" />
+    <state width="1750" height="309" key="GridCell.Tab.0.center" timestamp="1614688060459">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state width="1750" height="309" key="GridCell.Tab.0.center/-2560.-191.2560.1440/0.0.1792.1120@0.0.1792.1120" timestamp="1614686124294" />
-    <state width="1750" height="380" key="GridCell.Tab.0.center/0.0.1792.1120@0.0.1792.1120" timestamp="1614687551138" />
-    <state width="1750" height="380" key="GridCell.Tab.0.left" timestamp="1614687551136">
+    <state width="1750" height="309" key="GridCell.Tab.0.center/0.0.1792.1120@0.0.1792.1120" timestamp="1614688060459" />
+    <state width="1750" height="309" key="GridCell.Tab.0.left" timestamp="1614688060458">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state width="1750" height="309" key="GridCell.Tab.0.left/-2560.-191.2560.1440/0.0.1792.1120@0.0.1792.1120" timestamp="1614686124289" />
-    <state width="1750" height="380" key="GridCell.Tab.0.left/0.0.1792.1120@0.0.1792.1120" timestamp="1614687551136" />
-    <state width="1750" height="380" key="GridCell.Tab.0.right" timestamp="1614687551141">
+    <state width="1750" height="309" key="GridCell.Tab.0.left/0.0.1792.1120@0.0.1792.1120" timestamp="1614688060458" />
+    <state width="1750" height="309" key="GridCell.Tab.0.right" timestamp="1614688060460">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state width="1750" height="309" key="GridCell.Tab.0.right/-2560.-191.2560.1440/0.0.1792.1120@0.0.1792.1120" timestamp="1614686124296" />
-    <state width="1750" height="380" key="GridCell.Tab.0.right/0.0.1792.1120@0.0.1792.1120" timestamp="1614687551141" />
-    <state width="1750" height="309" key="GridCell.Tab.1.bottom" timestamp="1614687550830">
+    <state width="1750" height="309" key="GridCell.Tab.0.right/0.0.1792.1120@0.0.1792.1120" timestamp="1614688060460" />
+    <state width="1750" height="309" key="GridCell.Tab.1.bottom" timestamp="1614687951865">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state width="1750" height="309" key="GridCell.Tab.1.bottom/-2560.-191.2560.1440/0.0.1792.1120@0.0.1792.1120" timestamp="1614686124312" />
-    <state width="1750" height="309" key="GridCell.Tab.1.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1614687550830" />
-    <state width="1750" height="309" key="GridCell.Tab.1.center" timestamp="1614687550828">
+    <state width="1750" height="309" key="GridCell.Tab.1.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1614687951865" />
+    <state width="1750" height="309" key="GridCell.Tab.1.center" timestamp="1614687951863">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state width="1750" height="309" key="GridCell.Tab.1.center/-2560.-191.2560.1440/0.0.1792.1120@0.0.1792.1120" timestamp="1614686124309" />
-    <state width="1750" height="309" key="GridCell.Tab.1.center/0.0.1792.1120@0.0.1792.1120" timestamp="1614687550828" />
-    <state width="1750" height="309" key="GridCell.Tab.1.left" timestamp="1614687550826">
+    <state width="1750" height="309" key="GridCell.Tab.1.center/0.0.1792.1120@0.0.1792.1120" timestamp="1614687951863" />
+    <state width="1750" height="309" key="GridCell.Tab.1.left" timestamp="1614687951862">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state width="1750" height="309" key="GridCell.Tab.1.left/-2560.-191.2560.1440/0.0.1792.1120@0.0.1792.1120" timestamp="1614686124304" />
-    <state width="1750" height="309" key="GridCell.Tab.1.left/0.0.1792.1120@0.0.1792.1120" timestamp="1614687550826" />
-    <state width="1750" height="309" key="GridCell.Tab.1.right" timestamp="1614687550829">
+    <state width="1750" height="309" key="GridCell.Tab.1.left/0.0.1792.1120@0.0.1792.1120" timestamp="1614687951862" />
+    <state width="1750" height="309" key="GridCell.Tab.1.right" timestamp="1614687951864">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state width="1750" height="309" key="GridCell.Tab.1.right/-2560.-191.2560.1440/0.0.1792.1120@0.0.1792.1120" timestamp="1614686124310" />
-    <state width="1750" height="309" key="GridCell.Tab.1.right/0.0.1792.1120@0.0.1792.1120" timestamp="1614687550829" />
+    <state width="1750" height="309" key="GridCell.Tab.1.right/0.0.1792.1120@0.0.1792.1120" timestamp="1614687951864" />
+    <state width="1750" height="380" key="GridCell.Tab.2.bottom" timestamp="1614687738039">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state width="1750" height="380" key="GridCell.Tab.2.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1614687738039" />
+    <state width="1750" height="380" key="GridCell.Tab.2.center" timestamp="1614687738036">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state width="1750" height="380" key="GridCell.Tab.2.center/0.0.1792.1120@0.0.1792.1120" timestamp="1614687738036" />
+    <state width="1750" height="380" key="GridCell.Tab.2.left" timestamp="1614687738034">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state width="1750" height="380" key="GridCell.Tab.2.left/0.0.1792.1120@0.0.1792.1120" timestamp="1614687738034" />
+    <state width="1750" height="380" key="GridCell.Tab.2.right" timestamp="1614687738038">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state width="1750" height="380" key="GridCell.Tab.2.right/0.0.1792.1120@0.0.1792.1120" timestamp="1614687738038" />
     <state x="302" y="234" key="new project wizard" timestamp="1614680518399">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
