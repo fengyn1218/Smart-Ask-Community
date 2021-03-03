@@ -1,2 +1,9 @@
 server:
   port: 8080
+spring:
+  thymeleaf:
+    cache: false # 开发时关闭缓存，不然看不到事实时页面
+    mode: HTML # 用非严格的HTML
+    encoding: utf-8
+    servlet:
+      content-type: text/html

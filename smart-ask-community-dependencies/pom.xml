@@ -13,6 +13,8 @@
 
     <artifactId>smart-ask-community-dependencies</artifactId>
 
+
+
     <dependencyManagement>
         <dependencies>
             <dependency>
