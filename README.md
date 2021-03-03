@@ -2,9 +2,11 @@
 一个智能问答社区
 
 # 技术栈
+- JDK1.8开发环境（Intellij IDEA）
 - Spring Boot：底层支持框架
 - Redis：缓存设计、榜单设计。。。。
 - MyBatis-plus：ORM框架支持
+- MySQL：数据库支持
 - lombok：简化代码
 - maven：依赖管理
 

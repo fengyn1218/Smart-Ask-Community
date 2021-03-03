@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>community</artifactId>
         <groupId>com.feng</groupId>
-        <version>${revision}</version>
+        <artifactId>smart-ask-community-dependencies</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
 
     <packaging>jar</packaging>
