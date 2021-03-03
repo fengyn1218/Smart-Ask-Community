@@ -20,16 +20,145 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a8ccea8e-3aa7-4d96-b3cd-85dec80d9b4c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/css/full.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/css/global.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/css/iconfont.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/css/iconfont.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/css/iconfont.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/css/iconfont.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/images/avatar/0.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/images/avatar/00.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/images/avatar/1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/images/avatar/10.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/images/avatar/11.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/images/avatar/2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/images/avatar/3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/images/avatar/4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/images/avatar/5.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/images/avatar/6.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/images/avatar/7.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/images/avatar/8.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/images/avatar/9.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/images/avatar/default.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/images/case.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/images/fly.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/images/logo-1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/images/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/images/other/1437100018023.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/images/other/study-a.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/images/weixin.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/css/layui.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/css/layui.mobile.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/css/modules/code.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/css/modules/laydate/default/laydate.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/css/modules/layer/default/icon-ext.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/css/modules/layer/default/icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/css/modules/layer/default/layer.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/css/modules/layer/default/loading-0.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/css/modules/layer/default/loading-1.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/css/modules/layer/default/loading-2.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/font/iconfont.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/font/iconfont.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/font/iconfont.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/font/iconfont.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/0.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/1.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/10.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/11.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/12.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/13.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/14.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/15.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/16.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/17.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/18.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/19.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/2.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/20.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/21.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/22.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/23.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/24.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/25.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/26.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/27.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/28.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/29.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/3.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/30.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/31.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/32.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/33.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/34.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/35.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/36.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/37.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/38.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/39.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/4.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/40.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/41.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/42.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/43.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/44.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/45.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/46.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/47.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/48.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/49.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/5.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/50.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/51.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/52.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/53.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/54.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/55.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/56.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/57.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/58.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/59.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/6.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/60.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/61.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/62.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/63.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/64.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/65.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/66.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/67.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/68.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/69.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/7.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/70.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/71.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/8.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/images/face/9.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/lay/modules/carousel.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/lay/modules/code.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/lay/modules/element.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/lay/modules/flow.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/lay/modules/form.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/lay/modules/jquery.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/lay/modules/laydate.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/lay/modules/layedit.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/lay/modules/layer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/lay/modules/laypage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/lay/modules/laytpl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/lay/modules/mobile.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/lay/modules/table.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/lay/modules/tree.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/lay/modules/upload.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/lay/modules/util.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/layui.all.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/layui/layui.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/mods/case.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/mods/face.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/mods/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/mods/jie.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static/mods/user.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/templates/index1.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smart-ask-community-api/smart-ask-community-api.iml" beforeDir="false" afterPath="$PROJECT_DIR$/smart-ask-community-api/smart-ask-community-api.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smart-ask-community-api/src/main/java/com/feng/community/CommunityApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/smart-ask-community-api/src/main/java/com/feng/community/CommunityApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/smart-ask-community-api/src/main/java/com/feng/community/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/smart-ask-community-api/src/main/java/com/feng/community/controller/AdminController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smart-ask-community-component/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/smart-ask-community-component/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smart-ask-community-component/smart-ask-community-component.iml" beforeDir="false" afterPath="$PROJECT_DIR$/smart-ask-community-component/smart-ask-community-component.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smart-ask-community-dependencies/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/smart-ask-community-dependencies/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,25 +213,30 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/templates" />
     <property name="project.structure.last.edited" value="Global Libraries" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="MavenSettings" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java/com/feng/community" />
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.feng.community" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/main/java/com/feng/community" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/templates" />
+      <recent name="$PROJECT_DIR$/smart-ask-community-component/src/main/resources/static" />
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Spring Boot.CommunityApplication">
+    <configuration name="index1.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/community/smart-ask-community-component/templates/index1.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
     <configuration name="CommunityApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="smart-ask-community-api" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.feng.community.CommunityApplication" />
@@ -123,6 +257,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.index1.html" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -139,7 +278,8 @@
       <workItem from="1614685163283" duration="7049000" />
       <workItem from="1614738957563" duration="3295000" />
       <workItem from="1614752797082" duration="2674000" />
-      <workItem from="1614768837767" duration="2357000" />
+      <workItem from="1614768837767" duration="2598000" />
+      <workItem from="1614774062663" duration="1652000" />
     </task>
     <servers />
   </component>
@@ -167,53 +307,61 @@
       <screen x="0" y="25" width="1792" height="1021" />
     </state>
     <state x="514" y="228" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog/0.25.1792.1021@0.25.1792.1021" timestamp="1614687301614" />
-    <state width="1750" height="318" key="GridCell.Tab.0.bottom" timestamp="1614773040161">
+    <state width="1750" height="318" key="GridCell.Tab.0.bottom" timestamp="1614774471957">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
+    <state width="1750" height="318" key="GridCell.Tab.0.bottom/-2560.-166.2560.1415/0.0.1792.1120@0.0.1792.1120" timestamp="1614773239331" />
     <state width="1750" height="309" key="GridCell.Tab.0.bottom/-2560.-166.2560.1415/0.25.1792.1021@0.25.1792.1021" timestamp="1614737725426" />
-    <state width="1750" height="318" key="GridCell.Tab.0.bottom/-2560.-191.2560.1440/0.0.1792.1120@0.0.1792.1120" timestamp="1614773040161" />
+    <state width="1750" height="318" key="GridCell.Tab.0.bottom/-2560.-191.2560.1440/0.0.1792.1120@0.0.1792.1120" timestamp="1614774471957" />
     <state width="1750" height="309" key="GridCell.Tab.0.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1614689075100" />
-    <state width="1750" height="318" key="GridCell.Tab.0.center" timestamp="1614773040159">
+    <state width="1750" height="318" key="GridCell.Tab.0.center" timestamp="1614774471953">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
+    <state width="1750" height="318" key="GridCell.Tab.0.center/-2560.-166.2560.1415/0.0.1792.1120@0.0.1792.1120" timestamp="1614773239329" />
     <state width="1750" height="309" key="GridCell.Tab.0.center/-2560.-166.2560.1415/0.25.1792.1021@0.25.1792.1021" timestamp="1614737725423" />
-    <state width="1750" height="318" key="GridCell.Tab.0.center/-2560.-191.2560.1440/0.0.1792.1120@0.0.1792.1120" timestamp="1614773040159" />
+    <state width="1750" height="318" key="GridCell.Tab.0.center/-2560.-191.2560.1440/0.0.1792.1120@0.0.1792.1120" timestamp="1614774471953" />
     <state width="1750" height="309" key="GridCell.Tab.0.center/0.0.1792.1120@0.0.1792.1120" timestamp="1614689075099" />
-    <state width="1750" height="318" key="GridCell.Tab.0.left" timestamp="1614773040158">
+    <state width="1750" height="318" key="GridCell.Tab.0.left" timestamp="1614774471952">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
+    <state width="1750" height="318" key="GridCell.Tab.0.left/-2560.-166.2560.1415/0.0.1792.1120@0.0.1792.1120" timestamp="1614773239318" />
     <state width="1750" height="309" key="GridCell.Tab.0.left/-2560.-166.2560.1415/0.25.1792.1021@0.25.1792.1021" timestamp="1614737725422" />
-    <state width="1750" height="318" key="GridCell.Tab.0.left/-2560.-191.2560.1440/0.0.1792.1120@0.0.1792.1120" timestamp="1614773040158" />
+    <state width="1750" height="318" key="GridCell.Tab.0.left/-2560.-191.2560.1440/0.0.1792.1120@0.0.1792.1120" timestamp="1614774471952" />
     <state width="1750" height="309" key="GridCell.Tab.0.left/0.0.1792.1120@0.0.1792.1120" timestamp="1614689075098" />
-    <state width="1750" height="318" key="GridCell.Tab.0.right" timestamp="1614773040160">
+    <state width="1750" height="318" key="GridCell.Tab.0.right" timestamp="1614774471955">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
+    <state width="1750" height="318" key="GridCell.Tab.0.right/-2560.-166.2560.1415/0.0.1792.1120@0.0.1792.1120" timestamp="1614773239330" />
     <state width="1750" height="309" key="GridCell.Tab.0.right/-2560.-166.2560.1415/0.25.1792.1021@0.25.1792.1021" timestamp="1614737725425" />
-    <state width="1750" height="318" key="GridCell.Tab.0.right/-2560.-191.2560.1440/0.0.1792.1120@0.0.1792.1120" timestamp="1614773040160" />
+    <state width="1750" height="318" key="GridCell.Tab.0.right/-2560.-191.2560.1440/0.0.1792.1120@0.0.1792.1120" timestamp="1614774471955" />
     <state width="1750" height="309" key="GridCell.Tab.0.right/0.0.1792.1120@0.0.1792.1120" timestamp="1614689075099" />
-    <state width="1750" height="318" key="GridCell.Tab.1.bottom" timestamp="1614773040165">
+    <state width="1750" height="318" key="GridCell.Tab.1.bottom" timestamp="1614774471965">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
+    <state width="1750" height="318" key="GridCell.Tab.1.bottom/-2560.-166.2560.1415/0.0.1792.1120@0.0.1792.1120" timestamp="1614773239333" />
     <state width="1750" height="309" key="GridCell.Tab.1.bottom/-2560.-166.2560.1415/0.25.1792.1021@0.25.1792.1021" timestamp="1614737725431" />
-    <state width="1750" height="318" key="GridCell.Tab.1.bottom/-2560.-191.2560.1440/0.0.1792.1120@0.0.1792.1120" timestamp="1614773040165" />
+    <state width="1750" height="318" key="GridCell.Tab.1.bottom/-2560.-191.2560.1440/0.0.1792.1120@0.0.1792.1120" timestamp="1614774471965" />
     <state width="1750" height="309" key="GridCell.Tab.1.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1614689051845" />
-    <state width="1750" height="318" key="GridCell.Tab.1.center" timestamp="1614773040163">
+    <state width="1750" height="318" key="GridCell.Tab.1.center" timestamp="1614774471961">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
+    <state width="1750" height="318" key="GridCell.Tab.1.center/-2560.-166.2560.1415/0.0.1792.1120@0.0.1792.1120" timestamp="1614773239332" />
     <state width="1750" height="309" key="GridCell.Tab.1.center/-2560.-166.2560.1415/0.25.1792.1021@0.25.1792.1021" timestamp="1614737725429" />
-    <state width="1750" height="318" key="GridCell.Tab.1.center/-2560.-191.2560.1440/0.0.1792.1120@0.0.1792.1120" timestamp="1614773040163" />
+    <state width="1750" height="318" key="GridCell.Tab.1.center/-2560.-191.2560.1440/0.0.1792.1120@0.0.1792.1120" timestamp="1614774471961" />
     <state width="1750" height="309" key="GridCell.Tab.1.center/0.0.1792.1120@0.0.1792.1120" timestamp="1614689051844" />
-    <state width="1750" height="318" key="GridCell.Tab.1.left" timestamp="1614773040162">
+    <state width="1750" height="318" key="GridCell.Tab.1.left" timestamp="1614774471959">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
+    <state width="1750" height="318" key="GridCell.Tab.1.left/-2560.-166.2560.1415/0.0.1792.1120@0.0.1792.1120" timestamp="1614773239331" />
     <state width="1750" height="309" key="GridCell.Tab.1.left/-2560.-166.2560.1415/0.25.1792.1021@0.25.1792.1021" timestamp="1614737725427" />
-    <state width="1750" height="318" key="GridCell.Tab.1.left/-2560.-191.2560.1440/0.0.1792.1120@0.0.1792.1120" timestamp="1614773040162" />
+    <state width="1750" height="318" key="GridCell.Tab.1.left/-2560.-191.2560.1440/0.0.1792.1120@0.0.1792.1120" timestamp="1614774471959" />
     <state width="1750" height="309" key="GridCell.Tab.1.left/0.0.1792.1120@0.0.1792.1120" timestamp="1614689051843" />
-    <state width="1750" height="318" key="GridCell.Tab.1.right" timestamp="1614773040164">
+    <state width="1750" height="318" key="GridCell.Tab.1.right" timestamp="1614774471963">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
+    <state width="1750" height="318" key="GridCell.Tab.1.right/-2560.-166.2560.1415/0.0.1792.1120@0.0.1792.1120" timestamp="1614773239333" />
     <state width="1750" height="309" key="GridCell.Tab.1.right/-2560.-166.2560.1415/0.25.1792.1021@0.25.1792.1021" timestamp="1614737725430" />
-    <state width="1750" height="318" key="GridCell.Tab.1.right/-2560.-191.2560.1440/0.0.1792.1120@0.0.1792.1120" timestamp="1614773040164" />
+    <state width="1750" height="318" key="GridCell.Tab.1.right/-2560.-191.2560.1440/0.0.1792.1120@0.0.1792.1120" timestamp="1614774471963" />
     <state width="1750" height="309" key="GridCell.Tab.1.right/0.0.1792.1120@0.0.1792.1120" timestamp="1614689051844" />
     <state width="1750" height="380" key="GridCell.Tab.2.bottom" timestamp="1614738736610">
       <screen x="0" y="0" width="1792" height="1120" />
@@ -241,6 +389,10 @@
     <state width="1792" height="1021" key="SettingsEditor/-2560.-166.2560.1415/0.25.1792.1021@0.25.1792.1021" timestamp="1614739063175" />
     <state x="0" y="25" width="1792" height="1021" key="SettingsEditor/-2560.-191.2560.1440/0.0.1792.1120@0.0.1792.1120" timestamp="1614739217100" />
     <state x="0" y="25" key="SettingsEditor/-2560.-191.2560.1440/0.25.1792.1021@0.25.1792.1021" timestamp="1614739262135" />
+    <state x="902" y="293" width="599" height="531" key="find.popup" timestamp="1614774330746">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state x="902" y="293" width="599" height="531" key="find.popup/-2560.-191.2560.1440/0.0.1792.1120@0.0.1792.1120" timestamp="1614774330746" />
     <state x="0" y="25" width="1792" height="1021" key="new project wizard" timestamp="1614737974417">
       <screen x="0" y="25" width="1792" height="1021" />
     </state>
