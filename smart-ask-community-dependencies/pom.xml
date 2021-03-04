@@ -18,6 +18,10 @@
 
     <properties>
         <component.version>1.0-SNAPSHOT</component.version>
+        <druid.version>1.2.5</druid.version>
+        <jdbc.version>2.1.9.RELEASE</jdbc.version>
+        <tk.mapper.version>2.0.2</tk.mapper.version>
+        <pagehelper.version>1.2.5</pagehelper.version>
     </properties>
 
     <dependencyManagement>
@@ -26,6 +30,26 @@
                 <groupId>com.feng</groupId>
                 <artifactId>smart-ask-community-component</artifactId>
                 <version>${component.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-jdbc</artifactId>
+                <version>${jdbc.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>tk.mybatis</groupId>
+                <artifactId>mapper-spring-boot-starter</artifactId>
+                <version>${tk.mapper.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>${pagehelper.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.feng.community.dao.TbPostMapper">
+  <resultMap id="BaseResultMap" type="com.feng.community.entity.TbPost">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="type" jdbcType="BIGINT" property="type" />
+    <result column="gold" jdbcType="INTEGER" property="gold" />
+    <result column="created" jdbcType="TIMESTAMP" property="created" />
+    <result column="updated" jdbcType="TIMESTAMP" property="updated" />
+    <result column="status" jdbcType="BIGINT" property="status" />
+    <result column="author_id" jdbcType="BIGINT" property="authorId" />
+    <result column="title" jdbcType="LONGVARCHAR" property="title" />
+  </resultMap>
+</mapper>

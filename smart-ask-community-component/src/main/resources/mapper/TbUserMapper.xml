@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.feng.community.dao.TbUserMapper">
+  <resultMap id="BaseResultMap" type="com.feng.community.entity.TbUser">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="activating" jdbcType="INTEGER" property="activating" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="created" jdbcType="TIMESTAMP" property="created" />
+    <result column="updated" jdbcType="TIMESTAMP" property="updated" />
+    <result column="sex" jdbcType="BIGINT" property="sex" />
+    <result column="city" jdbcType="LONGVARCHAR" property="city" />
+    <result column="signature" jdbcType="LONGVARCHAR" property="signature" />
+  </resultMap>
+</mapper>

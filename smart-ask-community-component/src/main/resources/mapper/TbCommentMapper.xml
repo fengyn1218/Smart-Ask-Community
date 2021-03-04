@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.feng.community.dao.TbCommentMapper">
+  <resultMap id="BaseResultMap" type="com.feng.community.entity.TbComment">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="author_id" jdbcType="BIGINT" property="authorId" />
+    <result column="post_id" jdbcType="BIGINT" property="postId" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="created" jdbcType="TIMESTAMP" property="created" />
+  </resultMap>
+</mapper>
