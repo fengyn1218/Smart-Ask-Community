@@ -1,17 +1,21 @@
+package com.feng.community;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 
 /**
  * @author fengyunan <fengyunan@kuaishou.com>
  * Created on 2021-03-04
  */
+
 @SpringBootTest
 public class TestRedis {
 
     @Autowired
-    private RedisTemplate<String, String> redisTemplate;
+    private StringRedisTemplate redisTemplate;
 
     @Test
     public void set() {
