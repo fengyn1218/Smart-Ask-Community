@@ -21,6 +21,12 @@ spring:
       # MySQL 8.x: com.mysql.cj.jdbc.Driver
       driver-class-name: com.mysql.cj.jdbc.Driver
 
+  redis:
+    host: 59.110.23.184
+    port: 6379
+
+
+
 mybatis:
   type-aliases-package: com.feng.community.entity
   mapper-locations: classpath:mapper/*.xml
