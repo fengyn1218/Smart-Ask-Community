@@ -4,16 +4,18 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>com.feng</groupId>
-        <artifactId>smart-ask-community-dependencies</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
-    </parent>
-
     <packaging>jar</packaging>
 
+    <parent>
+        <artifactId>smart-ask-community-dependencies</artifactId>
+        <groupId>com.feng</groupId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../smart-ask-community-dependencies/pom.xml</relativePath>
+    </parent>
 
+    <groupId>com.feng</groupId>
     <artifactId>smart-ask-community-api</artifactId>
+    <version>1.0-SNAPSHOT</version>
 
     <dependencies>
         <dependency>
@@ -21,6 +23,5 @@
             <artifactId>smart-ask-community-component</artifactId>
         </dependency>
     </dependencies>
-
 
 </project>

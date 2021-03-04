@@ -3,16 +3,19 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
-        <groupId>com.feng</groupId>
         <artifactId>smart-ask-community-dependencies</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <groupId>com.feng</groupId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../smart-ask-community-dependencies/pom.xml</relativePath>
     </parent>
 
-    <packaging>jar</packaging>
-
-
+    <groupId>com.feng</groupId>
     <artifactId>smart-ask-community-component</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
@@ -38,5 +41,6 @@
             <artifactId>nekohtml</artifactId>
         </dependency>
     </dependencies>
+
 
 </project>

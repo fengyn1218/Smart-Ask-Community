@@ -4,8 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * @author fengyunan
- * Created on 2021-03-02
+ * @author fengyunan <fengyunan@kuaishou.com>
+ * Created on 2021-03-04
  */
 @SpringBootApplication
 public class CommunityApplication {

@@ -6,9 +6,9 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>smart-ask-community-api</module>
-        <module>smart-ask-community-component</module>
         <module>smart-ask-community-dependencies</module>
+        <module>smart-ask-community-component</module>
+        <module>smart-ask-community-api</module>
     </modules>
 
     <parent>
@@ -20,7 +20,7 @@
 
     <groupId>com.feng</groupId>
     <artifactId>community</artifactId>
-    <version>${revision}</version>
+    <version>1.0.0-SNAPSHOT</version>
     <name>community</name>
 
     <description>Smart-Ask-Community</description>
@@ -38,7 +38,6 @@
             <name>fengyunan</name>
         </developer>
     </developers>
-
 
 
     <build>
