@@ -3,7 +3,7 @@ package com.feng.community.entity;
 import java.util.Date;
 import javax.persistence.*;
 
-@Table(name = "smart-ask-community..tb_user")
+@Table(name = "tb_user")
 public class TbUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

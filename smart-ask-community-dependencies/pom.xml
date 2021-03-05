@@ -23,6 +23,7 @@
         <tk.mapper.version>2.0.2</tk.mapper.version>
         <pagehelper.version>1.2.5</pagehelper.version>
         <lombok.version>1.18.18</lombok.version>
+        <commons-lang3.version>3.10</commons-lang3.version>
     </properties>
 
     <dependencyManagement>
@@ -56,6 +57,11 @@
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
