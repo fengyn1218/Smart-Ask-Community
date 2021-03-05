@@ -3,7 +3,8 @@ package com.feng.community;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.redis.core.StringRedisTemplate;
+
+import com.feng.community.helper.RedisHelper;
 
 /**
  * @author fengyunan <fengyunan@kuaishou.com>
@@ -14,12 +15,12 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 public class TestRedis {
 
     @Autowired
-    private StringRedisTemplate redisTemplate;
+    private RedisHelper redisHelper;
 
     @Test
     public void set() {
-        redisTemplate.opsForValue().set("myKey", "myValue");
-        System.out.println(redisTemplate.opsForValue().get("myKey"));
+        redisHelper.set("123","456");
+        System.out.println(redisHelper.get("123"));
     }
 
 

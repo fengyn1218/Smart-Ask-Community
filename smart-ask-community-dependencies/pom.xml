@@ -22,6 +22,7 @@
         <jdbc.version>2.1.9.RELEASE</jdbc.version>
         <tk.mapper.version>2.0.2</tk.mapper.version>
         <pagehelper.version>1.2.5</pagehelper.version>
+        <lombok.version>1.18.18</lombok.version>
     </properties>
 
     <dependencyManagement>
@@ -50,6 +51,11 @@
                 <groupId>com.github.pagehelper</groupId>
                 <artifactId>pagehelper-spring-boot-starter</artifactId>
                 <version>${pagehelper.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
