@@ -24,7 +24,7 @@ public class IndexController {
             @RequestParam(name = "search", required = false) String search
     ) {
 
-        return "index1";
+        return "index";
     }
 
 }

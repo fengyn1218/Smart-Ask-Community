@@ -17,7 +17,7 @@ public class ResultView<T> {
 
     public static ResultView success(String message) {
         ResultView resultView = new ResultView();
-        resultView.setCode(SUCCESS);
+        resultView.setCode(SUCCESS.getCode());
         resultView.setMessage(message);
         return resultView;
     }
@@ -31,7 +31,7 @@ public class ResultView<T> {
 
     public static ResultView fail(String message) {
         ResultView resultView = new ResultView();
-        resultView.setCode(FAIL);
+        resultView.setCode(FAIL.getCode());
         resultView.setMessage(message);
         return resultView;
     }
@@ -43,4 +43,27 @@ public class ResultView<T> {
         return resultView;
     }
 
+    public Integer getCode() {
+        return code;
+    }
+
+    public void setCode(Integer code) {
+        this.code = code;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
+    }
 }
