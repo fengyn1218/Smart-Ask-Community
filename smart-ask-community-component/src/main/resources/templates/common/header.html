@@ -1,58 +1,141 @@
-<div class="fly-header layui-bg-black">
-  <div class="layui-container">
-    <a class="fly-logo" href="/">
-      <img src="../res/images/logo.png" alt="layui">
-    </a>
-    <ul class="layui-nav fly-nav layui-hide-xs">
-      <li class="layui-nav-item layui-this">
-        <a href="/"><i class="iconfont icon-jiaoliu"></i>交流</a>
-      </li>
-      <li class="layui-nav-item">
-        <a href="case/case.html"><i class="iconfont icon-iconmingxinganli"></i>案例</a>
-      </li>
-      <li class="layui-nav-item">
-        <a href="http://www.layui.com/" target="_blank"><i class="iconfont icon-ui"></i>框架</a>
-      </li>
-    </ul>
-    
-    <ul class="layui-nav fly-nav-user">
-      
-      <!-- 未登入的状态 -->
-      <li class="layui-nav-item">
-        <a class="iconfont icon-touxiang layui-hide-xs" href="../user/login.html"></a>
-      </li>
-      <li class="layui-nav-item">
-        <a href="../user/login.html">登入</a>
-      </li>
-      <li class="layui-nav-item">
-        <a href="../user/reg.html">注册</a>
-      </li>
-      <li class="layui-nav-item layui-hide-xs">
-        <a href="" onclick="layer.msg('正在通过QQ登入', {icon:16, shade: 0.1, time:0})" title="QQ登入" class="iconfont icon-qq"></a>
-      </li>
-      <li class="layui-nav-item layui-hide-xs">
-        <a href="" onclick="layer.msg('正在通过微博登入', {icon:16, shade: 0.1, time:0})" title="微博登入" class="iconfont icon-weibo"></a>
-      </li>
-      
-      <!-- 登入后的状态 -->
-      <!--
-      <li class="layui-nav-item">
-        <a class="fly-nav-avatar" href="javascript:;">
-          <cite class="layui-hide-xs">贤心</cite>
-          <i class="iconfont icon-renzheng layui-hide-xs" title="认证信息：layui 作者"></i>
-          <i class="layui-badge fly-badge-vip layui-hide-xs">VIP3</i>
-          <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg">
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="head">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="社区,讨论,问答社区">
+    <meta name="description" content="Aries智能问答社区">
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/mylay.css?v=1.36">
+    <link rel="stylesheet" href="/css/wap2app.css?v=1.7">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon"/>
+    <script src="/js/util.js"></script>
+    <script src="/js/jquery-3.4.1.min.js"></script>
+    <script src="/js/community.js?v=1.4.22" type="application/javascript"></script>
+    <script src="/js/sweetalert.min.js"></script>
+    <script src="/js/plusShare.js?v=1.7" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/wap2app.js?v=1.5.20" type="text/javascript" charset="utf-8"></script>
+</th:block>
+
+<div th:fragment="nav" class="fly-header layui-bg-cyan html5plus-hide">
+    <div class="layui-container">
+        <a class="fly-logo layui-hide-xs" href="/index">
+            <img src="/images/logo.png" alt="layui" style="height: 40px">
         </a>
-        <dl class="layui-nav-child">
-          <dd><a href="user/set.html"><i class="layui-icon">&#xe620;</i>基本设置</a></dd>
-          <dd><a href="user/message.html"><i class="iconfont icon-tongzhi" style="top: 4px;"></i>我的消息</a></dd>
-          <dd><a href="user/home.html"><i class="layui-icon" style="margin-left: 2px; font-size: 22px;">&#xe68e;</i>我的主页</a></dd>
-          <hr style="margin: 5px 0;">
-          <dd><a href="/user/logout/" style="text-align: center;">退出</a></dd>
-        </dl>
-      </li>
-      -->
-      
-    </ul>
-  </div>
+
+        <a class="fly-logo layui-hide-lg layui-hide-md" href="/forum">
+            <img src="/images/N80.png" alt="layui" style="height: 40px">
+        </a>
+        <ul class="layui-nav layui-hide-lg layui-hide-md" style="margin-left: 60px">
+            <li th:class="${'communitynav' == navtype}? 'layui-nav-item layui-this' : 'layui-nav-item'">
+                <a href="/index"><i class="layui-icon">&#xe68e;</i>主页</a>
+            </li>
+            <li class="layui-nav-item">
+                <a></a>
+                <dl class="layui-nav-child">
+                    <dd><a href="/news"><i class="layui-icon">&#xe705;</i>看看</a></dd>
+                    <dd><a href="/talk"><i class="iconfont icon-jiaoliu"></i>说说</a></dd>
+
+                    <dd><a target="_blank"
+                           href="https://api-1251590924.cos.ap-nanjing.myqcloud.com/qrcode/index.html"><i
+                            class="layui-icon" style="font-size: 16px; color: #ffdd11;">&#xe65e;</i>打赏</a></dd>
+                </dl>
+            </li>
+        </ul>
+
+        <ul class="layui-nav fly-nav layui-hide-xs">
+            <li th:class="${'communitynav' == navtype}? 'layui-nav-item layui-this' : 'layui-nav-item'">
+                <a href="/index"><i class="layui-icon">&#xe68e;</i>主页</a>
+            </li>
+            <li th:class="${'talknav' == navtype}? 'layui-nav-item layui-this' : 'layui-nav-item'">
+                <a href="/talk"><i class="layui-icon">&#xe63a;</i>说说</a>
+            </li>
+            <li th:class="${'newsnav' == navtype}? 'layui-nav-item layui-this' : 'layui-nav-item'">
+                <a href="/news"><i class="layui-icon">&#xe705;</i>看看</a>
+            </li>
+            <li th:class="${'newsnav' == navtype}? 'layui-nav-item layui-this' : 'layui-nav-item'">
+                <a href="#"><i class="layui-icon">&#xe705;</i>教务系统</a>
+            </li>
+
+        </ul>
+
+        <ul class="layui-nav fly-nav-user">
+            <th:block th:if="${loginUser==null}">
+                <!-- 未登入的状态 -->
+                <li class="layui-nav-item">
+                    <a class="iconfont icon-touxiang layui-hide-xs" href="/login"></a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="/login">登录使用网站功能</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="/register">注册</a>
+                </li>
+            </th:block>
+            <!-- 登入后的状态 -->
+            <th:block th:if="${loginUser!=null}">
+
+                <li class="layui-nav-item">
+                    <a class="fly-nav-avatar niter-avatar" href="javascript:;">
+                        <i th:if="${loginUser.vipRank==1}" class="layui-icon fly-list-kiss layui-hide-xs"
+                           title="红砖会员等级：LV1">&#xe735</i>
+                        <cite th:class="${loginUser.vipRank==1? 'fly-list-kiss':''}" th:text="${loginUser.name}"></cite>
+                        <img th:src="${loginUser.avatarUrl}">
+                    </a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="/user/message" class="user-message-menu"><i class="iconfont icon-tongzhi"
+                                                                                 style="top: 4px;"></i>我的消息</a></dd>
+                        <dd><a th:href="${'/user/'+loginUser.id}"><i class="layui-icon"
+                                                                     style="margin-left: 2px; font-size: 22px;">&#xe68e;</i>我的主页</a>
+                        </dd>
+                        <hr style="margin: 5px 0;">
+                        <dd><a href="/user/myPosts"><i class="layui-icon">&#xe62a;</i>帖子管理</a></dd>
+                        <dd><a href="/user/set/account"><i class="layui-icon">&#xe612;</i>账户中心</a></dd>
+                        <dd><a href="/user/set/info"><i class="layui-icon">&#xe620;</i>基本设置</a></dd>
+                        <hr style="margin: 5px 0;">
+                        <dd><a href="/logout" style="text-align: center;"><i class="layui-icon">&#x1006;</i>退出登录</a>
+                        </dd>
+                    </dl>
+                </li>
+            </th:block>
+
+        </ul>
+    </div>
 </div>
+
+
+
+<div th:fragment="sub_nav" class="fly-panel fly-column">
+    <div class="layui-container">
+        <ul class="layui-clear">
+            <li th:class="${type == null}? 'layui-this' : ''"><a href="/index">首页</a></li>
+            <li th:class="${type == 1}? 'layui-this' : ''"><a href="/index?type=1">提问</a></li>
+            <li th:class="${type == 2}? 'layui-this' : ''"><a href="/index?type=2">分享<span
+                    class="layui-badge-dot"></span></a></li>
+            <li th:class="${type == 3}? 'layui-this' : ''"><a href="/index?type=3">建议</a></li>
+            <li th:class="${type == 4}? 'layui-this' : ''"><a href="/index?type=4">讨论</a></li>
+            <li th:class="${type == 5}? 'layui-this' : ''"><a href="/index?type=5">公告</a></li>
+            <li th:class="${type == 6}? 'layui-this' : ''"><a href="/index?type=6">动态</a></li>
+            <li th:class="${type == 9}? 'layui-this' : ''"><a href="/index?type=9">其它</a></li>
+            <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><span class="fly-mid"></span></li>
+
+            <!-- 用户登入后显示 -->
+            <th:block th:if="${loginUser!=null}">
+                <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><a target="_blank"
+                                                                                      href="/user/myPosts">我发表的贴</a>
+                </li>
+                <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><a target="_blank"
+                                                                                      href="/user/likes">我收藏的贴</a>
+                </li>
+            </th:block>
+        </ul>
+        <div class="fly-column-right layui-hide-xs">
+            <span class="fly-search"><i class="layui-icon"></i></span>
+            <a href="/publish" target="_blank" class="layui-btn">发表新帖</a>
+        </div>
+    </div>
+</div>
+
+
+</html>

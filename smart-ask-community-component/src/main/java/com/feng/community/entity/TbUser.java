@@ -31,6 +31,12 @@ public class TbUser {
     private Long sex;
 
     /**
+     * 头像网址
+     */
+    @Column(name = "avatar_url")
+    private String avatarUrl;
+
+    /**
      * 所在城市
      */
     private String city;
@@ -158,6 +164,24 @@ public class TbUser {
      */
     public void setSex(Long sex) {
         this.sex = sex;
+    }
+
+    /**
+     * 获取头像网址
+     *
+     * @return avatar_url - 头像网址
+     */
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    /**
+     * 设置头像网址
+     *
+     * @param avatarUrl 头像网址
+     */
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
     }
 
     /**

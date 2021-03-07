@@ -1,6 +1,7 @@
 package com.feng.community.entity;
 
 import java.util.Date;
+
 import javax.persistence.*;
 
 @Table(name = "tb_post")
@@ -11,12 +12,12 @@ public class TbPost {
 
     /**
      * 所属专栏 ：
-1：提问
-2：分享
-3：讨论
-4：建议
-5:公告
-6:动态
+     * 1：提问
+     * 2：分享
+     * 3：讨论
+     * 4：建议
+     * 5:公告
+     * 6:动态
      */
     private Long type;
 
@@ -41,6 +42,13 @@ public class TbPost {
     private Long authorId;
 
     /**
+     * 标签
+     */
+    private String tag;
+
+    private Integer permission;
+
+    /**
      * 标题
      */
     private String title;
@@ -53,7 +61,7 @@ public class TbPost {
     }
 
     /**
-     * @param id
+     *
      */
     public void setId(Long id) {
         this.id = id;
@@ -61,20 +69,20 @@ public class TbPost {
 
     /**
      * 获取所属专栏 ：
-1：提问
-2：分享
-3：讨论
-4：建议
-5:公告
-6:动态
+     * 1：提问
+     * 2：分享
+     * 3：讨论
+     * 4：建议
+     * 5:公告
+     * 6:动态
      *
      * @return type - 所属专栏 ：
-1：提问
-2：分享
-3：讨论
-4：建议
-5:公告
-6:动态
+     * 1：提问
+     * 2：分享
+     * 3：讨论
+     * 4：建议
+     * 5:公告
+     * 6:动态
      */
     public Long getType() {
         return type;
@@ -82,20 +90,20 @@ public class TbPost {
 
     /**
      * 设置所属专栏 ：
-1：提问
-2：分享
-3：讨论
-4：建议
-5:公告
-6:动态
+     * 1：提问
+     * 2：分享
+     * 3：讨论
+     * 4：建议
+     * 5:公告
+     * 6:动态
      *
      * @param type 所属专栏 ：
-1：提问
-2：分享
-3：讨论
-4：建议
-5:公告
-6:动态
+     * 1：提问
+     * 2：分享
+     * 3：讨论
+     * 4：建议
+     * 5:公告
+     * 6:动态
      */
     public void setType(Long type) {
         this.type = type;
@@ -127,7 +135,7 @@ public class TbPost {
     }
 
     /**
-     * @param created
+     *
      */
     public void setCreated(Date created) {
         this.created = created;
@@ -141,7 +149,7 @@ public class TbPost {
     }
 
     /**
-     * @param updated
+     *
      */
     public void setUpdated(Date updated) {
         this.updated = updated;
@@ -181,6 +189,38 @@ public class TbPost {
      */
     public void setAuthorId(Long authorId) {
         this.authorId = authorId;
+    }
+
+    /**
+     * 获取标签
+     *
+     * @return tag - 标签
+     */
+    public String getTag() {
+        return tag;
+    }
+
+    /**
+     * 设置标签
+     *
+     * @param tag 标签
+     */
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
+    /**
+     * @return permission
+     */
+    public Integer getPermission() {
+        return permission;
+    }
+
+    /**
+     *
+     */
+    public void setPermission(Integer permission) {
+        this.permission = permission;
     }
 
     /**

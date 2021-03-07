@@ -1,6 +1,4 @@
 
-
-
 /* 全局 */
 html,body{overflow-x: hidden;}
 html body{margin-top: 61px;}
@@ -357,7 +355,7 @@ body .layui-edit-face  .layui-layer-content{padding:0; background-color:#fff; co
 .jieda li{position: relative; padding: 20px 0 10px; border-bottom: 1px dotted #DFDFDF;}
 .jieda li:last-child{border-bottom: none;}
 .jieda .fly-none{height: 50px; min-height: 0;}
-.jieda .icon-caina{position:absolute; right:10px; top:15px; font-size:60px; color: #58A571;}
+.jieda .icon-caina{position:absolute; right:10px; top:15px; font-size:60px; color: #ff6200;}
 
 .detail-about-reply{padding: 0 0 0 55px; background: none;}
 .detail-about-reply .detail-hits{left: 0; bottom: 0;}
@@ -415,7 +413,7 @@ body .fly-user-main{position: relative; min-height: 600px;}
 
 /*.home-jieda li{margin-bottom:20px; padding-bottom:10px; line-height:24px; border-bottom: 1px dotted #DFDFDF;}*/
 .home-jieda li{ margin-bottom:20px; line-height:24px;}
-.home-dacontent{margin-top:10px; padding:10px 15px; background-color:#F2F2F5; border-radius:5px; word-wrap: break-word;;}
+.home-dacontent{ padding:10px 15px; background-color:#F2F2F5; border-radius:5px; word-wrap: break-word;;}
 .home-dacontent pre{ background-color:#F2F2F5;}
 .home-dacontent img{max-width:100%;}
 .home-jieda li a{padding:0 5px; color:#4F99CF;}
@@ -435,7 +433,7 @@ body .fly-user-main{position: relative; min-height: 600px;}
 /* 设置 */
 .avatar-add{position:relative; width:373px; height:373px; background-color:#F2F2F5;}
 .avatar-add .upload-img{position:absolute; left:50%; top:35px; margin:0 0 0 -56px;}
-.avatar-add img{position:absolute; left:50%; top:50%; width:168px; height:168px; margin:-50px 0 0 -84px; border-radius:100%;}
+.avatar-add img{position:absolute; left:50%; top:50%; width:168px; height:168px; margin:-50px 0 0 -84px; }
 .avatar-add .loading{display:none; position:absolute; width:100%; height:100%; left:0; top:0; padding: 0; background-color:#000; opacity:0.5; filter: Alpha(opacity=50);}
 .avatar-add p{position:absolute; top:70px; width:100%; margin-top: 10px;; font-size:12px; text-align:center; color:#999;}
 .app-bind li{margin-bottom:10px; line-height:30px; color:#999;}

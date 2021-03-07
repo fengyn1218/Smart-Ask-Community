@@ -13,6 +13,7 @@
     <result column="created" jdbcType="TIMESTAMP" property="created" />
     <result column="updated" jdbcType="TIMESTAMP" property="updated" />
     <result column="sex" jdbcType="BIGINT" property="sex" />
+    <result column="avatar_url" jdbcType="VARCHAR" property="avatarUrl" />
     <result column="city" jdbcType="LONGVARCHAR" property="city" />
     <result column="signature" jdbcType="LONGVARCHAR" property="signature" />
   </resultMap>

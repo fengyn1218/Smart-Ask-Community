@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.feng.community.dao.TbNotificationMapper">
+  <resultMap id="BaseResultMap" type="com.feng.community.entity.TbNotification">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="notifier" jdbcType="BIGINT" property="notifier" />
+    <result column="receiver" jdbcType="BIGINT" property="receiver" />
+    <result column="outerid" jdbcType="BIGINT" property="outerid" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="gmt_create" jdbcType="BIGINT" property="gmtCreate" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="notifier_name" jdbcType="VARCHAR" property="notifierName" />
+    <result column="outer_title" jdbcType="VARCHAR" property="outerTitle" />
+  </resultMap>
+</mapper>

@@ -11,30 +11,15 @@
 </head>
 <body>
 
-<div class="fly-header layui-bg-black">
-    <div class="layui-container">
-        <a class="fly-logo" href="/">
-            <img src="/images/logo.png" alt="layui">
-        </a>
+<div th:insert="~{common/header :: nav}"></div>
 
-        <ul class="layui-nav fly-nav-user">
-            <!-- 未登入的状态 -->
-            <li class="layui-nav-item">
-                <a class="iconfont icon-touxiang layui-hide-xs" href="/login.html"></a>
-            <li class="layui-nav-item">
-                <a href="#">请登录之后使用网站功能！</a>
-            </li>
-
-        </ul>
-    </div>
-</div>
 
 <div class="layui-container fly-marginTop">
     <div class="fly-panel fly-panel-user" pad20>
         <div class="layui-tab layui-tab-brief" lay-filter="user">
             <ul class="layui-tab-title">
                 <li class="layui-this">登入</li>
-                <li><a href="#">注册</a></li>
+                <li><a href="/register">注册</a></li>
             </ul>
             <div class="layui-form layui-tab-content" id="LAY_ucm" style="padding: 20px 0;">
                 <div class="layui-tab-item layui-show">
@@ -72,12 +57,13 @@
                                         th:onclick="loginClick()">
                                     立即登录
                                 </button>
-                                <span style="padding-left:20px;">
-                  <a href="forget.html">忘记密码？</a>
-                </span>
+                                <span  style="padding-left:20px;">
+                                    <a href="register">没有账号?点击注册</a> |
+                                    <a href="#">忘记密码?点击找回</a>
+                                </span>
                             </div>
                             <div class="layui-form-item fly-form-app">
-                                <span>登录失败请联系管理员</span>
+                                <span >登录失败请联系管理员!</span>
 
                             </div>
                         </form>

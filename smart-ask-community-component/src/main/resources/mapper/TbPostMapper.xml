@@ -12,6 +12,8 @@
     <result column="updated" jdbcType="TIMESTAMP" property="updated" />
     <result column="status" jdbcType="BIGINT" property="status" />
     <result column="author_id" jdbcType="BIGINT" property="authorId" />
+    <result column="tag" jdbcType="VARCHAR" property="tag" />
+    <result column="permission" jdbcType="INTEGER" property="permission" />
     <result column="title" jdbcType="LONGVARCHAR" property="title" />
   </resultMap>
 </mapper>

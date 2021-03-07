@@ -1,17 +1,207 @@
-<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
-    <title>智能问答社区</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="keywords" content="fly,layui,前端社区">
+    <meta name="keywords" content="社区,讨论,问答社区">
     <meta name="description" content="智能问答社区">
-    <link rel="stylesheet" href="/layui/css/layui.css">
-    <link rel="stylesheet" href="/css/global.css">
+    <th:block th:insert="~{common/header :: head}"></th:block>
+    <link rel="stylesheet" href="/css/community.css">
+    <title>Aries问答</title>
 </head>
 <body>
 
-123
+<div th:insert="~{common/header :: nav}"></div>
+<div th:insert="~{common/header :: sub_nav}"></div>
 
+
+<div class="layui-container">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md8">
+            <div class="fly-panel">
+                <div class="fly-panel-title fly-filter">
+                    <a>欢迎使用~</a>
+                    <a th:if="${loginUser==null}" href="/login" class="layui-hide-sm fly-right html5plus-display"
+                       id="LAY_gologin" style="color: #FF5722;display: none">注册/登录</a>
+                    <a th:if="${loginUser!=null}"
+                       class="fly-nav-avatar niter-avatar layui-hide-sm fly-right html5plus-display html5plus-user-icon"
+                       id="LAY_goUserCenter" style="color: #FF5722;display: none">
+                        <i th:if="${loginUser.vipRank==1}" class="layui-icon fly-list-kiss layui-hide-xs"
+                           title="红砖会员等级：LV1">&#xe735</i>
+                        <cite onclick="javascript:window.open('/user/set/info')"
+                              th:class="${loginUser.vipRank==1? 'fly-list-kiss':''}" th:text="${loginUser.name}"></cite>
+                    </a>
+
+                </div>
+                <ul class="fly-list">
+                    <li th:each="question : ${topQuestions}">
+                        <a th:href="${'/user/'+question.user.id}" class="fly-avatar niter-avatar">
+                            <img th:src="${question.user.avatarUrl}"
+                                 th:alt="${question.user.name}">
+                        </a>
+                        <h2>
+                            <a class="layui-badge" th:if="${question.type==1}">提问</a>
+                            <a class="layui-badge" th:if="${question.type==2}">分享</a>
+                            <a class="layui-badge" th:if="${question.type==3}">建议</a>
+                            <a class="layui-badge" th:if="${question.type==4}">讨论</a>
+                            <a class="layui-badge layui-bg-green" th:if="${question.type==5}">公告</a>
+                            <a class="layui-badge" th:if="${question.type==6}">动态</a>
+                            <a class="layui-badge" th:if="${question.type==9}">其它</a>
+                            <a th:if="${question.permission==10}" class="fly-list-like layui-hide-xs" title="会员尊享"><i
+                                    class="layui-icon">&#xe735</i></a>
+                            <a th:href="@{'/p/'+ ${question.id}}" th:text="${question.title}"
+                               th:title="${question.title}" target="_blank"
+                               th:style="${question.permission==10? 'color:red':''}"></a>
+                            <a th:if="${question.viewCount>100}" class="fly-list-like layui-hide-xs" title="烫烫烫"><i
+                                    class="layui-icon" style="font-size: 20px">&#xe756;</i></a>
+                        </h2>
+                        <div class="fly-list-info">
+                            <a link>
+                                <i th:if="${question.userAccount.vipRank==1}" class="layui-icon fly-list-kiss"
+                                   title="红砖会员等级：LV1">&#xe735</i>
+                                <cite th:class="${question.userAccount.vipRank==1? 'fly-list-kiss':''}"
+                                      th:text="${question.user.name}"></cite>
+                                <i class="layui-badge fly-badge-vip layui-bg-gray layui-hide-xs"
+                                   th:text="${@environment.getProperty('user.group.r'+question.userAccount.groupId)}"></i>
+                            </a>
+                            <span th:text="${question.gmtLatestCommentStr}"></span>
+
+                            <!--span class="fly-list-kiss layui-hide-xs" title="浏览"><i class="iconfont icon-kiss"></i><span th:text="${question.viewCount}"></span></span-->
+                            <span class="fly-list-like layui-hide-xs" title="收藏"><i class="layui-icon">&#xe600;</i><span
+                                    th:text="${question.LikeCount}"></span></span>
+                            <!--span class="layui-badge fly-badge-accept layui-hide-xs">已结</span-->
+                            <span class="fly-list-nums">
+                <i class="iconfont layui-hide-xs" title="浏览">&#xe60b;</i> <span class="layui-hide-xs"
+                                                                                th:text="${question.viewCount}"></span>
+                <i class="iconfont icon-pinglun1" title="回复"></i> <span th:text="${question.commentCount}"></span>
+              </span>
+                        </div>
+                        <div class="fly-list-badge">
+                            <span th:if="${question.status==2||question.status==3}" class="layui-badge layui-bg-orange">置顶</span>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+
+            <div class="fly-panel" style="margin-bottom: 0;">
+
+                <div class="fly-panel-title fly-filter">
+                    <a href="/index" th:class="${sort == 'new' || sort == null ? 'layui-this':''}">综合</a>
+                    <span class="fly-mid"></span>
+                    <a th:class="${sort == 'hot7' ? 'layui-this':''}"
+                       th:href="@{/index/(sort='hot7',search=${search},tag=${tag},type=${type})}">周榜</a>
+                    <span class="fly-mid"></span>
+                    <a th:class="${sort == 'hot30' ? 'layui-this':''}"
+                       th:href="@{/index/(sort='hot30',search=${search},tag=${tag},type=${type})}">月榜</a>
+                    <span class="fly-mid"></span>
+                    <a th:class="${sort == 'good' ? 'layui-this':''}"
+                       th:href="@{/index/(sort='good',search=${search},tag=${tag},type=${type})}">精华</a>
+                    <span class="fly-filter-right">
+            <a class="html5plus-hide" href="" style="color: red"><i
+                    class="layui-icon">&#xe63b;</i>怎么突然想起</a>
+            <span class="fly-mid layui-hide-xs"></span>
+            <a th:href="@{/forum/(sort='new',search=${search},tag=${tag},type=${type})}"
+               th:class="${sort == 'new' || sort == null ? 'layui-this layui-hide-xs':'layui-hide-xs'}">按最新</a>
+            <span class="fly-mid layui-hide-xs"></span>
+            <a th:class="${sort == 'no' ? 'layui-this  layui-hide-xs':' layui-hide-xs'}"
+               th:href="@{/index/(sort='no',search=${search},tag=${tag},type=${type})}">抢沙发</a>
+          </span>
+                </div>
+
+                <ul class="fly-list">
+                    <li th:each="question : ${pagination.data}">
+                        <div th:if="${question.status==0||question.status==1}">
+                            <a th:href="${'/user/'+question.user.id}" class="fly-avatar niter-avatar">
+                                <img th:src="${question.user.avatarUrl}"
+                                     th:alt="${question.user.name}">
+                            </a>
+                            <h2>
+                                <a class="layui-badge" th:if="${question.type==1}">提问</a>
+                                <a class="layui-badge" th:if="${question.type==2}">分享</a>
+                                <a class="layui-badge" th:if="${question.type==3}">建议</a>
+                                <a class="layui-badge" th:if="${question.type==4}">讨论</a>
+                                <a class="layui-badge layui-bg-green" th:if="${question.type==5}">公告</a>
+                                <a class="layui-badge" th:if="${question.type==6}">动态</a>
+                                <a class="layui-badge" th:if="${question.type==9}">其它</a>
+                                <a th:if="${question.permission==10}" class="fly-list-like layui-hide-xs"
+                                   title="会员尊享"><i class="layui-icon">&#xe735</i></a>
+                                <a th:href="@{'/p/'+ ${question.id}}" th:text="${question.title}"
+                                   th:title="${question.title}"
+                                   th:style="${question.permission==10? 'color:red':''}"></a>
+                                <a th:if="${question.viewCount>100}" class="fly-list-like layui-hide-xs" title="烫烫烫"><i
+                                        class="layui-icon" style="font-size: 20px">&#xe756;</i></a>
+                            </h2>
+                            <div class="fly-list-info">
+                                <a link>
+                                    <i th:if="${question.userAccount.vipRank==1}" class="layui-icon fly-list-kiss"
+                                       title="红砖会员等级：LV1">&#xe735</i>
+                                    <cite th:class="${question.userAccount.vipRank==1? 'fly-list-kiss':''}"
+                                          th:text="${question.user.name}"></cite>
+                                    <i class="layui-badge fly-badge-vip layui-bg-gray layui-hide-xs"
+                                       th:text="${@environment.getProperty('user.group.r'+question.userAccount.groupId)}"></i>
+                                </a>
+                                <span th:text="${question.gmtLatestCommentStr}"></span>
+                                <span class="fly-list-like layui-hide-xs" title="收藏"><i
+                                        class="layui-icon">&#xe600;</i><span
+                                        th:text="${question.LikeCount}"></span></span>
+                                <!--span class="layui-badge fly-badge-accept layui-hide-xs">已结</span-->
+                                <span class="fly-list-nums">
+                <i class="iconfont layui-hide-xs" title="浏览">&#xe60b;</i> <span class="layui-hide-xs"
+                                                                                th:text="${question.viewCount}"></span>
+                <i class="iconfont icon-pinglun1" title="回复"></i> <span th:text="${question.commentCount}"></span>
+              </span>
+                            </div>
+                            <div class="fly-list-badge">
+                                <span th:if="${question.status==1||question.status==3}"
+                                      class="layui-badge layui-bg-red">精帖</span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+                <div style="text-align: center">
+                    <div class="laypage-main"><!-- 分页展示 -->
+                        <a th:if="${pagination.showFirstPage}"
+                           th:href="@{/index/(page=1,search=${search},tag=${tag},sort=${sort},type=${type})}"
+                           aria-label="Previous" class="laypage-prev">
+                            &laquo;
+                        </a>
+                        <a th:if="${pagination.showPrevious}"
+                           th:href="@{/index/(page=${pagination.page - 1},search=${search},tag=${tag},sort=${sort},type=${type})}"
+                           class="laypage-prev">
+                            &lt;
+                        </a>
+                        <th:block th:each="page : ${pagination.pages}">
+                            <a th:if="${pagination.page != page}"
+                               th:href="@{/index/(page=${page},search=${search},tag=${tag},sort=${sort},type=${type})}"
+                               th:text="${page}"></a>
+                            <span th:if="${pagination.page == page}"
+                                  th:href="@{/forum/(page=${page},search=${search},tag=${tag},sort=${sort},type=${type})}"
+                                  th:text="${page}"
+                                  class="laypage-curr"></span>
+                        </th:block>
+                        <a th:if="${pagination.showNext}"
+                           th:href="@{/index/(page=${pagination.page +1 },search=${search},tag=${tag},sort=${sort},type=${type})}"
+                           class="laypage-next">
+                            &gt;
+                        </a>
+                        <a th:if="${pagination.showEndPage}"
+                           th:href="@{/index/(page=${pagination.totalPage},search=${search},tag=${tag},sort=${sort},type=${type})}"
+                           aria-label="Next" class="laypage-next">
+                            &raquo;
+                        </a>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <th:block th:insert="~{common/sider :: index}"></th:block>
+    </div>
+</div>
+<th:block th:insert="~{common/footer :: foot}"></th:block>
+<script>
+
+</script>
 </body>
 </html>
