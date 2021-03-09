@@ -52,9 +52,31 @@ public class UserRegisterImpl implements UserRegisterService {
                 // 明文密码加密
                 tbUser.setPassword(DigestUtils.md5DigestAsHex(password.getBytes()));
                 tbUser.setCreated(new Date());
+                tbUserMapper.insert(tbUser);
                 return ResultView.success("注册成功，去登录吧！");
             }
         }
         return ResultView.fail("某些未知的错误，兜个底！你注册失败了！");
+    }
+
+    @Override
+    public ResultView forget(String email, String password, String code) {
+        Example example = new Example(TbUser.class);
+        example.createCriteria().andEqualTo("email", email);
+        List<TbUser> tbUsers = tbUserMapper.selectByExample(example);
+        String cacheCode = (String) redisHelper.get(SEND_MAIL_CODE.of(email));
+        if (CollectionUtils.isEmpty(tbUsers)) {
+            return ResultView.fail("邮箱还没注册，去注册吧！");
+        } else if (StringUtils.isEmpty(cacheCode)) {
+            return ResultView.fail("验证码已经失效，请重新获取！");
+        } else if (!code.equals(cacheCode)) {
+            return ResultView.fail("验证码错误，请输入正确的验证码！");
+        } else {
+            TbUser user = tbUsers.get(0);
+            user.setPassword(DigestUtils.md5DigestAsHex(password.getBytes()));
+            user.setUpdated(new Date());
+            tbUserMapper.updateByExample(user, example);
+            return ResultView.success("修改密码成功，去登录吧！");
+        }
     }
 }

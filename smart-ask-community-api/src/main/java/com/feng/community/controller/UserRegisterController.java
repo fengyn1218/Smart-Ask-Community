@@ -33,4 +33,18 @@ public class UserRegisterController {
     ) {
         return userRegisterService.register(mail, password, code);
     }
+
+    @GetMapping("forget")
+    public String forget() {
+        return "forget";
+    }
+
+    @PostMapping("forget")
+    @ResponseBody
+    public ResultView forget(@RequestParam(name = "mail", required = true) String mail,
+            @RequestParam(name = "password", required = true) String password,
+            @RequestParam(name = "code", required = true) String code) {
+        return userRegisterService.forget(mail, password, code);
+    }
+
 }

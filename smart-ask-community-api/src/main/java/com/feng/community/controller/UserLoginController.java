@@ -44,8 +44,15 @@ public class UserLoginController {
             model.addAttribute("user", tbUser);
             //重定向，默认是转发
             return "redirect:/index";
-
         }
+    }
+
+    @GetMapping("logout")
+    public String logout(HttpServletRequest request) {
+        // 从会话中删除
+        // request.getSession().removeAttribute("user");
+        //todo
+        return null;
     }
 
 }

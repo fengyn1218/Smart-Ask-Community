@@ -1,0 +1,253 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <title>找回密码/重置密码</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="keywords" content="社区,讨论,问答社区">
+  <meta name="description" content="智能问答社区">
+  <link rel="stylesheet" href="/layui/css/layui.css">
+  <link rel="stylesheet" href="/css/global.css">
+  <link rel="stylesheet" href="/css/mylay.css?v=1.36">
+  <link rel="stylesheet" href="/css/wap2app.css?v=1.7">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon"/>
+  <script src="/js/util.js"></script>
+  <script src="/js/jquery-3.4.1.min.js"></script>
+  <script src="/js/community.js?v=1.4.22" type="application/javascript"></script>
+  <script src="/js/sweetalert.min.js"></script>
+  <script src="/js/plusShare.js?v=1.7" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+
+<div th:insert="~{common/header :: nav}"></div>
+
+
+<div class="layui-container fly-marginTop">
+  <div class="fly-panel fly-panel-user" pad20>
+    <div class="layui-tab layui-tab-brief" lay-filter="user">
+      <ul class="layui-tab-title">
+        <li class="layui-this">修改密码</li>
+      </ul>
+
+      <div class="layui-form layui-tab-content" id="LAY_ucm" style="padding: 20px 0;">
+        <div class="layui-form layui-tab-content">
+          <div class="layui-form layui-form-pane">
+            <div class="layui-form-item">
+              <label for="mail" class="layui-form-label">邮箱号</label>
+              <div class="layui-input-inline">
+                <input type="text" id="mail" name="mail" required lay-verify="email"
+                       autocomplete="off"
+                       class="layui-input" placeholder="请输入您的邮箱号">
+              </div>
+            </div>
+
+
+            <div class="layui-form-item">
+              <label for="L_vercode" class="layui-form-label">人机验证</label>
+              <div class="layui-input-inline">
+                <input type="text" id="L_vercode" name="yanzheng" required lay-verify="required"
+                       placeholder="请回答后面的问题" autocomplete="off" class="layui-input">
+              </div>
+              <div class="layui-form-mid">
+                <span style="color: #c00;" id="yanzheng"><</span>
+              </div>
+            </div>
+
+
+            <div class="layui-form-item">
+              <label for="code" class="layui-form-label">验证码</label>
+              <div class="layui-input-inline">
+                <input type="text" id="code" name="code" required lay-verify="required"
+                       autocomplete="off" class="layui-input" placeholder="验证码发送到邮箱">
+              </div>
+              <button type="submit" class="layui-btn" id="btnSendCode" name="btnSendCode"
+                      onclick="getCode()">获取验证码
+              </button>
+            </div>
+
+
+            <div class="layui-form-item layui-form layui-form-pane">
+              <div class="layui-form-item">
+                <label for="password" class="layui-form-label">设置密码</label>
+                <div class="layui-input-inline">
+                  <input type="password" id="password" name="password" placeholder="请输入6到16个字符"
+                         required
+                         lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+              </div>
+              <div class="layui-form-item">
+                <label for="repass" class="layui-form-label">确认密码</label>
+                <div class="layui-input-inline">
+                  <input type="password" id="repass" name="repass" placeholder="请再次输入您的密码"
+                         required
+                         lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+              </div>
+
+              <div class="layui-form-item">
+                <button type="button" id="zhuce" class="layui-btn" onclick="register()">提交</button>
+                <span style="padding-left:20px;">
+                                    <a href="login">已有账号?点击登录</a> |
+                                    <a href="register">没有账号?点击注册</a>
+                                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="fly-footer">
+  <p><a href="/index" target="_blank">智能问答社区</a> 2021 &copy;
+    <a href="http://59.110.23.184:8081/" target="_blank">fengyunan
+      出品</a></p>
+  <p>
+    <a href="https://github.com/fengyn1218" target="_blank">作者GitHub</a>
+    <a href="https://blog.csdn.net/weixin_45518155?spm=1000.2115.3001.5343" target="_blank">作者CSDN</a>
+    <a href="https://wpa.qq.com/msgrd?v=3&uin=2318699921&site=qq&menu=yes" target="_blank">联系作者</a>
+  </p>
+  <p>
+    不炼金丹不坐禅,不做商贾不种田。闲来写就青山卖,不使人间造孽钱。
+  </p>
+</div>
+
+<script src="/layui/layui.js"></script>
+<script src="/layui/layui.all.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script type="text/javascript">
+  let i = Math.round(Math.random() * 100);
+  let j = Math.round(Math.random() * 100);
+  document.getElementById('yanzheng').innerText = i + '+' + j + '=' + '?';
+
+  var temp = document.getElementById("L_vercode");
+
+  isValid = 1;//是否可以发送验证码
+  var InterValObj; //timer变量，控制时间
+  var count = 60; //间隔函数，1秒执行
+  var curCount;//当前剩余秒数
+  function getCode() {
+    if (isValid == 0) {
+      swal({
+        title: "哎哟...",
+        text: "您刚刚提交过了哦，请等待60s后再提交哦~",
+        icon: "error",
+        button: "确认",
+      });
+    } else if (temp.value != (i + j)) {
+      swal({
+        title: "哎哟...",
+        text: "这么简单的数学题都不会么？~",
+        icon: "error",
+        button: "确认",
+      });
+      document.getElementById("L_vercode").value = "";
+    } else {
+      var mail = document.getElementById("mail").value;
+      var reg = new RegExp("^[a-z0-9A-Z]+[- | a-z0-9A-Z . _]+@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-z]{2,}$");
+      if (!reg.test(mail)) {
+        layer.msg("邮箱不合法");
+        return false;
+      }
+      isValid == 0
+      curCount = count;
+
+      $("#btnSendCode").attr("disabled", "true");
+      $("#btnSendCode").text(curCount + "秒后重新发送");
+      $("#btnSendCode").removeAttr("onclick");
+      InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+
+      $.post('/mail/send', {
+        mail: mail,
+      }, function (result) {
+        if (result.code == 1024) {
+          swal({
+            title: "哎哟...",
+            text: "" + result.message,
+            icon: "error",
+            button: "确认",
+          });
+        } else {
+          sweetAlert("请耐心等待", "" + result.message, "info");
+          $('#mail').attr("disabled", "disabled");
+
+        }
+      });
+    }
+  }
+
+  function SetRemainTime() {
+    if (curCount == 1) {
+      isValid == 1
+      window.clearInterval(InterValObj);//停止计时器
+      $("#btnSendCode").removeAttr("disabled");//启用按钮
+      $("#btnSendCode").attr("onclick", "getCode();");
+      $("#btnSendCode").text("获取验证码");
+    } else {
+      curCount--;
+      $("#btnSendCode").text(curCount + "秒后重新发送");
+    }
+  }
+
+  function register() {
+    // 在此验证人机
+    if (temp.value != (i + j)) {
+      swal({
+        title: "哎哟...",
+        text: "这么简单的数学题都不会么？~",
+        icon: "error",
+        button: "确认",
+      });
+      document.getElementById("L_vercode").value = "";
+      return false;
+    }
+
+
+    var mail = document.getElementById("mail").value;
+    var code = document.getElementById("code").value;
+    console.log(code)
+    var pass = document.getElementById("password").value;
+    var repass = document.getElementById("repass").value;
+    if (pass != repass) {
+      swal({
+        title: "哎哟...",
+        text: "咋回事？两次输入的密码都不一样！",
+        icon: "error",
+        button: "确认",
+      });
+      document.getElementById("repass").value = "";
+      return false;
+    }
+
+    $.post('/forget', {
+      mail: mail,
+      code: code,
+      password: pass
+    }, function (result) {
+      if (result.code == 200) {
+        swal({
+          title: "恭喜您!",
+          text: "您已经成功修改密码啦，去登录叭!",
+          icon: "success",
+        }).then((value) => {
+          window.location.href = '/login';
+        });
+      } else {
+        swal({
+          title: "修改失败!",
+          text: result.message,
+          icon: "error",
+          button: "确认",
+        });
+      }
+    });
+
+
+  }
+
+</script>
+
+</body>
+</html>

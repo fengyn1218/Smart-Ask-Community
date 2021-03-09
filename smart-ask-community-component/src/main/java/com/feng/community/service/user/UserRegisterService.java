@@ -8,4 +8,6 @@ import com.feng.community.dto.ResultView;
  */
 public interface UserRegisterService {
     ResultView register(String email, String password, String code);
+
+    ResultView forget(String email, String password, String code);
 }
