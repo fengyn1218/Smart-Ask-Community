@@ -8,6 +8,14 @@
     <meta name="description" content="智能问答社区">
     <link rel="stylesheet" href="/layui/css/layui.css">
     <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/mylay.css?v=1.36">
+    <link rel="stylesheet" href="/css/wap2app.css?v=1.7">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon"/>
+    <script src="/js/util.js"></script>
+    <script src="/js/jquery-3.4.1.min.js"></script>
+    <script src="/js/community.js?v=1.4.22" type="application/javascript"></script>
+    <script src="/js/sweetalert.min.js"></script>
+    <script src="/js/plusShare.js?v=1.7" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
 
@@ -57,13 +65,13 @@
                                         th:onclick="loginClick()">
                                     立即登录
                                 </button>
-                                <span  style="padding-left:20px;">
+                                <span style="padding-left:20px;">
                                     <a href="register">没有账号?点击注册</a> |
                                     <a href="#">忘记密码?点击找回</a>
                                 </span>
                             </div>
                             <div class="layui-form-item fly-form-app">
-                                <span >登录失败请联系管理员!</span>
+                                <span>登录失败请联系管理员!</span>
 
                             </div>
                         </form>
@@ -75,13 +83,13 @@
 </div>
 
 <div class="fly-footer">
-    <p><a href="/index" target="_blank">智能问答社区</a> 2021 &copy;
+    <p><a href="/index" target="_blank">Aries智能问答社区</a> 2021 &copy;
         <a href="http://59.110.23.184:8081/" target="_blank">fengyunan
             出品</a></p>
     <p>
         <a href="https://github.com/fengyn1218" target="_blank">作者GitHub</a>
         <a href="https://blog.csdn.net/weixin_45518155?spm=1000.2115.3001.5343" target="_blank">作者CSDN</a>
-        <a href="#" target="_blank">联系作者</a>
+        <a href="https://wpa.qq.com/msgrd?v=3&uin=2318699921&site=qq&menu=yes" target="_blank">联系作者</a>
     </p>
     <p>
         不炼金丹不坐禅,不做商贾不种田。闲来写就青山卖,不使人间造孽钱。
@@ -96,10 +104,29 @@
 
     function loginClick() {
         var temp = document.getElementById("L_vercode");
-        console.log(temp);
+        var mail = document.getElementById("L_email").value;
+
+        var mailReg = new RegExp("^[a-z0-9A-Z]+[- | a-z0-9A-Z . _]+@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-z]{2,}$");
+        if ((!mailReg.test(mail))) {//邮箱不合法
+            swal({
+                title: "哎哟...",
+                text: "邮箱格式错误了哦！",
+                icon: "error",
+                button: "确认",
+            });
+            document.getElementById("L_email").value = "";
+            return;
+        }
+
         if (temp.value != (i + j)) {
-            alert("验证失败！！！请重新输入！！！");
+            swal({
+                title: "哎哟...",
+                text: "这么简单的数学题都不会么？~",
+                icon: "error",
+                button: "确认",
+            });
             document.getElementById("L_vercode").value = "";
+            return;
         }
     }
 

@@ -1,11 +1,14 @@
 package com.feng.community.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.feng.community.dto.ResultView;
+import com.feng.community.service.user.UserRegisterService;
 
 /**
  * @author fengyunan
@@ -14,18 +17,20 @@ import com.feng.community.dto.ResultView;
 @Controller
 public class UserRegisterController {
 
+    @Autowired
+    private UserRegisterService userRegisterService;
 
     @GetMapping("/register")
     public String register() {
         return "register";
     }
 
-    @PostMapping
-    public ResultView register(@RequestParam(name = "register", required = true) String email,
+    @ResponseBody
+    @PostMapping("register")
+    public ResultView register(@RequestParam(name = "mail", required = true) String mail,
             @RequestParam(name = "password", required = true) String password,
             @RequestParam(name = "code", required = true) String code
     ) {
-        //todo
-        return null;
+        return userRegisterService.register(mail, password, code);
     }
 }

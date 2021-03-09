@@ -10,6 +10,8 @@
 - lombok：简化代码
 - maven：依赖管理
 
+> mvn package -Dmaven.test.skip=true (打包命令)
+
 # Author
 [点击当问作者主页](http://59.110.23.184:8081/)      
 

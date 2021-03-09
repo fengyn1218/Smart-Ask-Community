@@ -4,14 +4,14 @@ server:
 
 # Spring配置
 spring:
-# thymeleaf 配置
+  # thymeleaf 配置
   thymeleaf:
     cache: false # 开发时关闭缓存，不然看不到事实时页面
     mode: HTML # 用非严格的HTML
     encoding: utf-8
     servlet:
       content-type: text/html
-# druid 数据源配置
+  # druid 数据源配置
   datasource:
     druid:
       url: jdbc:mysql://59.110.23.184:3306/smart-ask-community?useUnicode=true&characterEncoding=utf-8&useSSL=false
@@ -23,9 +23,9 @@ spring:
       test-on-borrow: true
       # MySQL 8.x: com.mysql.cj.jdbc.Driver(避免报错)
       driver-class-name: com.mysql.cj.jdbc.Driver
-# 加载多个配置文件
+  # 加载多个配置文件
   profiles:
-    active: redis
+    active: redis,email
 
 # mybatis 配置
 mybatis:
