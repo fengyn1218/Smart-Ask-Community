@@ -14,7 +14,6 @@ import org.springframework.util.DigestUtils;
 import com.feng.community.dao.TbUserMapper;
 import com.feng.community.dto.ResultView;
 import com.feng.community.entity.TbUser;
-import com.feng.community.helper.MailHelper;
 import com.feng.community.helper.RedisHelper;
 import com.feng.community.service.user.UserRegisterService;
 
@@ -56,6 +55,6 @@ public class UserRegisterImpl implements UserRegisterService {
                 return ResultView.success("注册成功，去登录吧！");
             }
         }
-        return ResultView.fail("某些未知的错误，哈哈哈！你注册失败了！");
+        return ResultView.fail("某些未知的错误，兜个底！你注册失败了！");
     }
 }

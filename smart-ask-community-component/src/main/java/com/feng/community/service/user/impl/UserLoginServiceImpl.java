@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.DigestUtils;
 
 import com.feng.community.dao.TbUserMapper;
 import com.feng.community.entity.TbUser;
@@ -29,7 +30,9 @@ public class UserLoginServiceImpl implements UserLoginService {
         List<TbUser> tbUsers = tbUserMapper.selectByExample(example);
         if (!CollectionUtils.isEmpty(tbUsers)) {
             TbUser user = tbUsers.get(0);
-            if (password.equals(user.getPassword())) {
+            // 密码加密
+            String pass = DigestUtils.md5DigestAsHex(password.getBytes());
+            if (pass.equals(user.getPassword())) {
                 return user;
             }
         }
