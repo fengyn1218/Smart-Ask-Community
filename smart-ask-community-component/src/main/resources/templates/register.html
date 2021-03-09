@@ -220,6 +220,15 @@
             });
             document.getElementById("repass").value = "";
             return false;
+        } else if (pass.length < 6 || pass.length > 15) {
+            swal({
+                title: "哎哟...",
+                text: "咋回事？你这密码长度不符合规格啊！",
+                icon: "error",
+                button: "确认",
+            });
+            document.getElementById("password").value = "";
+            return false;
         }
 
         $.post('/register', {
