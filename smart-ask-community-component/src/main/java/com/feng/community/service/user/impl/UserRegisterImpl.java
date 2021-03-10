@@ -49,8 +49,10 @@ public class UserRegisterImpl implements UserRegisterService {
             } else if (!StringUtils.isEmpty(cacheCode)) {
                 TbUser tbUser = new TbUser();
                 tbUser.setEmail(email);
+                tbUser.setUserName("Aries社区_编号" + code);
                 // 明文密码加密
                 tbUser.setPassword(DigestUtils.md5DigestAsHex(password.getBytes()));
+                tbUser.setAvatarUrl("/images/avatar/default.png");
                 tbUser.setCreated(new Date());
                 tbUserMapper.insert(tbUser);
                 return ResultView.success("注册成功，去登录吧！");

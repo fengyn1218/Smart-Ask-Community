@@ -29,6 +29,14 @@ public class ResultView<T> {
         return resultView;
     }
 
+    public static <T> ResultView success(T data) {
+        ResultView resultView = new ResultView();
+        resultView.setCode(SUCCESS.getCode());
+        resultView.setMessage("请求成功");
+        resultView.setData(data);
+        return resultView;
+    }
+
     public static ResultView fail(String message) {
         ResultView resultView = new ResultView();
         resultView.setCode(FAIL.getCode());
