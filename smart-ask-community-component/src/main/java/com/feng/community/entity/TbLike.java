@@ -1,6 +1,7 @@
 package com.feng.community.entity;
 
 import java.util.Date;
+
 import javax.persistence.*;
 
 @Table(name = "tb_like")
@@ -16,7 +17,7 @@ public class TbLike {
     private Long targetId;
 
     /**
-     * 目标类型（评论点赞/帖子收藏）
+     * 目标类型
      */
     private Integer type;
 
@@ -38,7 +39,7 @@ public class TbLike {
     }
 
     /**
-     * @param id
+     *
      */
     public void setId(Long id) {
         this.id = id;

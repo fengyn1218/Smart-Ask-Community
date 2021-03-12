@@ -41,7 +41,7 @@ public class TbNotification {
     }
 
     /**
-     * @param id
+     *
      */
     public void setId(Long id) {
         this.id = id;
@@ -55,7 +55,7 @@ public class TbNotification {
     }
 
     /**
-     * @param notifier
+     *
      */
     public void setNotifier(Long notifier) {
         this.notifier = notifier;
@@ -69,7 +69,7 @@ public class TbNotification {
     }
 
     /**
-     * @param receiver
+     *
      */
     public void setReceiver(Long receiver) {
         this.receiver = receiver;
@@ -83,7 +83,7 @@ public class TbNotification {
     }
 
     /**
-     * @param outerid
+     *
      */
     public void setOuterid(Long outerid) {
         this.outerid = outerid;
@@ -115,7 +115,7 @@ public class TbNotification {
     }
 
     /**
-     * @param gmtCreate
+     *
      */
     public void setGmtCreate(Long gmtCreate) {
         this.gmtCreate = gmtCreate;
@@ -147,7 +147,7 @@ public class TbNotification {
     }
 
     /**
-     * @param notifierName
+     *
      */
     public void setNotifierName(String notifierName) {
         this.notifierName = notifierName;
@@ -161,7 +161,7 @@ public class TbNotification {
     }
 
     /**
-     * @param outerTitle
+     *
      */
     public void setOuterTitle(String outerTitle) {
         this.outerTitle = outerTitle;

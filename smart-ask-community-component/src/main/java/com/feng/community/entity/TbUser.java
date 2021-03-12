@@ -1,6 +1,7 @@
 package com.feng.community.entity;
 
 import java.util.Date;
+
 import javax.persistence.*;
 
 @Table(name = "tb_user")
@@ -54,7 +55,7 @@ public class TbUser {
     }
 
     /**
-     * @param id
+     *
      */
     public void setId(Long id) {
         this.id = id;
@@ -68,7 +69,7 @@ public class TbUser {
     }
 
     /**
-     * @param userName
+     *
      */
     public void setUserName(String userName) {
         this.userName = userName;
@@ -82,7 +83,7 @@ public class TbUser {
     }
 
     /**
-     * @param password
+     *
      */
     public void setPassword(String password) {
         this.password = password;
@@ -114,7 +115,7 @@ public class TbUser {
     }
 
     /**
-     * @param email
+     *
      */
     public void setEmail(String email) {
         this.email = email;
@@ -128,7 +129,7 @@ public class TbUser {
     }
 
     /**
-     * @param created
+     *
      */
     public void setCreated(Date created) {
         this.created = created;
@@ -142,7 +143,7 @@ public class TbUser {
     }
 
     /**
-     * @param updated
+     *
      */
     public void setUpdated(Date updated) {
         this.updated = updated;

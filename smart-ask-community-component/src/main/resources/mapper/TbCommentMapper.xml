@@ -10,5 +10,6 @@
     <result column="post_id" jdbcType="BIGINT" property="postId" />
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="created" jdbcType="TIMESTAMP" property="created" />
+    <result column="like_count" jdbcType="INTEGER" property="likeCount" />
   </resultMap>
 </mapper>

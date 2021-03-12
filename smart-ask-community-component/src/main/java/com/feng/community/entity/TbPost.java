@@ -49,6 +49,18 @@ public class TbPost {
     private Integer permission;
 
     /**
+     * 收藏数
+     */
+    @Column(name = "like_count")
+    private Integer likeCount;
+
+    /**
+     * 点击量
+     */
+    @Column(name = "view_count")
+    private Integer viewCount;
+
+    /**
      * 标题
      */
     private String title;
@@ -221,6 +233,42 @@ public class TbPost {
      */
     public void setPermission(Integer permission) {
         this.permission = permission;
+    }
+
+    /**
+     * 获取收藏数
+     *
+     * @return like_count - 收藏数
+     */
+    public Integer getLikeCount() {
+        return likeCount;
+    }
+
+    /**
+     * 设置收藏数
+     *
+     * @param likeCount 收藏数
+     */
+    public void setLikeCount(Integer likeCount) {
+        this.likeCount = likeCount;
+    }
+
+    /**
+     * 获取点击量
+     *
+     * @return view_count - 点击量
+     */
+    public Integer getViewCount() {
+        return viewCount;
+    }
+
+    /**
+     * 设置点击量
+     *
+     * @param viewCount 点击量
+     */
+    public void setViewCount(Integer viewCount) {
+        this.viewCount = viewCount;
     }
 
     /**
