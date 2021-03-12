@@ -4,22 +4,17 @@ import static com.feng.community.constant.RedisKey.SEND_MAIL_CODE;
 import static com.feng.community.constant.ResultViewCode.SEND_MAIL_FAIL;
 import static com.feng.community.constant.ResultViewCode.SEND_MAIL_SUCCESS;
 
-import java.io.UnsupportedEncodingException;
 import java.util.Random;
 
-import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 
 import com.feng.community.dto.ResultView;
-
-import jdk.internal.org.objectweb.asm.commons.TryCatchBlockSorter;
 
 /**
  * @author fengyunan
