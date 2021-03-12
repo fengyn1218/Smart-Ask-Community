@@ -22,7 +22,7 @@ import com.feng.community.utils.TokenUtils;
 @Controller
 public class UserLoginController {
     // Cookie过期时间
-    private static final int COOKIE_TIME = 86400 * 3;
+    private static final int COOKIE_TIME = 86400 * 1;
 
     @Autowired
     private UserLoginService userLoginService;

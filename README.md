@@ -13,8 +13,10 @@
 - Lay-UI：前端模版支持
 - SJR-303校验：后端校验（待补充）
 - JWT：token鉴权设计
+- Logback：日志框架支持（待补充）
 
-> mvn package -Dmaven.test.skip=true (打包命令)
+> mvn package -Dmaven.test.skip=true (打包命令) 
+
 > java -jar (启动命令)
 
 # Author
