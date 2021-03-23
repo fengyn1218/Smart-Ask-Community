@@ -1,5 +1,5 @@
 # Smart-Ask-Community
-一个智能问答社区
+一个智能问答社区，所谓“智能”，乃调用AI用作文本审核
 
 # 技术栈
 - JDK1.8开发环境（Intellij IDEA）
