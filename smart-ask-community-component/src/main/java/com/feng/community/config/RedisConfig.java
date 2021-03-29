@@ -39,6 +39,7 @@ public class RedisConfig {
         template.setValueSerializer(objectJackson2JsonRedisSerializer);
         template.setHashValueSerializer(objectJackson2JsonRedisSerializer);
         //默认的连接配置
+
         template.setConnectionFactory(redisConnectionFactory);
         return template;
     }
