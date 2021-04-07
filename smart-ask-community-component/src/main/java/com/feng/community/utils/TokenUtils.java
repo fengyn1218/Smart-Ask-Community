@@ -16,14 +16,17 @@ import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.feng.community.dto.ResultView;
 import com.feng.community.entity.TbUser;
+import org.springframework.stereotype.Component;
 
 /**
  * @author fengyunan
  * Created on 2021-03-10
  */
+@Component
 public class TokenUtils {
     private static String SECRET;
 
+    // set注入密钥
     @Value("08fIptMkiWY8hHUt")
     public void setSecret(String SECRET) {
         this.SECRET = SECRET;
@@ -36,7 +39,7 @@ public class TokenUtils {
                 .withClaim("id", user.getId())
                 .withClaim("avatarUrl", user.getAvatarUrl())
                 .withClaim("email", user.getEmail())
-                .withExpiresAt(new Date(System.currentTimeMillis() + 3600000 * 24 * 3))//三天
+                .withExpiresAt(new Date(System.currentTimeMillis() + 3600000 * 24)) // 24小时
                 .sign(Algorithm.HMAC256(SECRET));// token 的密钥
     }
 
@@ -56,7 +59,7 @@ public class TokenUtils {
             return ResultView.success(user);
 
         } catch (JWTVerificationException e) {
-            return ResultView.fail(NEED_LOGIN.getCode(), "需要登录");
+            return ResultView.fail(NEED_LOGIN.getCode(), NEED_LOGIN.getMsg());
         }
     }
 }

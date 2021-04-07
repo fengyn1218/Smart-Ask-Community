@@ -2,11 +2,15 @@ package com.feng.community;
 
 import static com.feng.community.constant.RedisKey.SEND_MAIL_CODE;
 
+import com.feng.community.entity.TbUser;
+import com.feng.community.storage.LoginUserCache;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.feng.community.helper.RedisHelper;
+
+import java.util.List;
 
 /**
  * @author fengyunan
@@ -18,6 +22,16 @@ public class TestRedis {
 
     @Autowired
     private RedisHelper redisHelper;
+    @Autowired
+    private LoginUserCache loginUserCache;
+
+    @Test
+    public void setLoginUserCache() {
+        loginUserCache.putLoginUser(1L, System.currentTimeMillis());
+        loginUserCache.putLoginUser(2L, System.currentTimeMillis());
+        loginUserCache.putLoginUser(3L, System.currentTimeMillis());
+        loginUserCache.putLoginUser(4L, System.currentTimeMillis());
+    }
 
     @Test
     public void set() {
@@ -27,7 +41,14 @@ public class TestRedis {
 
     @Test
     public void test() {
-        System.out.println(SEND_MAIL_CODE.of("231"));
+        redisHelper.clearDB();
+    }
+
+    @Test
+    public void Test1() {
+        loginUserCache.putLoginUser(1L, System.currentTimeMillis());
+        List<TbUser> loginUsers = loginUserCache.getLoginUsers();
+        loginUsers.stream().map(TbUser::getEmail).forEach(System.out::print);
     }
 
 }

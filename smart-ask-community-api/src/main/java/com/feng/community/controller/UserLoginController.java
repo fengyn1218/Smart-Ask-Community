@@ -34,7 +34,7 @@ public class UserLoginController {
 
     @PostMapping("login")
     public String login(@RequestParam(required = true) String email, @RequestParam(required = true) String password,
-            Model model, HttpServletRequest request, HttpServletResponse response) {
+                        Model model, HttpServletRequest request, HttpServletResponse response) {
         TbUser tbUser = userLoginService.login(email, password);
         //登录失败
         if (null == tbUser) {
@@ -46,18 +46,18 @@ public class UserLoginController {
             //将登陆信息放入会话
             request.getSession().setAttribute("user", tbUser);
             CookieUtils.setCookie(request, response, "token", TokenUtils.getToken(tbUser), COOKIE_TIME);
-            model.addAttribute("user", tbUser);
+            model.addAttribute("loginUser", tbUser);
             //重定向，默认是转发
             return "redirect:/index";
         }
     }
 
     @GetMapping("logout")
-    public String logout(HttpServletRequest request) {
-        // 从会话中删除
-        // request.getSession().removeAttribute("user");
-        //todo
-        return null;
+    public String logout(HttpServletRequest request, HttpServletResponse response) {
+        // Cookie中移除token
+        CookieUtils.deleteCookie(request, response, "token");
+        // 返回首页
+        return "redirect:/index";
     }
 
 }

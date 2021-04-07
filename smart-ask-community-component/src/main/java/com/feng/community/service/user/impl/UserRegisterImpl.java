@@ -54,6 +54,7 @@ public class UserRegisterImpl implements UserRegisterService {
                 tbUser.setPassword(DigestUtils.md5DigestAsHex(password.getBytes()));
                 tbUser.setAvatarUrl("/images/avatar/default.png");
                 tbUser.setCreated(new Date());
+                tbUser.setUpdated(new Date());
                 tbUserMapper.insert(tbUser);
                 return ResultView.success("注册成功，去登录吧！");
             }

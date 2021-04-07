@@ -57,9 +57,9 @@
             <!--<i class="layui-icon fly-loading">&#xe63d;</i>-->
             <dd th:each="loginUser : ${loginUsers}">
                 <a th:href="${'/user/'+loginUser.id}" class="niter-avatar">
-                    <img th:src="${loginUser.avatarUrl}" th:alt="${loginUser.name}"><cite
-                        th:text="${loginUser.name}"></cite><i
-                        th:text="${#dates.format(loginUser.gmtModified,'MM-dd HH:mm')}">106次回答</i>
+                    <img th:src="${loginUser.avatarUrl}" th:alt="${loginUser.userName}"><cite
+                        th:text="${loginUser.userName}"></cite><i
+                        th:text="${loginUser.updated}">106次回答</i>
                 </a>
             </dd>
         </dl>
@@ -106,41 +106,13 @@
             <!--<i class="layui-icon fly-loading">&#xe63d;</i>-->
             <dd th:each="loginUser : ${loginUsers}">
                 <a th:href="${'/user/'+loginUser.id}" class="niter-avatar">
-                    <img th:src="${loginUser.avatarUrl}" th:alt="${loginUser.name}"><cite
-                        th:text="${loginUser.name}"></cite><i
-                        th:text="${#dates.format(loginUser.gmtModified,'MM-dd HH:mm')}">106次回答</i>
+                    <img th:src="${loginUser.avatarUrl}" th:alt="${loginUser.userName}"><cite
+                        th:text="${loginUser.userName}"></cite><i
+                        th:text="${loginUser.updated}">106次回答</i>
                 </a>
             </dd>
         </dl>
     </div>
-
-    <th:block th:insert="~{common/sider :: common}"></th:block>
-
-</div>
-
-<div th:fragment="news_detail" class="layui-col-md4">
-
-    <div class="fly-panel">
-        <div class="fly-panel-title">
-            本版公告
-        </div>
-        <div class="fly-panel-main">
-            <p>欢迎访问看看板块，我们将在本版块为您带来最新最全最热的资讯，包含互联网、科技、数码、电脑、科普、体育、娱乐、国内等新闻。所有新闻都为单纯事实消息的时事新闻，转载均注明了来源，版权归源站所有，如有侵权，烦请<a
-                    class="fly-link" target="_blank" th:href="${@environment.getProperty('site.info.contactQunUrl')}">联系我们</a>。
-            </p>
-        </div>
-    </div>
-
-    <dl class="fly-panel fly-list-one">
-        <dt class="fly-panel-title" th:text="${'更多'+news.columnStr+'资讯...'}"></dt>
-        <dd th:each="related : ${relatedNews}">
-            <a th:href="@{'/news/'+ ${related.newsId}}" th:text="${related.title}"></a>
-            <span><i class="iconfont icon-pinglun1"></i> <span th:text="${related.commentCount}"></span></span>
-        </dd>
-
-        <div th:if="${relatedNews==null}" class="fly-none">没有相关数据</div>
-
-    </dl>
 
     <th:block th:insert="~{common/sider :: common}"></th:block>
 
@@ -171,10 +143,7 @@
         </div>
         <div class="fly-panel-main">
             <a href="http://59.110.23.184:8081/" target="_blank" class="fly-zanzhu"
-               time-limit="2017.09.25-2099.01.01" style="background-color: #5FB878;">17岁 你抬头看天 期盼着与老天并肩 意气风发的跟所有人说 就在今天。
-                20岁 你点了一根烟 吐了一口迷茫的烟圈 笑着说 还有明天。 25岁 你风度翩翩 眉宇之间 唯独兜里抽不出一张纸卷 平静得说 先过完今天 30岁 你胖了一圈 身边的人都远去天边 她没有美若天仙
-                而是承包了柴米油盐 你还像从前那个少年 没有一丝丝改变 35岁 儿子坐在你肩 你已经习惯了平静的每天 抽着廉价的香烟！吐着浑浊的烟圈！你开始有些后悔年少荒废的时间 你脑子里在寻找回忆的碎片 可是有些东西
-                你再也找不见在你梦中的彩云之颠 那时你意气冲天 身旁诸神并肩 你笑了 笑的是 你回不去的昨天</a>
+               time-limit="2017.09.25-2099.01.01" style="background-color: #5FB878;">我的故事还是关于你啊</a>
         </div>
     </div>
 

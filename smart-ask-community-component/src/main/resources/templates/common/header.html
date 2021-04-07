@@ -78,9 +78,8 @@
 
                 <li class="layui-nav-item">
                     <a class="fly-nav-avatar niter-avatar" href="javascript:;">
-                        <i th:if="${loginUser.vipRank==1}" class="layui-icon fly-list-kiss layui-hide-xs"
-                           title="红砖会员等级：LV1">&#xe735</i>
-                        <cite th:class="${loginUser.vipRank==1? 'fly-list-kiss':''}" th:text="${loginUser.name}"></cite>
+                        <i class="layui-icon fly-list-kiss layui-hide-xs"       title="test">&#xe735</i>
+                       <cite class="fly-list-kiss" th:text="${loginUser.userName}"></cite>
                         <img th:src="${loginUser.avatarUrl}">
                     </a>
                     <dl class="layui-nav-child">
