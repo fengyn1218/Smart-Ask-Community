@@ -88,7 +88,7 @@ public class PostServiceImpl implements PostService {
     public PaginationDTO<TbPost> listByUserId(Long userId, Integer page, Integer size) {
         Integer totalPage;
         Example example = new Example(TbPost.class);
-        example.createCriteria().andEqualTo("id", userId);
+        example.createCriteria().andEqualTo("authorId", userId);
         Integer totalCount = (int) tbPostMapper.selectCountByExample(example);
         if (totalCount % size == 0) {
             totalPage = totalCount / size;
@@ -106,7 +106,7 @@ public class PostServiceImpl implements PostService {
         example.setOrderByClause("updated desc");
         List<TbPost> posts = tbPostMapper.selectByExampleAndRowBounds(example, new RowBounds(offset, size));
 
-        List<PostDTO> questionDTOList = new ArrayList<>();
+        List<PostDTO> postDTOList = new ArrayList<>();
         PaginationDTO paginationDTO = new PaginationDTO();
         for (TbPost question : posts) {
             TbUser user = tbUserMapper.selectByPrimaryKey(question.getAuthorId());
@@ -116,9 +116,9 @@ public class PostServiceImpl implements PostService {
 //            BeanUtils.copyProperties(user, userDTO);
             postDTO.setUser(user);
             postDTO.setUpdatedStr(DateFormatUtils.format(postDTO.getUpdated(), FORMAT));
-            questionDTOList.add(postDTO);
+            postDTOList.add(postDTO);
         }
-        paginationDTO.setData(questionDTOList);
+        paginationDTO.setData(postDTOList);
         paginationDTO.setTotalCount(totalCount);
         paginationDTO.setPagination(totalPage, page);
         return paginationDTO;

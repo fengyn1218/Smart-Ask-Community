@@ -1,6 +1,6 @@
 # 服务配置
 server:
-  port:8080
+  port: 8080
 
 # Spring配置
 spring:
@@ -21,7 +21,6 @@ spring:
       min-idle: 1
       max-active: 20
       test-on-borrow: true
-      # MySQL 8.x: com.mysql.cj.jdbc.Driver(避免报错)
       driver-class-name: com.mysql.cj.jdbc.Driver
   # 加载多个配置文件
   profiles:

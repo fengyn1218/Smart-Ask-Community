@@ -3,9 +3,9 @@
 <head>
     <title th:text="${user.userName + '的主页'}"></title>
     <th:block th:insert="~{common/header :: head}"></th:block>
-    <script src="/static/js/community.js" type="application/javascript"></script>
-    <script src="/static/js/moment.js" type="application/javascript"></script>
-    <script src="/static/js/xss.min.js?v=1.5" type="application/javascript"></script>
+    <script src="/js/community.js" type="application/javascript"></script>
+    <script src="/js/moment.js" type="application/javascript"></script>
+    <script src="/js/xss.min.js?v=1.5" type="application/javascript"></script>
 </head>
 <body style="margin-top: 0px">
 <div th:insert="~{common/header :: nav}" style="margin-top: 61px" class="html5plus-hide"></div>
@@ -52,12 +52,12 @@
                      style="min-height: 50px; padding:30px 0; height:auto;"><i style="font-size:14px;">该用户还没有发表任何帖子</i>
                 </div>
                 <ul class="jie-row">
-                    <th:block th:each="question : ${paginationDto.data}">
+                    <th:block th:each="post : ${paginationDto.data}">
                         <li>
                             <span th:if="${post.status==1||post.status==3}" class="fly-jing">精</span>
                             <a th:href="'/p/' + ${post.id}" th:text="${post.title}"
                                class="jie-title"></a>
-                            <i th:text="${'于 '+post.gmtModifiedStr}"></i>
+                            <i th:text="${'于 '+post.updatedStr}"></i>
                             <!--em class="layui-hide-xs" th:text="${question.commentCount+'个回复 •'+question.viewCount+'次浏览 •'+question.LikeCount+'人收藏'}"></em-->
                         </li>
                     </th:block>
@@ -113,7 +113,7 @@
 </div>
 <th:block th:insert="~{common/footer :: foot}"></th:block>
 <script>
-
+console.log(7878979879879);
     layui.config({
         version: "3.0.0"
         , base: '/mods/'
@@ -151,7 +151,7 @@
                             }
                             layui.each(response.data.data, function (index, item) {
                                 var titleLabel = "<p>\n" +
-                                    "   <span>他在 " + item.gmtModifiedStr + "</span>\n" +
+                                    "   <span>他在 " + item.updatedStr + "</span>\n" +
                                     "   回答了以下内容，快去<a href=\"/p/" + item.parentId + "#comment-body-" + item.id + "\" target=\"_blank\" class='fly-link'>围观</a>吧：\n" +
                                     "   </p>";
                                 var ContentLabel = "          <div class=\"reply-body-" + page + " home-dacontent \">" +

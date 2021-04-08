@@ -1,11 +1,4 @@
-/**
 
- @Name：layui.blog 闲言轻博客模块
- @Author：徐志文
- @License：MIT
- @Site：http://www.layui.com/template/xianyan/
-    
- */
 layui.define(['element', 'form','laypage','jquery','laytpl'],function(exports){
   var element = layui.element
   ,form = layui.form
