@@ -10,7 +10,7 @@
     <result column="receiver" jdbcType="BIGINT" property="receiver" />
     <result column="outerid" jdbcType="BIGINT" property="outerid" />
     <result column="type" jdbcType="INTEGER" property="type" />
-    <result column="gmt_create" jdbcType="BIGINT" property="gmtCreate" />
+    <result column="create_time" jdbcType="BIGINT" property="createTime" />
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="notifier_name" jdbcType="VARCHAR" property="notifierName" />
     <result column="outer_title" jdbcType="VARCHAR" property="outerTitle" />

@@ -33,6 +33,9 @@ public class UserLoginServiceImpl implements UserLoginService {
             // 密码加密
             String pass = DigestUtils.md5DigestAsHex(password.getBytes());
             if (pass.equals(user.getPassword())) {
+                user.setLastLoginTime(System.currentTimeMillis());
+                // 更新最近登录时间
+                tbUserMapper.updateByPrimaryKey(user);
                 return user;
             }
         }

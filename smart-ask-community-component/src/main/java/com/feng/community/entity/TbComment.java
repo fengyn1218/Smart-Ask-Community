@@ -1,7 +1,5 @@
 package com.feng.community.entity;
 
-import java.util.Date;
-
 import javax.persistence.*;
 
 @Table(name = "tb_comment")
@@ -24,7 +22,7 @@ public class TbComment {
     /**
      * 创建时间
      */
-    private Date created;
+    private Long created;
 
     /**
      * 点赞数
@@ -32,11 +30,16 @@ public class TbComment {
     @Column(name = "like_count")
     private Integer likeCount;
 
-
+    /**
+     * @return id
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * @param id
+     */
     public void setId(Long id) {
         this.id = id;
     }
@@ -48,7 +51,9 @@ public class TbComment {
         return authorId;
     }
 
-
+    /**
+     * @param authorId
+     */
     public void setAuthorId(Long authorId) {
         this.authorId = authorId;
     }
@@ -60,7 +65,9 @@ public class TbComment {
         return postId;
     }
 
-
+    /**
+     * @param postId
+     */
     public void setPostId(Long postId) {
         this.postId = postId;
     }
@@ -88,7 +95,7 @@ public class TbComment {
      *
      * @return created - 创建时间
      */
-    public Date getCreated() {
+    public Long getCreated() {
         return created;
     }
 
@@ -97,7 +104,7 @@ public class TbComment {
      *
      * @param created 创建时间
      */
-    public void setCreated(Date created) {
+    public void setCreated(Long created) {
         this.created = created;
     }
 

@@ -10,10 +10,11 @@
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="activating" jdbcType="INTEGER" property="activating" />
     <result column="email" jdbcType="VARCHAR" property="email" />
-    <result column="created" jdbcType="TIMESTAMP" property="created" />
-    <result column="updated" jdbcType="TIMESTAMP" property="updated" />
+    <result column="created" jdbcType="BIGINT" property="created" />
+    <result column="updated" jdbcType="BIGINT" property="updated" />
     <result column="sex" jdbcType="BIGINT" property="sex" />
     <result column="avatar_url" jdbcType="VARCHAR" property="avatarUrl" />
+    <result column="last_login_time" jdbcType="BIGINT" property="lastLoginTime" />
     <result column="city" jdbcType="LONGVARCHAR" property="city" />
     <result column="signature" jdbcType="LONGVARCHAR" property="signature" />
   </resultMap>

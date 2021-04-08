@@ -76,7 +76,7 @@ public final class CookieUtils {
      * 设置Cookie的值 不设置生效时间默认浏览器关闭即失效,也不编码
      */
     public static void setCookie(HttpServletRequest request, HttpServletResponse response, String cookieName,
-            String cookieValue) {
+                                 String cookieValue) {
         setCookie(request, response, cookieName, cookieValue, -1);
     }
 
@@ -84,7 +84,7 @@ public final class CookieUtils {
      * 设置Cookie的值 在指定时间内生效,但不编码
      */
     public static void setCookie(HttpServletRequest request, HttpServletResponse response, String cookieName,
-            String cookieValue, int cookieMaxage) {
+                                 String cookieValue, int cookieMaxage) {
         setCookie(request, response, cookieName, cookieValue, cookieMaxage, false);
     }
 
@@ -92,7 +92,7 @@ public final class CookieUtils {
      * 设置Cookie的值 不设置生效时间,但编码
      */
     public static void setCookie(HttpServletRequest request, HttpServletResponse response, String cookieName,
-            String cookieValue, boolean isEncode) {
+                                 String cookieValue, boolean isEncode) {
         setCookie(request, response, cookieName, cookieValue, -1, isEncode);
     }
 
@@ -100,7 +100,7 @@ public final class CookieUtils {
      * 设置Cookie的值 在指定时间内生效, 编码参数
      */
     public static void setCookie(HttpServletRequest request, HttpServletResponse response, String cookieName,
-            String cookieValue, int cookieMaxage, boolean isEncode) {
+                                 String cookieValue, int cookieMaxage, boolean isEncode) {
         doSetCookie(request, response, cookieName, cookieValue, cookieMaxage, isEncode);
     }
 
@@ -108,7 +108,7 @@ public final class CookieUtils {
      * 设置Cookie的值 在指定时间内生效, 编码参数(指定编码)
      */
     public static void setCookie(HttpServletRequest request, HttpServletResponse response, String cookieName,
-            String cookieValue, int cookieMaxage, String encodeString) {
+                                 String cookieValue, int cookieMaxage, String encodeString) {
         doSetCookie(request, response, cookieName, cookieValue, cookieMaxage, encodeString);
     }
 
@@ -116,7 +116,7 @@ public final class CookieUtils {
      * 删除Cookie带cookie域名
      */
     public static void deleteCookie(HttpServletRequest request, HttpServletResponse response,
-            String cookieName) {
+                                    String cookieName) {
         doSetCookie(request, response, cookieName, "", -1, false);
     }
 
@@ -126,7 +126,7 @@ public final class CookieUtils {
      * @param cookieMaxage cookie生效的最大秒数
      */
     private static final void doSetCookie(HttpServletRequest request, HttpServletResponse response,
-            String cookieName, String cookieValue, int cookieMaxage, boolean isEncode) {
+                                          String cookieName, String cookieValue, int cookieMaxage, boolean isEncode) {
         try {
             if (cookieValue == null) {
                 cookieValue = "";
@@ -139,7 +139,6 @@ public final class CookieUtils {
             }
             if (null != request) {// 设置域名的cookie
                 String domainName = getDomainName(request);
-                //                System.out.println(domainName);
                 if (!"localhost".equals(domainName)) {
                     cookie.setDomain(domainName);
                 }
@@ -157,7 +156,7 @@ public final class CookieUtils {
      * @param cookieMaxage cookie生效的最大秒数
      */
     private static final void doSetCookie(HttpServletRequest request, HttpServletResponse response,
-            String cookieName, String cookieValue, int cookieMaxage, String encodeString) {
+                                          String cookieName, String cookieValue, int cookieMaxage, String encodeString) {
         try {
             if (cookieValue == null) {
                 cookieValue = "";
@@ -170,7 +169,6 @@ public final class CookieUtils {
             }
             if (null != request) {// 设置域名的cookie
                 String domainName = getDomainName(request);
-                //                System.out.println(domainName);
                 if (!"localhost".equals(domainName)) {
                     cookie.setDomain(domainName);
                 }
@@ -198,6 +196,14 @@ public final class CookieUtils {
             serverName = serverName.substring(0, end);
             final String[] domains = serverName.split("\\.");
             int len = domains.length;
+
+            // 处理ip地址访问情况
+            if (serverName.contains(":")) {
+                String[] split = serverName.split(":");
+                domainName = split[0];
+                return domainName;
+            }
+
             if (len > 3) {
                 // www.xxx.com.cn
                 domainName = "." + domains[len - 3] + "." + domains[len - 2] + "." + domains[len - 1];

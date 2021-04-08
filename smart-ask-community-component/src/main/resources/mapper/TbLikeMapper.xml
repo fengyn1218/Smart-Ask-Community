@@ -9,6 +9,6 @@
     <result column="target_id" jdbcType="BIGINT" property="targetId" />
     <result column="type" jdbcType="INTEGER" property="type" />
     <result column="liker" jdbcType="BIGINT" property="liker" />
-    <result column="created" jdbcType="TIMESTAMP" property="created" />
+    <result column="created" jdbcType="BIGINT" property="created" />
   </resultMap>
 </mapper>

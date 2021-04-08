@@ -4,9 +4,12 @@ import com.feng.community.dao.TbPostMapper;
 import com.feng.community.dao.TbUserMapper;
 import com.feng.community.dto.PaginationDTO;
 import com.feng.community.dto.PostDTO;
+import com.feng.community.dto.UserDTO;
 import com.feng.community.entity.TbPost;
 import com.feng.community.entity.TbUser;
 import com.feng.community.service.post.PostService;
+import org.apache.commons.lang3.time.DateFormatUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +26,8 @@ import java.util.stream.Collectors;
  */
 @Service
 public class PostServiceImpl implements PostService {
+    public static final String FORMAT = "yyyy-MM-dd HH:mm:ss";
+
     @Autowired
     private TbPostMapper tbPostMapper;
     @Autowired
@@ -82,10 +87,9 @@ public class PostServiceImpl implements PostService {
     @Override
     public PaginationDTO<TbPost> listByUserId(Long userId, Integer page, Integer size) {
         Integer totalPage;
-        QuestionExample questionExample = new QuestionExample();
-        questionExample.createCriteria()
-                .andCreatorEqualTo(userId);
-        Integer totalCount = (int)questionMapper.countByExample(questionExample);
+        Example example = new Example(TbPost.class);
+        example.createCriteria().andEqualTo("id", userId);
+        Integer totalCount = (int) tbPostMapper.selectCountByExample(example);
         if (totalCount % size == 0) {
             totalPage = totalCount / size;
         } else {
@@ -98,27 +102,25 @@ public class PostServiceImpl implements PostService {
             page = 1;
         }
 
-        Integer offset = size * (page-1);
-        QuestionExample example = new QuestionExample();
-        example.createCriteria()
-                .andCreatorEqualTo(userId);
-        example.setOrderByClause("gmt_modified desc");
-        List<Question> questions = questionMapper.selectByExampleWithRowbounds(example, new RowBounds(offset, size));
-        List<QuestionDTO> questionDTOList = new ArrayList<>();
+        Integer offset = size * (page - 1);
+        example.setOrderByClause("updated desc");
+        List<TbPost> posts = tbPostMapper.selectByExampleAndRowBounds(example, new RowBounds(offset, size));
+
+        List<PostDTO> questionDTOList = new ArrayList<>();
         PaginationDTO paginationDTO = new PaginationDTO();
-        for (Question question : questions) {
-            TbUser user = tbUserMapper.selectByPrimaryKey(question.getCreator());
-            QuestionDTO questionDTO = new QuestionDTO();
-            BeanUtils.copyProperties(question,questionDTO);
-            UserDTO userDTO = new UserDTO();
-            BeanUtils.copyProperties(user,userDTO);
-            questionDTO.setUser(userDTO);
-            questionDTO.setGmtModifiedStr(timeUtils.getTime(questionDTO.getGmtModified(),null));
-            questionDTOList.add(questionDTO);
+        for (TbPost question : posts) {
+            TbUser user = tbUserMapper.selectByPrimaryKey(question.getAuthorId());
+            PostDTO postDTO = new PostDTO();
+            BeanUtils.copyProperties(question, postDTO);
+//            UserDTO userDTO = new UserDTO();
+//            BeanUtils.copyProperties(user, userDTO);
+            postDTO.setUser(user);
+            postDTO.setUpdatedStr(DateFormatUtils.format(postDTO.getUpdated(), FORMAT));
+            questionDTOList.add(postDTO);
         }
         paginationDTO.setData(questionDTOList);
         paginationDTO.setTotalCount(totalCount);
-        paginationDTO.setPagination(totalPage,page);
+        paginationDTO.setPagination(totalPage, page);
         return paginationDTO;
     }
 }

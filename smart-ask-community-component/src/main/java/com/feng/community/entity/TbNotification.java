@@ -19,8 +19,8 @@ public class TbNotification {
      */
     private Integer type;
 
-    @Column(name = "gmt_create")
-    private Long gmtCreate;
+    @Column(name = "create_time")
+    private Long createTime;
 
     /**
      * 0未读，1已读
@@ -41,7 +41,7 @@ public class TbNotification {
     }
 
     /**
-     *
+     * @param id
      */
     public void setId(Long id) {
         this.id = id;
@@ -55,7 +55,7 @@ public class TbNotification {
     }
 
     /**
-     *
+     * @param notifier
      */
     public void setNotifier(Long notifier) {
         this.notifier = notifier;
@@ -69,7 +69,7 @@ public class TbNotification {
     }
 
     /**
-     *
+     * @param receiver
      */
     public void setReceiver(Long receiver) {
         this.receiver = receiver;
@@ -83,7 +83,7 @@ public class TbNotification {
     }
 
     /**
-     *
+     * @param outerid
      */
     public void setOuterid(Long outerid) {
         this.outerid = outerid;
@@ -108,17 +108,17 @@ public class TbNotification {
     }
 
     /**
-     * @return gmt_create
+     * @return create_time
      */
-    public Long getGmtCreate() {
-        return gmtCreate;
+    public Long getCreateTime() {
+        return createTime;
     }
 
     /**
-     *
+     * @param createTime
      */
-    public void setGmtCreate(Long gmtCreate) {
-        this.gmtCreate = gmtCreate;
+    public void setCreateTime(Long createTime) {
+        this.createTime = createTime;
     }
 
     /**
@@ -147,7 +147,7 @@ public class TbNotification {
     }
 
     /**
-     *
+     * @param notifierName
      */
     public void setNotifierName(String notifierName) {
         this.notifierName = notifierName;
@@ -161,7 +161,7 @@ public class TbNotification {
     }
 
     /**
-     *
+     * @param outerTitle
      */
     public void setOuterTitle(String outerTitle) {
         this.outerTitle = outerTitle;

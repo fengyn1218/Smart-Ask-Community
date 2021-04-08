@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${user.userName + '的主页'}"></title>
+    <th:block th:insert="~{common/header :: head}"></th:block>
+    <script src="/static/js/community.js" type="application/javascript"></script>
+    <script src="/static/js/moment.js" type="application/javascript"></script>
+    <script src="/static/js/xss.min.js?v=1.5" type="application/javascript"></script>
+</head>
+<body style="margin-top: 0px">
+<div th:insert="~{common/header :: nav}" style="margin-top: 61px" class="html5plus-hide"></div>
+
+<div class="fly-home fly-panel" style="background-image: url('https://api.lli.cx/bing/api.php');">
+    <img th:src="${user.avatarUrl}" th:alt="${user.userName}">
+    <i class="iconfont icon-renzheng" title="Fly社区认证"></i>
+    <h1>
+        <i class="layui-icon fly-list-kiss" title="Areis用户">&#xe735</i>
+        <span th:text="${user.userName}"></span>
+
+        <i th:if="${user.sex=='1'}" class="iconfont icon-nan"></i>
+        <i th:if="${user.sex=='2'}" class="iconfont icon-nv"></i>
+
+    </h1>
+
+    <p style="padding: 10px 0; color: #5FB878;">认证信息：Aries社区用户</p>
+
+    <p class="fly-home-info">
+        <i class="iconfont icon-kiss" title="邮箱信息"></i><span style="color: #FF7200;"
+                                                             th:text="${user.email}"></span>
+        <i class="iconfont icon-shijian"></i><span
+            th:text="${#dates.format(user.created,'yyyy-MM-dd HH:mm')+' 加入'}"></span>
+        <i class="iconfont icon-chengshi"></i><span
+            th:text="${'来自：'+(user.city==null?'保密':user.city)}"></span>
+    </p>
+
+    <p class="fly-home-sign"
+       th:text="${'个人简介：'+((user.signature==null||user.signature=='')?'该用户太懒了，还没来得及填写':user.signature)}"></p>
+
+    <div class="fly-sns" data-user="">
+        <a href="javascript:;" class="layui-btn layui-btn-primary fly-imActive" data-type="addFriend">添加好友</a>
+        <a href="javascript:;" class="layui-btn layui-btn-normal fly-imActive" data-type="chat">发起会话</a>
+    </div>
+
+</div>
+
+<div class="layui-container">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md6 fly-home-jie">
+            <div class="fly-panel">
+                <h3 class="fly-panel-title" th:text="${user.userName+' 发表了 '+paginationDto.totalCount+' 个帖子'}"></h3>
+                <div th:if="${paginationDto.totalCount} == 0" class="fly-none"
+                     style="min-height: 50px; padding:30px 0; height:auto;"><i style="font-size:14px;">该用户还没有发表任何帖子</i>
+                </div>
+                <ul class="jie-row">
+                    <th:block th:each="question : ${paginationDto.data}">
+                        <li>
+                            <span th:if="${post.status==1||post.status==3}" class="fly-jing">精</span>
+                            <a th:href="'/p/' + ${post.id}" th:text="${post.title}"
+                               class="jie-title"></a>
+                            <i th:text="${'于 '+post.gmtModifiedStr}"></i>
+                            <!--em class="layui-hide-xs" th:text="${question.commentCount+'个回复 •'+question.viewCount+'次浏览 •'+question.LikeCount+'人收藏'}"></em-->
+                        </li>
+                    </th:block>
+                </ul>
+                <div style="text-align: center">
+                    <div class="laypage-main"><!-- 分页展示 -->
+                        <a th:if="${paginationDto.showFirstPage}" th:href="@{'/user/'+${user.id}(page=1)}"
+                           aria-label="Previous">
+                            &laquo;
+                        </a>
+                        <a th:if="${paginationDto.showPrevious}"
+                           th:href="@{'/user/'+${user.id}(page=${paginationDto.page - 1})}">
+                            &lt;
+                        </a>
+                        <th:block th:each="page : ${paginationDto.pages}">
+                            <a th:if="${paginationDto.page != page}"
+                               th:href="@{'/user/'+${user.id}(page=${page})}"
+                               th:text="${page}"></a>
+                            <span th:if="${paginationDto.page == page}"
+                                  th:href="@{'/user/'+${user.id}(page=${page})}"
+                                  th:text="${page}"
+                                  class="laypage-curr"></span>
+                        </th:block>
+                        <a th:if="${paginationDto.showNext}"
+                           th:href="@{'/user/'+${user.id}(page=${paginationDto.page +1 })}">
+                            &gt;
+                        </a>
+                        <a th:if="${paginationDto.showEndPage}"
+                           th:href="@{'/user/'+${user.id}(page=${paginationDto.totalPage})}"
+                           aria-label="Next">
+                            &raquo;
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="layui-col-md6 fly-home-da">
+            <div class="fly-panel">
+                <h3 class="fly-panel-title">
+                    <th:block th:text="${user.userName+' 回复了主题 '}"></th:block>
+                    <span id="comment_count"></span> 次
+                </h3>
+                <ul class="home-jieda" id="jieda-list">
+
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>
+<th:block th:insert="~{common/footer :: foot}"></th:block>
+<script>
+
+    layui.config({
+        version: "3.0.0"
+        , base: '/mods/'
+    }).extend({
+        fly: 'index2'
+    }).use(['fly', 'flow', 'layer'], function () {
+
+        var $ = layui.jquery; //不用额外加载jQuery，flow模块本身是有依赖jQuery的，直接用即可。
+        var flow = layui.flow;
+        var layer = layui.layer;
+        var fly = layui.fly;
+        //var page=[[${page}]];
+        flow.load({
+            elem: '#jieda-list' //指定列表容器
+            , isAuto: false//懒加载
+            , end: "咱可是有底线滴~"//底部文字
+            , done: function (page, next) { //到达临界点（默认滚动触发），触发下一页
+                var lis = [];
+                //以jQuery的Ajax请求为例，请求下一页数据（注意：page是从2开始返回）
+                $.ajax({
+                    type: "GET",
+                    url: "/api/comment/list",
+                    contentType: 'application/json',
+                    data: {
+                        "type": 1
+                        , "commentator": [[${user.id}]]
+                        , "page": page
+                        , "size": 5
+                    },
+                    success: function (response) {
+                        if (response.code == 200) {
+                            if (page == 1) {
+                                var comment_count = $("#comment_count");
+                                comment_count.html(response.data.totalCount);
+                            }
+                            layui.each(response.data.data, function (index, item) {
+                                var titleLabel = "<p>\n" +
+                                    "   <span>他在 " + item.gmtModifiedStr + "</span>\n" +
+                                    "   回答了以下内容，快去<a href=\"/p/" + item.parentId + "#comment-body-" + item.id + "\" target=\"_blank\" class='fly-link'>围观</a>吧：\n" +
+                                    "   </p>";
+                                var ContentLabel = "          <div class=\"reply-body-" + page + " home-dacontent \">" +
+                                    item.content +
+                                    "          </div>";
+                                var str = "<li>" + titleLabel + ContentLabel + "</li>";
+                                lis.push(str);
+                            });
+
+                            //执行下一页渲染，第二参数为：满足“加载更多”的条件，即后面仍有分页
+                            //pages为Ajax返回的总页数，只有当前页小于总页数的情况下，才会继续出现加载更多
+                            next(lis.join(''), page < response.data.totalPage);
+
+
+                        } else {
+                            var str = "<div class=\"fly-none\" style=\"min-height: 50px; padding:30px 0; height:auto;\"><span>出错啦，请联系管理员</span></div>";
+                            lis.push(str);
+                        }
+                        //如果你是采用模版自带的编辑器，你需要开启以下语句来解析。
+                        $('.reply-body-' + page).each(function () {
+                            var othis = $(this), html = othis.html();
+                            othis.html(filterXSS(fly.content(html)));
+                            // othis.html(fly.content(html));
+                        });
+                    },
+                    error: function (xmlHttpRequest, textStatus, errorThrown) {
+                        var str = "<div class=\"fly-none\" style=\"min-height: 50px; padding:30px 0; height:auto;\"><span>错误" + xmlHttpRequest.status + "，请联系管理员</span></div>";
+                        lis.push(str);
+                        next(lis.join(''), 1 < 1);
+                    },
+                    dataType: "json"
+                });
+
+
+            }
+        });
+
+
+        $('body').on('click', '.home-dacontent img', function () {
+            //window.open(this.src);
+            layer.photos({
+                photos: {
+                    "data": [{
+                        "src": this.src
+                    }]
+                },
+                anim: 1
+            });
+        });
+
+    });
+</script>
+
+<script>
+    //var user_id=[[${user.id}]];
+    function getReplyBody() {
+
+
+    }
+</script>
+</body>
+</html>

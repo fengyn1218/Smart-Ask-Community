@@ -1,7 +1,5 @@
 package com.feng.community.entity;
 
-import java.util.Date;
-
 import javax.persistence.*;
 
 @Table(name = "tb_user")
@@ -22,9 +20,9 @@ public class TbUser {
 
     private String email;
 
-    private Date created;
+    private Long created;
 
-    private Date updated;
+    private Long updated;
 
     /**
      * 性别 1男2女
@@ -36,6 +34,9 @@ public class TbUser {
      */
     @Column(name = "avatar_url")
     private String avatarUrl;
+
+    @Column(name = "last_login_time")
+    private Long lastLoginTime;
 
     /**
      * 所在城市
@@ -55,7 +56,7 @@ public class TbUser {
     }
 
     /**
-     *
+     * @param id
      */
     public void setId(Long id) {
         this.id = id;
@@ -69,7 +70,7 @@ public class TbUser {
     }
 
     /**
-     *
+     * @param userName
      */
     public void setUserName(String userName) {
         this.userName = userName;
@@ -83,7 +84,7 @@ public class TbUser {
     }
 
     /**
-     *
+     * @param password
      */
     public void setPassword(String password) {
         this.password = password;
@@ -115,7 +116,7 @@ public class TbUser {
     }
 
     /**
-     *
+     * @param email
      */
     public void setEmail(String email) {
         this.email = email;
@@ -124,28 +125,28 @@ public class TbUser {
     /**
      * @return created
      */
-    public Date getCreated() {
+    public Long getCreated() {
         return created;
     }
 
     /**
-     *
+     * @param created
      */
-    public void setCreated(Date created) {
+    public void setCreated(Long created) {
         this.created = created;
     }
 
     /**
      * @return updated
      */
-    public Date getUpdated() {
+    public Long getUpdated() {
         return updated;
     }
 
     /**
-     *
+     * @param updated
      */
-    public void setUpdated(Date updated) {
+    public void setUpdated(Long updated) {
         this.updated = updated;
     }
 
@@ -183,6 +184,20 @@ public class TbUser {
      */
     public void setAvatarUrl(String avatarUrl) {
         this.avatarUrl = avatarUrl;
+    }
+
+    /**
+     * @return last_login_time
+     */
+    public Long getLastLoginTime() {
+        return lastLoginTime;
+    }
+
+    /**
+     * @param lastLoginTime
+     */
+    public void setLastLoginTime(Long lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
     }
 
     /**

@@ -13,15 +13,15 @@ public class PostDTO {
     private String title;
     private String description;
     private String tag;
-    private Long gmtCreate;
-    private Long gmtModified;
-    private String gmtModifiedStr;
-    private Long creator;
+    private Long created;
+    private Long updated;
+    private String updatedStr;
+    private Long authorId;
     private Integer viewCount;
-//    private Integer commentCount;
+    private Integer commentCount;
     private Integer likeCount;
-    private String userGroupName;
     private TbUser user;
+
     private Long gmtLatestComment;
     private String gmtLatestCommentStr;
     private String shortDescription;
@@ -29,6 +29,7 @@ public class PostDTO {
     private Integer status;
     private Integer type;
     private Integer permission;//阅读权限
+
 
     //状态
     private boolean approved = true;//是否合法（通过审核）

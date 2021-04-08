@@ -48,6 +48,10 @@ public class SessionInterceptor implements HandlerInterceptor {
             return true;
         }
 
+        if (!(handler instanceof HandlerMethod)) {
+            return true;
+        }
+
         Method method = ((HandlerMethod) handler).getMethod();
         String token = null;
         ResultView resultView = null;

@@ -1,7 +1,5 @@
 package com.feng.community.entity;
 
-import java.util.Date;
-
 import javax.persistence.*;
 
 @Table(name = "tb_post")
@@ -26,9 +24,9 @@ public class TbPost {
      */
     private Integer gold;
 
-    private Date created;
+    private Long created;
 
-    private Date updated;
+    private Long updated;
 
     /**
      * 状态：1:未结。2:已结。3:精华
@@ -60,10 +58,18 @@ public class TbPost {
     @Column(name = "view_count")
     private Integer viewCount;
 
+    @Column(name = "gmt_latest_comment")
+    private Long gmtLatestComment;
+
+    @Column(name = "comment_count")
+    private Byte commentCount;
+
     /**
      * 标题
      */
     private String title;
+
+    private String description;
 
     /**
      * @return id
@@ -73,7 +79,7 @@ public class TbPost {
     }
 
     /**
-     *
+     * @param id
      */
     public void setId(Long id) {
         this.id = id;
@@ -110,12 +116,12 @@ public class TbPost {
      * 6:动态
      *
      * @param type 所属专栏 ：
-     * 1：提问
-     * 2：分享
-     * 3：讨论
-     * 4：建议
-     * 5:公告
-     * 6:动态
+     *             1：提问
+     *             2：分享
+     *             3：讨论
+     *             4：建议
+     *             5:公告
+     *             6:动态
      */
     public void setType(Long type) {
         this.type = type;
@@ -142,28 +148,28 @@ public class TbPost {
     /**
      * @return created
      */
-    public Date getCreated() {
+    public Long getCreated() {
         return created;
     }
 
     /**
-     *
+     * @param created
      */
-    public void setCreated(Date created) {
+    public void setCreated(Long created) {
         this.created = created;
     }
 
     /**
      * @return updated
      */
-    public Date getUpdated() {
+    public Long getUpdated() {
         return updated;
     }
 
     /**
-     *
+     * @param updated
      */
-    public void setUpdated(Date updated) {
+    public void setUpdated(Long updated) {
         this.updated = updated;
     }
 
@@ -229,7 +235,7 @@ public class TbPost {
     }
 
     /**
-     *
+     * @param permission
      */
     public void setPermission(Integer permission) {
         this.permission = permission;
@@ -272,6 +278,34 @@ public class TbPost {
     }
 
     /**
+     * @return gmt_latest_comment
+     */
+    public Long getGmtLatestComment() {
+        return gmtLatestComment;
+    }
+
+    /**
+     * @param gmtLatestComment
+     */
+    public void setGmtLatestComment(Long gmtLatestComment) {
+        this.gmtLatestComment = gmtLatestComment;
+    }
+
+    /**
+     * @return comment_count
+     */
+    public Byte getCommentCount() {
+        return commentCount;
+    }
+
+    /**
+     * @param commentCount
+     */
+    public void setCommentCount(Byte commentCount) {
+        this.commentCount = commentCount;
+    }
+
+    /**
      * 获取标题
      *
      * @return title - 标题
@@ -287,5 +321,19 @@ public class TbPost {
      */
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    /**
+     * @return description
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * @param description
+     */
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

@@ -1,7 +1,5 @@
 package com.feng.community.entity;
 
-import java.util.Date;
-
 import javax.persistence.*;
 
 @Table(name = "tb_like")
@@ -17,7 +15,9 @@ public class TbLike {
     private Long targetId;
 
     /**
-     * 目标类型
+     * 目标类型:
+     * 1评论点赞
+     * 2帖子收藏
      */
     private Integer type;
 
@@ -29,7 +29,7 @@ public class TbLike {
     /**
      * 点赞时间
      */
-    private Date created;
+    private Long created;
 
     /**
      * @return id
@@ -39,7 +39,7 @@ public class TbLike {
     }
 
     /**
-     *
+     * @param id
      */
     public void setId(Long id) {
         this.id = id;
@@ -64,18 +64,26 @@ public class TbLike {
     }
 
     /**
-     * 获取目标类型
+     * 获取目标类型:
+     * 1评论点赞
+     * 2帖子收藏
      *
-     * @return type - 目标类型
+     * @return type - 目标类型:
+     * 1评论点赞
+     * 2帖子收藏
      */
     public Integer getType() {
         return type;
     }
 
     /**
-     * 设置目标类型
+     * 设置目标类型:
+     * 1评论点赞
+     * 2帖子收藏
      *
-     * @param type 目标类型
+     * @param type 目标类型:
+     *             1评论点赞
+     *             2帖子收藏
      */
     public void setType(Integer type) {
         this.type = type;
@@ -104,7 +112,7 @@ public class TbLike {
      *
      * @return created - 点赞时间
      */
-    public Date getCreated() {
+    public Long getCreated() {
         return created;
     }
 
@@ -113,7 +121,7 @@ public class TbLike {
      *
      * @param created 点赞时间
      */
-    public void setCreated(Date created) {
+    public void setCreated(Long created) {
         this.created = created;
     }
 }

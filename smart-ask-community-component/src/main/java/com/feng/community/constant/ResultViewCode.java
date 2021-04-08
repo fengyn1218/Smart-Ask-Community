@@ -12,6 +12,8 @@ public enum ResultViewCode {
     SEND_MAIL_SUCCESS(1025), //发送邮件成功
 
     NEED_LOGIN(1030, "需要登录哦！"), //需要登录
+
+    USER_IS_EMPTY(2040, "该用户不存在"),
     ;
 
     private Integer code;

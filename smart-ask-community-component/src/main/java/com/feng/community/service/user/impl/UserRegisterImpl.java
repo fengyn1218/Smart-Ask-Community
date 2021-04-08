@@ -53,8 +53,8 @@ public class UserRegisterImpl implements UserRegisterService {
                 // 明文密码加密
                 tbUser.setPassword(DigestUtils.md5DigestAsHex(password.getBytes()));
                 tbUser.setAvatarUrl("/images/avatar/default.png");
-                tbUser.setCreated(new Date());
-                tbUser.setUpdated(new Date());
+                tbUser.setCreated(System.currentTimeMillis());
+                tbUser.setUpdated(System.currentTimeMillis());
                 tbUserMapper.insert(tbUser);
                 return ResultView.success("注册成功，去登录吧！");
             }
@@ -77,7 +77,7 @@ public class UserRegisterImpl implements UserRegisterService {
         } else {
             TbUser user = tbUsers.get(0);
             user.setPassword(DigestUtils.md5DigestAsHex(password.getBytes()));
-            user.setUpdated(new Date());
+            user.setUpdated(System.currentTimeMillis());
             tbUserMapper.updateByExample(user, example);
             return ResultView.success("修改密码成功，去登录吧！");
         }

@@ -59,7 +59,7 @@
                 <a th:href="${'/user/'+loginUser.id}" class="niter-avatar">
                     <img th:src="${loginUser.avatarUrl}" th:alt="${loginUser.userName}"><cite
                         th:text="${loginUser.userName}"></cite><i
-                        th:text="${loginUser.updated}">106次回答</i>
+                        th:text="${#dates.format(loginUser.lastLoginTime,'MM-dd HH:mm')}">106次回答</i>
                 </a>
             </dd>
         </dl>
@@ -108,7 +108,7 @@
                 <a th:href="${'/user/'+loginUser.id}" class="niter-avatar">
                     <img th:src="${loginUser.avatarUrl}" th:alt="${loginUser.userName}"><cite
                         th:text="${loginUser.userName}"></cite><i
-                        th:text="${loginUser.updated}">106次回答</i>
+                        th:text="${#dates.format(loginUser.lastLoginTime,'MM-dd HH:mm')}">106次回答</i>
                 </a>
             </dd>
         </dl>
