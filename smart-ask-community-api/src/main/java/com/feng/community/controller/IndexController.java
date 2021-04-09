@@ -22,6 +22,7 @@ import java.util.List;
 @Controller
 public class IndexController {
     public static final String string="456";
+    public static final String STRING = "456";
 
     @Autowired
     private LoginUserCache loginUserCache;
