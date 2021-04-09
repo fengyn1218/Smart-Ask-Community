@@ -3,3 +3,4 @@ spring:
   redis:
     host: 59.110.23.184
     port: 6379
+    password: fyn12181218.  # 总有傻逼攻击我redis
