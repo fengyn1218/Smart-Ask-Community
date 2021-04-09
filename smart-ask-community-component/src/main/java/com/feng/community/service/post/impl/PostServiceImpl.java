@@ -121,4 +121,10 @@ public class PostServiceImpl implements PostService {
         paginationDTO.setPagination(totalPage, page);
         return paginationDTO;
     }
+
+    @Override
+    public PostDTO getPostById(Long postId) {
+        //todo
+        return null;
+    }
 }

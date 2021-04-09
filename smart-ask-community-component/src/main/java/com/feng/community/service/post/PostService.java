@@ -1,6 +1,7 @@
 package com.feng.community.service.post;
 
 import com.feng.community.dto.PaginationDTO;
+import com.feng.community.dto.PostDTO;
 import com.feng.community.entity.TbPost;
 
 import java.util.List;
@@ -23,4 +24,6 @@ public interface PostService {
     PaginationDTO<TbPost> getPostByType(String search, String tag, String sort, Integer page, Integer size, Integer type);
 
     PaginationDTO<TbPost> listByUserId(Long userId, Integer page, Integer size);
+
+    PostDTO getPostById(Long postId);
 }

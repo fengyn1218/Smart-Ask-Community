@@ -22,8 +22,6 @@ import java.util.List;
 @Controller
 public class IndexController {
 
-
-
     @Autowired
     private LoginUserCache loginUserCache;
     @Autowired
