@@ -71,7 +71,7 @@ public class CommentServiceImpl implements CommentService {
         commentQueryDTO.setOffset(offset);
 
         example.setOrderByClause(commentQueryDTO.getSort() + " " + commentQueryDTO.getOrder());
-        List<TbComment> tbComments = tbCommentMapper.selectByExampleAndRowBounds(example, new RowBounds(commentQueryDTO.getSize() * (commentQueryDTO.getPage() - 1), commentQueryDTO.getSize()));
+        List<TbComment> tbComments = tbCommentMapper.selectByExampleAndRowBounds(example, new RowBounds(offset, commentQueryDTO.getSize()));
 
         PaginationDTO paginationDTO = new PaginationDTO();
         paginationDTO.setTotalCount(totalCount);

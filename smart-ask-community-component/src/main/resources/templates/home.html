@@ -131,6 +131,7 @@
             , isAuto: false//懒加载
             , end: "咱可是有底线滴~"//底部文字
             , done: function (page, next) { //到达临界点（默认滚动触发），触发下一页
+                console.log(page);
                 var lis = [];
                 //以jQuery的Ajax请求为例，请求下一页数据（注意：page是从2开始返回）
                 $.ajax({
@@ -151,8 +152,8 @@
                             }
                             layui.each(response.data.data, function (index, item) {
                                 var titleLabel = "<p>\n" +
-                                    "   <span>他在 " + item.updatedStr + "</span>\n" +
-                                    "   回答了以下内容，快去<a href=\"/p/" + item.parentId + "#comment-body-" + item.id + "\" target=\"_blank\" class='fly-link'>围观</a>吧：\n" +
+                                    "   <span>他在 " + item.createdStr + "</span>\n" +
+                                    "   回答了以下内容，快去<a href=\"/p/" + item.postId + "#comment-body-" + item.id + "\" target=\"_blank\" class='fly-link'>围观</a>吧：\n" +
                                     "   </p>";
                                 var ContentLabel = "          <div class=\"reply-body-" + page + " home-dacontent \">" +
                                     item.content +

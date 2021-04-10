@@ -48,7 +48,7 @@ public class PageConstant {
     /**
      * 默认排序
      */
-    public static final String PAGE_SORT_DEFAULT = "gmt_create";
+    public static final String PAGE_SORT_DEFAULT = "created";
 
     /**
      * 默认排序方向
