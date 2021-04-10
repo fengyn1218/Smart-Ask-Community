@@ -1,9 +1,7 @@
 package com.feng.community.controller;
 
 import com.feng.community.constant.PageConstant;
-import com.feng.community.dto.CommentDTO;
 import com.feng.community.dto.CommentQueryDTO;
-import com.feng.community.dto.PaginationDTO;
 import com.feng.community.dto.ResultView;
 import com.feng.community.service.comment.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +19,7 @@ public class CommentController {
     private CommentService commentService;
 
     @GetMapping("list")
-    public ResultView<PaginationDTO<CommentDTO>> list(@RequestParam(value = "id", required = false) Long id
+    public ResultView list(@RequestParam(value = "id", required = false) Long id
             , @RequestParam(value = "postId", required = false) Long postId
             , @RequestParam(value = "type", required = false) Integer type
             , @RequestParam(value = "authorId", required = false) Long authorId

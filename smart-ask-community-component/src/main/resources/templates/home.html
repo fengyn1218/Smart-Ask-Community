@@ -113,7 +113,7 @@
 </div>
 <th:block th:insert="~{common/footer :: foot}"></th:block>
 <script>
-console.log(7878979879879);
+    console.log(7878979879879);
     layui.config({
         version: "3.0.0"
         , base: '/mods/'
@@ -139,7 +139,7 @@ console.log(7878979879879);
                     contentType: 'application/json',
                     data: {
                         "type": 1
-                        , "commentator": [[${user.id}]]
+                        , "authorId": [[${user.id}]]
                         , "page": page
                         , "size": 5
                     },

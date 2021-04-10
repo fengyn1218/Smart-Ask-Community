@@ -18,13 +18,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.feng.community.constant.TimeConstant.FORMAT;
+
 /**
  * @author: fengyunan
  * Created on: 2021-04-05
  */
 @Service
 public class PostServiceImpl implements PostService {
-    public static final String FORMAT = "yyyy-MM-dd HH:mm:ss";
 
     @Autowired
     private TbPostMapper tbPostMapper;
@@ -60,7 +61,7 @@ public class PostServiceImpl implements PostService {
         }
 
         //   Example example = new Example(TbPost.class);
-        example.createCriteria().andEqualTo("type", type);
+        //  example.createCriteria().andEqualTo("type", type);
         List<TbPost> tbPosts = tbPostMapper.selectByExample(example);
 
         List<PostDTO> postDTOList = tbPosts.stream().map(e -> {
@@ -110,8 +111,6 @@ public class PostServiceImpl implements PostService {
             TbUser user = tbUserMapper.selectByPrimaryKey(question.getAuthorId());
             PostDTO postDTO = new PostDTO();
             BeanUtils.copyProperties(question, postDTO);
-//            UserDTO userDTO = new UserDTO();
-//            BeanUtils.copyProperties(user, userDTO);
             postDTO.setUser(user);
             postDTO.setUpdatedStr(DateFormatUtils.format(postDTO.getUpdated(), FORMAT));
             postDTOList.add(postDTO);
