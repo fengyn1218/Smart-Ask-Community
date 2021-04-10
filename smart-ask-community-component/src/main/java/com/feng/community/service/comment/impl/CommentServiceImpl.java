@@ -92,16 +92,18 @@ public class CommentServiceImpl implements CommentService {
         Map<Long, TbUser> userMap = users.stream().collect(Collectors.toMap(TbUser::getId, user -> user));
 
         // 转换 comment 为 commentDTO
-        List<CommentDTO> commentDTOS = tbComments.stream().map(comment -> {
-            CommentDTO commentDTO = new CommentDTO();
-            BeanUtils.copyProperties(comment, commentDTO);
-            TbUser tbUser = new TbUser();
-            BeanUtils.copyProperties(userMap.get(comment.getAuthorId()), tbUser);
-            commentDTO.setUser(userInfoService.selectUserByUserId(String.valueOf(tbUser.getId())));
-            commentDTO.setCreatedStr(DateFormatUtils.format(commentDTO.getCreated(), FORMAT));
-            return commentDTO;
-        }).collect(Collectors.toList());
-
+        List<CommentDTO> commentDTOS = tbComments
+                .stream()
+                .map(
+                        comment -> {
+                            CommentDTO commentDTO = new CommentDTO();
+                            BeanUtils.copyProperties(comment, commentDTO);
+                            TbUser tbUser = new TbUser();
+                            BeanUtils.copyProperties(userMap.get(comment.getAuthorId()), tbUser);
+                            commentDTO.setUser(userInfoService.selectUserByUserId(String.valueOf(tbUser.getId())));
+                            commentDTO.setCreatedStr(DateFormatUtils.format(commentDTO.getCreated(), FORMAT));
+                            return commentDTO;
+                        }).collect(Collectors.toList());
         paginationDTO.setData(commentDTOS);
         paginationDTO.setPagination(totalPage, commentQueryDTO.getPage());
         return paginationDTO;

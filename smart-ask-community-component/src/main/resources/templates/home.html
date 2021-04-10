@@ -113,7 +113,6 @@
 </div>
 <th:block th:insert="~{common/footer :: foot}"></th:block>
 <script>
-    console.log(7878979879879);
     layui.config({
         version: "3.0.0"
         , base: '/mods/'
@@ -131,7 +130,6 @@
             , isAuto: false//懒加载
             , end: "咱可是有底线滴~"//底部文字
             , done: function (page, next) { //到达临界点（默认滚动触发），触发下一页
-                console.log(page);
                 var lis = [];
                 //以jQuery的Ajax请求为例，请求下一页数据（注意：page是从2开始返回）
                 $.ajax({
