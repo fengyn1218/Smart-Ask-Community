@@ -12,6 +12,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.FileCopyUtils;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.ArrayList;
@@ -124,6 +125,15 @@ public class PostServiceImpl implements PostService {
     @Override
     public PostDTO getPostById(Long postId) {
         //todo
-        return null;
+        PostDTO postDTO=new PostDTO();
+
+        TbPost tbPost = tbPostMapper.selectByPrimaryKey(postId);
+
+        BeanUtils.copyProperties(tbPost,postDTO);
+
+
+
+
+        return postDTO;
     }
 }
