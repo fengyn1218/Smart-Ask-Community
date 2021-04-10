@@ -6,6 +6,7 @@ import com.feng.community.dto.ResultView;
 import com.feng.community.service.comment.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,12 +14,18 @@ import org.springframework.web.bind.annotation.RestController;
  * @author: fengyunan
  * Created on: 2021-04-09
  */
-@RestController("comment")
+@RestController
+@RequestMapping("comment")
 public class CommentController {
     @Autowired
     private CommentService commentService;
 
-    @GetMapping("list")
+    @GetMapping("test")
+    public String test() {
+        return "123";
+    }
+
+    @GetMapping("/list")
     public ResultView list(@RequestParam(value = "id", required = false) Long id
             , @RequestParam(value = "postId", required = false) Long postId
             , @RequestParam(value = "type", required = false) Integer type
