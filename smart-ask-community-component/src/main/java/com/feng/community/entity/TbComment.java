@@ -30,6 +30,8 @@ public class TbComment {
     @Column(name = "like_count")
     private Integer likeCount;
 
+    private Long type;
+
     /**
      * @return id
      */
@@ -124,5 +126,19 @@ public class TbComment {
      */
     public void setLikeCount(Integer likeCount) {
         this.likeCount = likeCount;
+    }
+
+    /**
+     * @return type
+     */
+    public Long getType() {
+        return type;
+    }
+
+    /**
+     * @param type
+     */
+    public void setType(Long type) {
+        this.type = type;
     }
 }

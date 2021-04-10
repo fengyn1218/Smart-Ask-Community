@@ -11,5 +11,6 @@
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="created" jdbcType="BIGINT" property="created" />
     <result column="like_count" jdbcType="INTEGER" property="likeCount" />
+    <result column="type" jdbcType="BIGINT" property="type" />
   </resultMap>
 </mapper>
