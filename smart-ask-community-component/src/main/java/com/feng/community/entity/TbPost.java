@@ -62,7 +62,7 @@ public class TbPost {
     private Long gmtLatestComment;
 
     @Column(name = "comment_count")
-    private Byte commentCount;
+    private Long commentCount;
 
     /**
      * 标题
@@ -294,14 +294,14 @@ public class TbPost {
     /**
      * @return comment_count
      */
-    public Byte getCommentCount() {
+    public Long getCommentCount() {
         return commentCount;
     }
 
     /**
      * @param commentCount
      */
-    public void setCommentCount(Byte commentCount) {
+    public void setCommentCount(Long commentCount) {
         this.commentCount = commentCount;
     }
 

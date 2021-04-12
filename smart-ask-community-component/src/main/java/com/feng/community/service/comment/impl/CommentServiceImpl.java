@@ -6,7 +6,6 @@ import com.feng.community.dto.CommentDTO;
 import com.feng.community.dto.CommentQueryDTO;
 import com.feng.community.dto.PaginationDTO;
 import com.feng.community.entity.TbComment;
-import com.feng.community.entity.TbPost;
 import com.feng.community.entity.TbUser;
 import com.feng.community.service.comment.CommentService;
 import com.feng.community.service.user.UserInfoService;

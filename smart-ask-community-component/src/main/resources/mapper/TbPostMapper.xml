@@ -17,7 +17,7 @@
     <result column="like_count" jdbcType="INTEGER" property="likeCount" />
     <result column="view_count" jdbcType="INTEGER" property="viewCount" />
     <result column="gmt_latest_comment" jdbcType="BIGINT" property="gmtLatestComment" />
-    <result column="comment_count" jdbcType="TINYINT" property="commentCount" />
+    <result column="comment_count" jdbcType="BIGINT" property="commentCount" />
     <result column="title" jdbcType="LONGVARCHAR" property="title" />
     <result column="description" jdbcType="LONGVARCHAR" property="description" />
   </resultMap>
