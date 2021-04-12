@@ -4,6 +4,7 @@ import com.feng.community.dto.PaginationDTO;
 import com.feng.community.dto.PostDTO;
 import com.feng.community.entity.TbPost;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public interface PostService {
@@ -25,5 +26,5 @@ public interface PostService {
 
     PaginationDTO<TbPost> listByUserId(Long userId, Integer page, Integer size);
 
-    PostDTO getPostById(Long postId);
+    PostDTO getPostById(Long postId, HttpServletRequest request);
 }

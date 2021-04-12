@@ -1,7 +1,10 @@
 package com.feng.community.dto;
 
+import com.feng.community.entity.TbComment;
 import com.feng.community.entity.TbUser;
 import lombok.Data;
+
+import java.util.List;
 
 /**
  * @author: fengyunan
@@ -21,6 +24,7 @@ public class PostDTO {
     private Integer commentCount;
     private Integer likeCount;
     private TbUser user;
+    private List<CommentDTO> comments;
 
     private Long gmtLatestComment;
     private String gmtLatestCommentStr;

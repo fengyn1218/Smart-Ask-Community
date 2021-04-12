@@ -350,7 +350,7 @@ function collapseComments(e,type) {
                     }).append($("<img/>", {
                         "class": "img-rounded",
                         "src": comment.user.avatarUrl,
-                        "alt": comment.user.name
+                        "alt": comment.user.userName
                     }));
 
                     var mediaBodyElement = $("<div/>", {
@@ -361,7 +361,7 @@ function collapseComments(e,type) {
                     }).append($("<span/>", {
                         "class": "menu"
                     }).append($("<cite/>", {
-                        "html": comment.user.name
+                        "html": comment.user.userName
                     }))));
                   var timeElement = $("<div/>", {
                         "class": "detail-hits"
@@ -372,7 +372,7 @@ function collapseComments(e,type) {
                       "class": "rightbtn",
                       "style":"cursor: pointer;",
                       "data-id": comment.id,
-                      "data-name": comment.user.name,
+                      "data-name": comment.user.userName,
                       "id": "comment-"+comment.id,
                       "onclick" :"collapseSubComments("+id+","+comment.id+","+type+");"
                   }).append($("<i/>", {
@@ -400,7 +400,7 @@ function collapseComments(e,type) {
                         "class": "fly-detail-user"
                     }).append($("<a/>", {
                         "class": "fly-link",
-                        "html": comment.user.name
+                        "html": comment.user.userName
                     })).append($("<div/>", {
                         "html": comment.content
                     })).append($("<div/>", {

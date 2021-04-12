@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title th:text="${talk.user.name+'与'+talk.gmtModifiedStr+'发表的说说：'+@environment.getProperty('site.main.titleInfo')}"></title>
+    <title th:text="${talk.user.userName+'与'+talk.gmtModifiedStr+'发表的说说：'+@environment.getProperty('site.main.titleInfo')}"></title>
     <script src="/js/moment.js" type="application/javascript"></script>
     <!--script src="/js/talk.js" type="application/javascript"></script-->
     <th:block th:insert="~{common/header :: head}"></th:block>
@@ -21,7 +21,7 @@
     <div class="layui-row layui-col-space15">
         <div class="layui-col-md8 content detail">
             <div class="fly-panel detail-box">
-                <!--a th:href="${'/p/'+question.id}"><h1 th:text="${comment.user.name+'回复于：'+question.title}"></h1></a-->
+                <!--a th:href="${'/p/'+question.id}"><h1 th:text="${comment.user.userName+'回复于：'+question.title}"></h1></a-->
                 <div class="fly-detail-info">
                     <!-- <span class="layui-badge">审核中</span> -->
                     <span class="layui-badge" style="background-color: #999;">未结</span>
@@ -49,12 +49,12 @@
                 <div class="detail-about">
                     <a class="fly-avatar niter-avatar" th:href="${'/user/'+talk.user.id}">
                         <img th:src="${talk.user.avatarUrl}"
-                             th:alt="${talk.user.name}">
+                             th:alt="${talk.user.userName}">
                     </a>
                     <div class="fly-detail-user">
                         <a th:href="${'/user/'+talk.user.id}" class="fly-link" target="_blank">
                             <i th:if="${talk.user.vipRank==1}" class="layui-icon fly-list-kiss" title="红砖会员等级：LV1">&#xe735</i>
-                            <cite th:class="${talk.user.vipRank==1? 'fly-list-kiss':''}" th:text="${talk.user.name}"></cite>
+                            <cite th:class="${talk.user.vipRank==1? 'fly-list-kiss':''}" th:text="${talk.user.userName}"></cite>
                             <i class="layui-badge fly-badge-vip layui-bg-gray" th:text="${talk.user.groupStr}"></i>
                         </a>
                         <span th:text="${talk.gmtModifiedStr}"></span><th:block th:text="${talk.edited?' 编辑':' 发表'}"></th:block>
@@ -92,12 +92,12 @@
                         <div class="detail-about detail-about-reply">
                             <a class="fly-avatar niter-avatar" th:href="${'/user/'+comment.user.id}">
                                 <img th:src="${comment.user.avatarUrl}"
-                                     th:alt="${comment.user.name}">
+                                     th:alt="${comment.user.userName}">
                             </a>
                             <div class="fly-detail-user">
                                 <a th:href="${'/user/'+comment.user.id}" class="fly-link" target="_blank">
                                     <i th:if="${comment.user.vipRank==1}" class="layui-icon fly-list-kiss" title="红砖会员等级：LV1">&#xe735</i>
-                                    <cite th:class="${comment.user.vipRank==1? 'fly-list-kiss':''}" th:text="${comment.user.name}"></cite>
+                                    <cite th:class="${comment.user.vipRank==1? 'fly-list-kiss':''}" th:text="${comment.user.userName}"></cite>
                                     <i class="layui-badge fly-badge-vip layui-bg-gray" th:text="${comment.user.groupStr}"></i>
                                 </a>
                                 <span th:if="${comment.user.id == talk.user.id}">(作者)</span>
@@ -325,7 +325,7 @@
 <script>
     layui.cache.page = 'jie';
     layui.cache.user = {
-        name: '[[${loginUser!=null?loginUser.name:"匿名用户"}]]'
+        name: '[[${loginUser!=null?loginuser.userName:"匿名用户"}]]'
         ,uid: [[${loginUser!=null?loginUser.id:-1}]]
         ,avatar: '[[${loginUser!=null?loginUser.avatarUrl:"/images/avatar/default.png"}]]'
         ,experience: 83

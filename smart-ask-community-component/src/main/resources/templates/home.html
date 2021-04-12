@@ -55,7 +55,7 @@
                     <th:block th:each="post : ${paginationDto.data}">
                         <li>
                             <span th:if="${post.status==1||post.status==3}" class="fly-jing">精</span>
-                            <a th:href="'/p/' + ${post.id}" th:text="${post.title}"
+                            <a th:href="'/post/' + ${post.id}" th:text="${post.title}"
                                class="jie-title"></a>
                             <i th:text="${'于 '+post.updatedStr}"></i>
                             <!--em class="layui-hide-xs" th:text="${question.commentCount+'个回复 •'+question.viewCount+'次浏览 •'+question.LikeCount+'人收藏'}"></em-->

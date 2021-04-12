@@ -1,24 +1,30 @@
 package com.feng.community.service.post.impl;
 
+import com.feng.community.constant.PostConstant;
 import com.feng.community.dao.TbPostMapper;
 import com.feng.community.dao.TbUserMapper;
+import com.feng.community.dto.CommentDTO;
 import com.feng.community.dto.PaginationDTO;
 import com.feng.community.dto.PostDTO;
+import com.feng.community.entity.TbComment;
 import com.feng.community.entity.TbPost;
 import com.feng.community.entity.TbUser;
+import com.feng.community.service.comment.CommentService;
 import com.feng.community.service.post.PostService;
+import com.feng.community.service.user.UserInfoService;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.FileCopyUtils;
 import tk.mybatis.mapper.entity.Example;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.feng.community.constant.PostConstant.VIEW_COUNT_STEP;
 import static com.feng.community.constant.TimeConstant.FORMAT;
 
 /**
@@ -32,6 +38,11 @@ public class PostServiceImpl implements PostService {
     private TbPostMapper tbPostMapper;
     @Autowired
     private TbUserMapper tbUserMapper;
+
+    @Autowired
+    private CommentService commentService;
+    @Autowired
+    private UserInfoService userInfoService;
 
     @Override
     public List<TbPost> getTopPost(String search, String tag, String sort, Integer type) {
@@ -123,17 +134,37 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public PostDTO getPostById(Long postId) {
+    public PostDTO getPostById(Long postId, HttpServletRequest request) {
+        //帖子信息
+        TbPost tbPost = tbPostMapper.selectByPrimaryKey(postId);
+        List<CommentDTO> collect = commentService.getCommentByPostId(postId).stream().map(e -> {
+            CommentDTO commentDTO = new CommentDTO();
+            BeanUtils.copyProperties(e, commentDTO);
+            commentDTO.setCreatedStr(DateFormatUtils.format(e.getCreated(), FORMAT));
+            commentDTO.setUser(userInfoService.selectUserByUserId(String.valueOf(e.getAuthorId())));
+            return commentDTO;
+        }).collect(Collectors.toList());
         //todo
         PostDTO postDTO=new PostDTO();
-
-        TbPost tbPost = tbPostMapper.selectByPrimaryKey(postId);
-
         BeanUtils.copyProperties(tbPost,postDTO);
+        postDTO.setUser(userInfoService.selectUserByUserId(tbPost.getAuthorId().toString()));
+        postDTO.setUpdatedStr(DateFormatUtils.format(postDTO.getUpdated(), FORMAT));
+        postDTO.setViewCount(tbPost.getViewCount());
+        postDTO.setCommentCount(Integer.valueOf(tbPost.getCommentCount().toString()));
+        postDTO.setComments(collect);
 
 
 
+        //登录用户信息
+        TbUser loginUser =  (TbUser)request.getAttribute("loginUser");
 
+        if(loginUser.getId()==tbPost.getAuthorId()){
+            postDTO.setCanEdit(true);
+            postDTO.setCanDelete(true);
+            postDTO.setEssence(true);
+        }
+        tbPost.setViewCount(tbPost.getViewCount()+VIEW_COUNT_STEP);
+        tbPostMapper.updateByPrimaryKey(tbPost);
         return postDTO;
     }
 }

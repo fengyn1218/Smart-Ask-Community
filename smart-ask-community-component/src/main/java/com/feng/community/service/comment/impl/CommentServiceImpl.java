@@ -107,4 +107,11 @@ public class CommentServiceImpl implements CommentService {
         paginationDTO.setPagination(totalPage, commentQueryDTO.getPage());
         return paginationDTO;
     }
+
+    @Override
+    public List<TbComment> getCommentByPostId(Long postId) {
+        Example example = new Example(TbComment.class);
+        example.createCriteria().andEqualTo("postId",postId);
+        return tbCommentMapper.selectByExample(example);
+    }
 }
