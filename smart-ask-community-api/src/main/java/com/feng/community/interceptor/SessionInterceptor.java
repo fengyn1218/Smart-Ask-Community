@@ -37,16 +37,16 @@ public class SessionInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
 
-//        String referer = request.getHeader("referer");
-//        String host = request.getHeader("host");
-//        //处理静态资源
-//        if (handler instanceof ResourceHttpRequestHandler) {
-//            if (referer != null && (!host.equals(referer.split("//")[1].split("/")[0]))) {//静态资源防盗链
-//                response.setStatus(403);
-//                return false;
-//            }
-//            return true;
-//        }
+        String referer = request.getHeader("referer");
+        String host = request.getHeader("host");
+        //处理静态资源
+        if (handler instanceof ResourceHttpRequestHandler) {
+            if (referer != null && (!host.equals(referer.split("//")[1].split("/")[0]))) {//静态资源防盗链
+                response.setStatus(403);
+                return false;
+            }
+            return true;
+        }
 
         if (!(handler instanceof HandlerMethod)) {
             return true;

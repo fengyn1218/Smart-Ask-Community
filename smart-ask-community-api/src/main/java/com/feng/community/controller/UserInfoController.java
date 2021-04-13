@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ClassUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -51,7 +52,8 @@ public class UserInfoController {
     private String vaptcha_vid;
     @Value("0")
     private Integer smsEnable;
-    private static final String UPLOAD_PATH = "/static/images/avatar/";
+    private static final String UPLOAD_PATH = "/smart-ask-community-component/src/main/resources/static/images";
+    private static final String FILE_PATH = "/static/images/";
 
     @GetMapping("/user/{userId}")
     public String getUserInfo(@PathVariable String userId,
@@ -178,18 +180,21 @@ public class UserInfoController {
                                             @RequestParam("file") MultipartFile file) {
         Map<String, Object> map = new HashMap<>();
         try {
+
             TbUser user = (TbUser) request.getAttribute("loginUser");
             //获取文件名后缀
             String fileName = file.getOriginalFilename();
             String fileSussix = fileName.substring(fileName.lastIndexOf("."));
             //上传图片文件存放路径
-            String realPath = request.getSession().getServletContext().getRealPath(UPLOAD_PATH);
-            File file1 = new File(realPath);
+            String realPath = System.getProperty("user.dir") + UPLOAD_PATH;
+            String fileAfterName = UUID.randomUUID() + fileSussix;
+
+
+            File file1 = new File(realPath, fileAfterName);
             if (!file1.exists()) {
                 file1.mkdir();
             }
             //将文件写入目标
-            file1 = new File(realPath, UUID.randomUUID() + fileSussix);
             try {
                 file.transferTo(file1);
             } catch (IOException e) {
@@ -198,8 +203,8 @@ public class UserInfoController {
 
             map.put("status", 0);
             map.put("msg", "");
-            map.put("url", realPath);
-            user.setAvatarUrl(realPath);
+            map.put("url", FILE_PATH + fileAfterName);
+            user.setAvatarUrl(FILE_PATH + fileAfterName);
             // 重新设置Cookie
             CookieUtils.setCookie(request, response, "token", TokenUtils.getToken(user), 86400);
             return map;
@@ -219,18 +224,22 @@ public class UserInfoController {
     public Map<String, Object> uploadLayImage(HttpServletRequest request, @RequestParam("file") MultipartFile file) {
         Map<String, Object> map = new HashMap<>();
         try {
+
             TbUser user = (TbUser) request.getAttribute("loginUser");
             //获取文件名后缀
             String fileName = file.getOriginalFilename();
             String fileSussix = fileName.substring(fileName.lastIndexOf("."));
             //上传图片文件存放路径
-            String realPath = request.getSession().getServletContext().getRealPath(UPLOAD_PATH);
-            File file1 = new File(realPath);
+
+            String realPath = System.getProperty("user.dir") + UPLOAD_PATH;
+            String fileAfterName = UUID.randomUUID() + fileSussix;
+
+
+            File file1 = new File(realPath, fileAfterName);
             if (!file1.exists()) {
                 file1.mkdir();
             }
             //将文件写入目标
-            file1 = new File(realPath, UUID.randomUUID() + fileSussix);
             try {
                 file.transferTo(file1);
             } catch (IOException e) {
@@ -238,7 +247,7 @@ public class UserInfoController {
             }
             map.put("code", 0);
             map.put("msg", "");
-            map.put("data", realPath);
+            map.put("data", FILE_PATH + fileAfterName);
             // System.out.println(map);
             return map;
         } catch (Exception e) {

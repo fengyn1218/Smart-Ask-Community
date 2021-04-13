@@ -5,6 +5,8 @@
     <th:block th:insert="~{common/header :: head}"></th:block>
     <script src="/js/community.js" type="application/javascript"></script>
     <link rel="stylesheet" type="text/css" href="/css/select.css"/>
+    <link rel="stylesheet" href="/css/community.css">
+    <link rel="stylesheet" href="/css/t-global.css">
 </head>
 <body>
 <div th:insert="~{common/header :: nav}"></div>
@@ -135,10 +137,7 @@
             onOk: function () {//当验证通过回调
                 layer.msg("滑块验证通过");
             }
-        })
-        /*$('#reset').on('click',function(){
-          slider.reset();
-        })*/
+        });
         //监听提交
         form.on('submit(submitInfo)', function (data) {
             if (slider.isOk()) {
@@ -159,5 +158,6 @@
 </script>
 
 <script src="/js/select.js" type="text/javascript" charset="utf-8"></script>
+<script src="/mods/user.js" type="text/javascript" charset="utf-8"></script>
 </body>
 </html>

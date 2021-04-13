@@ -23,5 +23,9 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        //获取文件的真实路径
+        String path = System.getProperty("user.dir") + "/smart-ask-community-component/src/main/resources/static/images/";
+        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
+        registry.addResourceHandler("/static/images/**").addResourceLocations("file:" + path);
     }
 }

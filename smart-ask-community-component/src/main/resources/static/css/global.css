@@ -1,9 +1,9 @@
 /**
-
+ 
  @Name: Fly社区
  @Author: 贤心
  @Site: fly.layui.com
-
+ 
  */
 
 
@@ -344,7 +344,7 @@ body .layui-edit-face  .layui-layer-content{padding:0; background-color:#fff; co
 .detail-body img{max-width: 100%; cursor: crosshair;}
 .detail-body table{margin: 10px 0 15px;}
 .detail-body table thead{background-color:#f2f2f2;}
-.detail-body table th,
+.detail-body table th, 
 .detail-body table td{padding: 10px 20px; line-height: 22px; border: 1px solid #DFDFDF; font-size: 14px; font-weight: 400;}
 .detail .page-title{ border: none; background-color: #f2f2f2;}
 
@@ -465,7 +465,7 @@ body .fly-user-main{position: relative; min-height: 600px;}
 .fly-case-tab .tab-this{background-color: #009688; color: #fff;}
 
 .fly-case-list{margin-top: 15px; font-size: 0;}
-.fly-case-list li,
+.fly-case-list li, 
 .layer-ext-ul li{display: inline-block; vertical-align: middle; *display: inline; *zoom:1; font-size: 14px; background-color: #fff;}
 .fly-case-list{width: 110%;}
 .fly-case-list li{width: 239px; margin: 0 15px 15px 0; padding: 10px;}
@@ -504,7 +504,7 @@ body .fly-user-main{position: relative; min-height: 600px;}
 
 
 @media screen and (max-width: 768px) {
-  .fly-main{width: 100%;}
+	.fly-main{width: 100%;}
 
   /* 顶边距 */
   .fly-marginTop{margin-top: 0;}
@@ -533,9 +533,9 @@ body .fly-user-main{position: relative; min-height: 600px;}
   .fly-list li h2 a{max-width: 72%;}
 
   /* Detail 页 */
-  .fly-admin-box{display: block; margin: 0; margin-top: 10px;}
-  .fly-detail-info .fly-list-nums{top: -2px;}
-  .fly-edit span{padding: 0 6px;}
+	.fly-admin-box{display: block; margin: 0; margin-top: 10px;}
+	.fly-detail-info .fly-list-nums{top: -2px;}
+	.fly-edit span{padding: 0 6px;}
 
   /* 案例 */
   .fly-case-list,
