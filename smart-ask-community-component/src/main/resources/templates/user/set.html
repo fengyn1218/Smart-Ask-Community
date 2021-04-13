@@ -1,234 +1,163 @@
-
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="utf-8">
-  <title>帐号设置</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="fly,layui,前端社区">
-  <meta name="description" content="Fly社区是模块化前端UI框架Layui的官网社区，致力于为web开发提供强劲动力">
-  <link rel="stylesheet" href="../../res/layui/css/layui.css">
-  <link rel="stylesheet" href="../../res/css/global.css">
+    <title>账号设置</title>
+    <th:block th:insert="~{common/header :: head}"></th:block>
+    <script src="/js/community.js" type="application/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="/css/select.css"/>
 </head>
 <body>
-
-<div class="fly-header layui-bg-black">
-  <div class="layui-container">
-    <a class="fly-logo" href="/">
-      <img src="../../res/images/logo.png" alt="layui">
-    </a>
-    <ul class="layui-nav fly-nav layui-hide-xs">
-      <li class="layui-nav-item layui-this">
-        <a href="/"><i class="iconfont icon-jiaoliu"></i>交流</a>
-      </li>
-      <li class="layui-nav-item">
-        <a href="../case/case.html"><i class="iconfont icon-iconmingxinganli"></i>案例</a>
-      </li>
-      <li class="layui-nav-item">
-        <a href="http://www.layui.com/" target="_blank"><i class="iconfont icon-ui"></i>框架</a>
-      </li>
-    </ul>
-    
-    <ul class="layui-nav fly-nav-user">
-      <!-- 登入后的状态 -->
-      <li class="layui-nav-item">
-        <a class="fly-nav-avatar" href="javascript:;">
-          <cite class="layui-hide-xs">贤心</cite>
-          <i class="iconfont icon-renzheng layui-hide-xs" title="认证信息：layui 作者"></i>
-          <i class="layui-badge fly-badge-vip layui-hide-xs">VIP3</i>
-          <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg">
-        </a>
-        <dl class="layui-nav-child">
-          <dd><a href="../user/set.html"><i class="layui-icon">&#xe620;</i>基本设置</a></dd>
-          <dd><a href="../user/message.html"><i class="iconfont icon-tongzhi" style="top: 4px;"></i>我的消息</a></dd>
-          <dd><a href="../home.html"><i class="layui-icon" style="margin-left: 2px; font-size: 22px;">&#xe68e;</i>我的主页</a></dd>
-          <hr style="margin: 5px 0;">
-          <dd><a href="" style="text-align: center;">退出</a></dd>
-        </dl>
-      </li>
-    </ul>
-  </div>
-</div>
+<div th:insert="~{common/header :: nav}"></div>
 
 <div class="layui-container fly-marginTop fly-user-main">
-  <ul class="layui-nav layui-nav-tree layui-inline" lay-filter="user">
-    <li class="layui-nav-item">
-      <a href="../home.html">
-        <i class="layui-icon">&#xe609;</i>
-        我的主页
-      </a>
-    </li>
-    <li class="layui-nav-item">
-      <a href="index.html">
-        <i class="layui-icon">&#xe612;</i>
-        用户中心
-      </a>
-    </li>
-    <li class="layui-nav-item layui-this">
-      <a href="set.html">
-        <i class="layui-icon">&#xe620;</i>
-        基本设置
-      </a>
-    </li>
-    <li class="layui-nav-item">
-      <a href="message.html">
-        <i class="layui-icon">&#xe611;</i>
-        我的消息
-      </a>
-    </li>
-  </ul>
+    <th:block th:insert="~{common/sider :: user}"></th:block>
 
-  <div class="site-tree-mobile layui-hide">
-    <i class="layui-icon">&#xe602;</i>
-  </div>
-  <div class="site-mobile-shade"></div>
-  
-  <div class="site-tree-mobile layui-hide">
-    <i class="layui-icon">&#xe602;</i>
-  </div>
-  <div class="site-mobile-shade"></div>
-  
-  
-  <div class="fly-panel fly-panel-user" pad20>
-    <div class="layui-tab layui-tab-brief" lay-filter="user">
-      <ul class="layui-tab-title" id="LAY_mine">
-        <li class="layui-this" lay-id="info">我的资料</li>
-        <li lay-id="avatar">头像</li>
-        <li lay-id="pass">密码</li>
-        <li lay-id="bind">帐号绑定</li>
-      </ul>
-      <div class="layui-tab-content" style="padding: 20px 0;">
-        <div class="layui-form layui-form-pane layui-tab-item layui-show">
-          <form method="post">
-            <div class="layui-form-item">
-              <label for="L_email" class="layui-form-label">邮箱</label>
-              <div class="layui-input-inline">
-                <input type="text" id="L_email" name="email" required lay-verify="email" autocomplete="off" value="" class="layui-input">
-              </div>
-              <div class="layui-form-mid layui-word-aux">如果您在邮箱已激活的情况下，变更了邮箱，需<a href="activate.html" style="font-size: 12px; color: #4f99cf;">重新验证邮箱</a>。</div>
-            </div>
-            <div class="layui-form-item">
-              <label for="L_username" class="layui-form-label">昵称</label>
-              <div class="layui-input-inline">
-                <input type="text" id="L_username" name="username" required lay-verify="required" autocomplete="off" value="" class="layui-input">
-              </div>
-              <div class="layui-inline">
-                <div class="layui-input-inline">
-                  <input type="radio" name="sex" value="0" checked title="男">
-                  <input type="radio" name="sex" value="1" title="女">
-                </div>
-              </div>
-            </div>
-            <div class="layui-form-item">
-              <label for="L_city" class="layui-form-label">城市</label>
-              <div class="layui-input-inline">
-                <input type="text" id="L_city" name="city" autocomplete="off" value="" class="layui-input">
-              </div>
-            </div>
-            <div class="layui-form-item layui-form-text">
-              <label for="L_sign" class="layui-form-label">签名</label>
-              <div class="layui-input-block">
-                <textarea placeholder="随便写些什么刷下存在感" id="L_sign"  name="sign" autocomplete="off" class="layui-textarea" style="height: 80px;"></textarea>
-              </div>
-            </div>
-            <div class="layui-form-item">
-              <button class="layui-btn" key="set-mine" lay-filter="*" lay-submit>确认修改</button>
-            </div>
-          </div>
-          
-          <div class="layui-form layui-form-pane layui-tab-item">
-            <div class="layui-form-item">
-              <div class="avatar-add">
-                <p>建议尺寸168*168，支持jpg、png、gif，最大不能超过50KB</p>
-                <button type="button" class="layui-btn upload-img">
-                  <i class="layui-icon">&#xe67c;</i>上传头像
-                </button>
-                <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg">
-                <span class="loading"></span>
-              </div>
-            </div>
-          </div>
-          
-          <div class="layui-form layui-form-pane layui-tab-item">
-            <form action="/user/repass" method="post">
-              <div class="layui-form-item">
-                <label for="L_nowpass" class="layui-form-label">当前密码</label>
-                <div class="layui-input-inline">
-                  <input type="password" id="L_nowpass" name="nowpass" required lay-verify="required" autocomplete="off" class="layui-input">
-                </div>
-              </div>
-              <div class="layui-form-item">
-                <label for="L_pass" class="layui-form-label">新密码</label>
-                <div class="layui-input-inline">
-                  <input type="password" id="L_pass" name="pass" required lay-verify="required" autocomplete="off" class="layui-input">
-                </div>
-                <div class="layui-form-mid layui-word-aux">6到16个字符</div>
-              </div>
-              <div class="layui-form-item">
-                <label for="L_repass" class="layui-form-label">确认密码</label>
-                <div class="layui-input-inline">
-                  <input type="password" id="L_repass" name="repass" required lay-verify="required" autocomplete="off" class="layui-input">
-                </div>
-              </div>
-              <div class="layui-form-item">
-                <button class="layui-btn" key="set-mine" lay-filter="*" lay-submit>确认修改</button>
-              </div>
-            </form>
-          </div>
-          
-          <div class="layui-form layui-form-pane layui-tab-item">
-            <ul class="app-bind">
-              <li class="fly-msg app-havebind">
-                <i class="iconfont icon-qq"></i>
-                <span>已成功绑定，您可以使用QQ帐号直接登录Fly社区，当然，您也可以</span>
-                <a href="javascript:;" class="acc-unbind" type="qq_id">解除绑定</a>
-                
-                <!-- <a href="" onclick="layer.msg('正在绑定微博QQ', {icon:16, shade: 0.1, time:0})" class="acc-bind" type="qq_id">立即绑定</a>
-                <span>，即可使用QQ帐号登录Fly社区</span> -->
-              </li>
-              <li class="fly-msg">
-                <i class="iconfont icon-weibo"></i>
-                <!-- <span>已成功绑定，您可以使用微博直接登录Fly社区，当然，您也可以</span>
-                <a href="javascript:;" class="acc-unbind" type="weibo_id">解除绑定</a> -->
-                
-                <a href="" class="acc-weibo" type="weibo_id"  onclick="layer.msg('正在绑定微博', {icon:16, shade: 0.1, time:0})" >立即绑定</a>
-                <span>，即可使用微博帐号登录Fly社区</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-      </div>
+    <div class="site-tree-mobile layui-hide">
+        <i class="layui-icon">&#xe602;</i>
     </div>
-  </div>
+    <div class="site-mobile-shade"></div>
+
+    <div class="site-tree-mobile layui-hide">
+        <i class="layui-icon">&#xe602;</i>
+    </div>
+    <div class="site-mobile-shade"></div>
+
+
+    <div class="fly-panel fly-panel-user" pad20>
+        <div class="layui-tab layui-tab-brief" lay-filter="user">
+            <ul class="layui-tab-title" id="LAY_mine">
+                <li class="layui-this" lay-id="info">我的资料</li>
+                <li lay-id="avatar">头像</li>
+            </ul>
+            <div class="layui-tab-content" style="padding: 20px 0;">
+
+                <div class="layui-form layui-form-pane layui-tab-item layui-show">
+                    <form method="post">
+                        <div class="layui-form-item">
+                            <label for="username" class="layui-form-label">昵称</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="username" name="username" required lay-verify="required"
+                                       autocomplete="off" th:value="${user.userName}" class="layui-input">
+                            </div>
+                            <div class="layui-inline">
+                                <div class="layui-input-inline">
+                                    <input type="radio" name="sex" value="男" th:checked="${user.sex==1}"
+                                           title="男">
+                                    <input type="radio" name="sex" value="女" th:checked="${user.sex==2}"
+                                           title="女">
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="layui-form-item">
+                            <input type="hidden" name="locationValue" id="locationValue"
+                                   th:value="${user.city}">
+                            <label for="location" class="layui-form-label">位置</label>
+                            <div class="layui-inline">
+                                <div class="layui-form-item" id="location" name="location">
+                                    <div class="layui-input-inline">
+                                        <select name="P1" lay-filter="province" id="province">
+                                            <option></option>
+                                        </select>
+                                    </div>
+                                    <div class="layui-input-inline">
+                                        <select name="C1" lay-filter="city" id="city">
+                                            <option></option>
+                                        </select>
+                                    </div>
+                                    <div class="layui-input-inline">
+                                        <select name="A1" lay-filter="area" id="area">
+                                            <option></option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item layui-form-text">
+                            <label for="signature" class="layui-form-label">签名</label>
+                            <div class="layui-input-block">
+                                <textarea placeholder="写点什么吧，让大家更好的认识你" id="signature" name="signature"
+                                          autocomplete="off" class="layui-textarea" style="height: 80px;"
+                                          th:text="${user.signature}"></textarea>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">验证</label>
+                            <div class="layui-input-inline" id="slider2" name="slider2">
+                                <div id="slider"></div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <button class="layui-btn" key="set-mine" lay-filter="submitInfo" lay-submit>确认修改</button>
+                        </div>
+                    </form>
+                </div>
+
+
+
+                <div class="layui-form layui-form-pane layui-tab-item">
+                    <div class="layui-form-item">
+                        <div class="avatar-add">
+                            <p>像素必须大于168*168，支持jpg、png、gif，最大不能超过1000KB</p>
+                            <button type="button" class="layui-btn upload-img">
+                                <i class="layui-icon">&#xe67c;</i>上传头像
+                            </button>
+                            <img th:src="${user.avatarUrl}">
+                            <span class="loading"></span>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
 </div>
 
-<div class="fly-footer">
-  <p><a href="http://fly.layui.com/" target="_blank">Fly社区</a> 2017 &copy; <a href="http://www.layui.com/" target="_blank">layui.com 出品</a></p>
-  <p>
-    <a href="http://fly.layui.com/jie/3147/" target="_blank">付费计划</a>
-    <a href="http://www.layui.com/template/fly/" target="_blank">获取Fly社区模版</a>
-    <a href="http://fly.layui.com/jie/2461/" target="_blank">微信公众号</a>
-  </p>
-</div>
+<th:block th:insert="~{common/footer :: foot}"></th:block>
 
-<script src="../../res/layui/layui.js"></script>
 <script>
-layui.cache.page = 'user';
-layui.cache.user = {
-  username: '游客'
-  ,uid: -1
-  ,avatar: '../../res/images/avatar/00.jpg'
-  ,experience: 83
-  ,sex: '男'
-};
-layui.config({
-  version: "2.0.0"
-  ,base: '../../res/mods/'
-}).extend({
-  fly: 'index'
-}).use('fly');
+
+    layui.config({
+        version: "2.0.0"
+        , base: '/mods/'
+    }).extend({
+        fly: 'index2'
+    }).use(['fly', 'sliderVerify', 'jquery', 'form'], function () {
+        var sliderVerify = layui.sliderVerify,
+            $ = layui.jquery,
+            form = layui.form;
+        var slider = sliderVerify.render({
+            elem: '#slider',
+            //isAutoVerify:false,//关闭自动验证
+            onOk: function () {//当验证通过回调
+                layer.msg("滑块验证通过");
+            }
+        })
+        /*$('#reset').on('click',function(){
+          slider.reset();
+        })*/
+        //监听提交
+        form.on('submit(submitInfo)', function (data) {
+            if (slider.isOk()) {
+                //layer.msg(JSON.stringify(data.field));
+                $.post('/user/set/info', {
+                    json: JSON.stringify(data.field)
+                }, function (res) {
+                    if (res.code == 200) swal("Good job!", "" + res.msg, "success");
+                    else swal("Oh,no!", "" + res.msg, "error");
+                });
+            } else {
+                layer.msg("请先通过滑块验证");
+            }
+            return false;
+        });
+
+    });
 </script>
 
+<script src="/js/select.js" type="text/javascript" charset="utf-8"></script>
 </body>
 </html>

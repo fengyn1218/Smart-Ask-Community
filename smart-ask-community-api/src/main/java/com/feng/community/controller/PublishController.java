@@ -67,7 +67,6 @@ public class PublishController {
             return "p/add";
         }
         //审核 todo
-
         TbPost tbPost = new TbPost();
       //  tbPost.setId(id);
         tbPost.setType(Long.valueOf(type));

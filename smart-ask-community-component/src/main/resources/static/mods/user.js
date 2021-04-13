@@ -20,6 +20,7 @@ layui.define(['laypage', 'fly', 'element', 'flow'], function(exports){
   var gather = {}, dom = {
     mine: $('#LAY_mine')
     ,mineview: $('.mine-view')
+    ,minelikep: $('#NT_minelike_p')
     ,minemsg: $('#LAY_minemsg')
     ,infobtn: $('#LAY_btninfo')
   };
@@ -167,17 +168,20 @@ layui.define(['laypage', 'fly', 'element', 'flow'], function(exports){
 
       upload.render({
         elem: '.upload-img'
-        ,url: '/user/upload/'
-        ,size: 50
+        ,url: '/file/avatar'
+        ,size: 1000
         ,before: function(){
           avatarAdd.find('.loading').show();
         }
         ,done: function(res){
           if(res.status == 0){
-            $.post('/user/set/', {
+           // console.log(res.url);
+            $.post('/user/set/avatar', {
               avatar: res.url
             }, function(res){
-              location.reload();
+                if(res.code==200) {swal("Good job!", ""+res.msg, "success").then((value) => {
+                    location.reload();});
+                }else swal("Oh,no!", ""+res.msg, "error");
             });
           } else {
             layer.msg(res.msg, {icon: 5});
@@ -258,6 +262,51 @@ layui.define(['laypage', 'fly', 'element', 'flow'], function(exports){
 
   }
 
+  layui.use('laydate', function(){
+    var laydate = layui.laydate;
+
+    //执行一个laydate实例
+    laydate.render({
+      elem: '#birthday' //指定元素
+      ,trigger: 'click'
+    });
+  });
+
+  //修改密码
+  form.on('submit(modifyPw)', function(data){
+    //alert("length:"+data.field.pass.length);
+    if(data.field.pass.length<6||data.field.pass.length>16){
+      swal("修改失败!", "当前密码长度不满足要求!", "warning");
+      return false;
+    }
+    //alert("json:"+JSON.stringify(data.field));
+    if(data.field.nowpass==data.field.pass)
+    {
+      swal("修改失败!", "新旧密码一致，无需修改!", "warning");
+      return false;
+    }
+    if(data.field.pass!=data.field.repass)
+    {
+      swal("修改失败!", "两次新密码不一致!", "warning");
+      return false;
+    }
+
+    $.post('/api/user/repass', {
+      nowpass: data.field.nowpass
+      ,pass:data.field.pass
+    }, function(res){
+      if(res.code==200) {
+        swal("Good job!", ""+res.message, "success").then((value) => {
+          location.reload();});
+      }
+      else swal("Oh,no!", ""+res.message, "error");
+    });
+
+
+    return true;
+  });
+
+
   //提交成功后刷新
   fly.form['set-mine'] = function(data, required){
     layer.msg('修改成功', {
@@ -327,36 +376,83 @@ layui.define(['laypage', 'fly', 'element', 'flow'], function(exports){
     });
     */
     
-    //阅读后删除
+    //删除消息
     dom.minemsg.on('click', '.mine-msg li .fly-delete', function(){
       var othis = $(this).parents('li'), id = othis.data('id');
-      fly.json('/message/remove/', {
+      $.post('/notification/remove/id', {
         id: id
       }, function(res){
-        if(res.status === 0){
+        if(res.code==200) {
           othis.remove();
           delEnd();
-        }
+        }else swal("Oh,no!", ""+res.msg, "error");
       });
+
     });
 
-    //删除全部
+    //删除全部消息
     $('#LAY_delallmsg').on('click', function(){
       var othis = $(this);
       layer.confirm('确定清空吗？', function(index){
-        fly.json('/message/remove/', {
-          all: true
+        $.post('/notification/removeAll', {
+          all: 1
         }, function(res){
-          if(res.status === 0){
-            layer.close(index);
+          layer.close(index);
+          if(res.code==200) {
             othis.addClass('layui-hide');
             delEnd(true);
-          }
+          }else swal("Oh,no!", ""+res.msg, "error");
+        });
+      });
+    });
+
+    //一键阅读全部消息
+    $('#LAY_readallmsg').on('click', function(){
+      var othis = $(this);
+      layer.confirm('确定一键已读吗？', function(index){
+        $.post('/notification/readAll', {
+          all: 1
+        }, function(res){
+          layer.close(index);
+          if(res.code==200) {
+            location.reload();
+          }else swal("Oh,no!", ""+res.msg, "error");
         });
       });
     });
 
   };
+
+  //移除收藏
+  $('.NT-remove-like-p').on('click', function(){
+    var othis = $(this).parents('li'), id = othis.data('id');
+    console.log("id"+id);
+    layer.confirm('确定取消收藏吗？', function(index){
+      $.ajax({
+        type: 'DELETE',
+        url: '/api/like/remove',
+        contentType: 'application/json',
+        dataType: "json",
+        data: JSON.stringify({
+          "targetId": id,
+          "type": 1
+        }),
+        success: function(res){
+          layer.close(index);
+          if(res.code==200) {
+            othis.remove();
+          }else swal("Oh,no!", ""+res.message, "error");
+        },
+        error: function(data){
+          swal("取消失败!", ""+res.message, "error");
+          //alert("删除失败");
+        }
+      });
+
+
+
+    });
+  });
 
   dom.minemsg[0] && gather.minemsg();
 

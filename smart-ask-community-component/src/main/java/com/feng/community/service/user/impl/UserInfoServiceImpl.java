@@ -21,4 +21,11 @@ public class UserInfoServiceImpl implements UserInfoService {
         return tbUserMapper.selectByPrimaryKey(id);
 
     }
+
+    @Override
+    public int updateAvatarById(Long userId, String url) {
+        TbUser user = tbUserMapper.selectByPrimaryKey(userId);
+        user.setAvatarUrl(url);
+        return tbUserMapper.updateByPrimaryKey(user);
+    }
 }
