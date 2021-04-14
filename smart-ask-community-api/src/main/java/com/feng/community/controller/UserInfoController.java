@@ -189,7 +189,6 @@ public class UserInfoController {
             String realPath = System.getProperty("user.dir") + UPLOAD_PATH;
             String fileAfterName = UUID.randomUUID() + fileSussix;
 
-
             File file1 = new File(realPath, fileAfterName);
             if (!file1.exists()) {
                 file1.mkdir();
@@ -224,7 +223,6 @@ public class UserInfoController {
     public Map<String, Object> uploadLayImage(HttpServletRequest request, @RequestParam("file") MultipartFile file) {
         Map<String, Object> map = new HashMap<>();
         try {
-
             TbUser user = (TbUser) request.getAttribute("loginUser");
             //获取文件名后缀
             String fileName = file.getOriginalFilename();
@@ -233,7 +231,6 @@ public class UserInfoController {
 
             String realPath = System.getProperty("user.dir") + UPLOAD_PATH;
             String fileAfterName = UUID.randomUUID() + fileSussix;
-
 
             File file1 = new File(realPath, fileAfterName);
             if (!file1.exists()) {
@@ -258,6 +255,5 @@ public class UserInfoController {
             return map;
         }
     }
-
 
 }
