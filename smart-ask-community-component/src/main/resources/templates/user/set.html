@@ -53,11 +53,11 @@
 
 
                         <div class="layui-form-item">
-                            <input type="hidden" name="locationValue" id="locationValue"
-                                   th:value="${user.city}">
+                            <input type="hidden" th:value="${user.city}" name="locationValue" id="locationValue"
+                                  >
                             <label for="location" class="layui-form-label">位置</label>
                             <div class="layui-inline">
-                                <div class="layui-form-item" id="location" name="location">
+                                <div class="layui-form-item"  id="location" name="location">
                                     <div class="layui-input-inline">
                                         <select name="P1" lay-filter="province" id="province">
                                             <option></option>
@@ -95,7 +95,6 @@
                         </div>
                     </form>
                 </div>
-
 
 
                 <div class="layui-form layui-form-pane layui-tab-item">
@@ -145,7 +144,7 @@
                 $.post('/user/set/info', {
                     json: JSON.stringify(data.field)
                 }, function (res) {
-                    if (res.code == 200) swal("Good job!", "" + res.msg, "success");
+                    if (res.code == 200) swal("修改成功啦!", "" + res.msg, "success");
                     else swal("Oh,no!", "" + res.msg, "error");
                 });
             } else {

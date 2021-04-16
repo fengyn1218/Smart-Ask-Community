@@ -8,4 +8,7 @@ import com.feng.community.dto.ResultView;
  */
 public interface SendMailService {
     ResultView sendMail(String email);
+
+    // 更改邮箱
+    ResultView updateEmail(String email, String code, String id);
 }

@@ -28,4 +28,15 @@ public class UserInfoServiceImpl implements UserInfoService {
         user.setAvatarUrl(url);
         return tbUserMapper.updateByPrimaryKey(user);
     }
+
+    @Override
+    public int updateUserInfo(TbUser tbUser) {
+        TbUser dbUser = selectUserByUserId(String.valueOf(tbUser.getId()));
+        dbUser.setUserName(tbUser.getUserName());
+        dbUser.setCity(tbUser.getCity());
+        dbUser.setSex(tbUser.getSex());
+        dbUser.setUpdated(tbUser.getUpdated());
+        dbUser.setSignature(tbUser.getSignature());
+        return tbUserMapper.updateByPrimaryKey(dbUser);
+    }
 }

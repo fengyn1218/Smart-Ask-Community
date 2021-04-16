@@ -6,4 +6,6 @@ public interface UserInfoService {
     TbUser selectUserByUserId(String userId);
 
     int updateAvatarById(Long userId, String url);
+
+    int updateUserInfo(TbUser tbUser);
 }

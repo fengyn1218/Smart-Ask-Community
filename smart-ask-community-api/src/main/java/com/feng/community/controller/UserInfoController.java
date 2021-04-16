@@ -4,7 +4,6 @@ import com.feng.community.annotation.NeedLoginToken;
 import com.feng.community.constant.ResultViewCode;
 import com.feng.community.dao.TbUserMapper;
 import com.feng.community.dto.PaginationDTO;
-import com.feng.community.entity.TbPost;
 import com.feng.community.entity.TbUser;
 import com.feng.community.exception.CustomizeException;
 import com.feng.community.service.post.PostService;
@@ -12,25 +11,18 @@ import com.feng.community.service.user.UserInfoService;
 import com.feng.community.utils.CookieUtils;
 import com.feng.community.utils.MapperUtils;
 import com.feng.community.utils.TokenUtils;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.ClassUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -103,42 +95,43 @@ public class UserInfoController {
                 map.put("msg", "妈呀，出问题啦！");
             }
         }
-        // 修改其他信息
-        if ("info".equals(action)) {
-            try {
-                TbUser tbUser = MapperUtils.json2pojo(json, TbUser.class);
-            } catch (Exception e) {
-                e.printStackTrace();
+        try {
+            Map<String, Object> stringObjectMap = MapperUtils.json2map(json);
+
+            // 修改其他信息
+            TbUser tbUser = new TbUser();
+            String city = stringObjectMap.get("P1") + "-" + stringObjectMap.get("C1") + "-" + stringObjectMap.get("A1");
+            long s = 1;
+            Object sex = stringObjectMap.get("sex");
+            if ("男".equals(sex)) {
+                s = 1;
+            } else if ("女".equals(sex)) {
+                s = 2;
             }
+            tbUser.setId(user.getId());
+            tbUser.setUserName((String) stringObjectMap.get("username"));
+            tbUser.setUpdated(System.currentTimeMillis());
+            tbUser.setSex(s);
+            tbUser.setCity(city);
+            tbUser.setSignature((String) stringObjectMap.get("signature"));
 
-//            userInfo.setLocation(obj.getString("P1") + "-" + obj.getString("C1") + "-" + obj.getString("A1"));
-//            String[] birthday = userInfo.getBirthday().split("-");
-//            if (birthday.length == 3) {
-//                String constellation = userInfoService.getConstellation(Integer.parseInt(birthday[1]), Integer.parseInt(birthday[2]));
-//                userInfo.setConstellation(constellation);
-//            }
-//            int i = userInfoService.updateByUserId(userInfo, user.getId());
-//            int j = userService.updateUsernameById(user.getId(), obj.getString("username"));
+            int i = userInfoService.updateUserInfo(tbUser);
 
-//            if (j != 1) {
-//                map.put("code", 500);
-//                map.put("msg", "妈呀，昵称修改失败啦！");
-//            } else if (i != 1) {
-//                map.put("code", 500);
-//                map.put("msg", "妈呀，资料修改失败啦！");
-//            } else {
-//                User dbUser = userService.selectUserByUserId(user.getId());
-//                UserDTO userDTO = userService.getUserDTO(dbUser);
-//                Cookie cookie = cookieUtils.getCookie("token", tokenUtils.getToken(userDTO), 86400 * 3);
-//                response.addCookie(cookie);
-//                map.put("code", 200);
-//                map.put("msg", "恭喜您，资料修改成功！！！");
-//            }
+            if (i != 1) {
+                map.put("code", 500);
+                map.put("msg", "妈呀，资料修改失败啦！");
+            } else {
+                TbUser byUserId = userInfoService.selectUserByUserId(String.valueOf(user.getId()));
+                // 重新设置Cookie
+                CookieUtils.setCookie(request, response, "token", TokenUtils.getToken(byUserId), 86400);
+                map.put("code", 200);
+                map.put("msg", "恭喜您，资料修改成功！！！");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
         return map;
     }
-
 
     @NeedLoginToken
     @GetMapping("/user/set/{action}")
@@ -164,8 +157,7 @@ public class UserInfoController {
             model.addAttribute("sectionName", "绑定/更新邮箱账号");
             model.addAttribute("sectionInfo", "绑定邮箱账号后，您可以使用邮箱账号登录本站，也可用邮箱账号找回密码\n");
             model.addAttribute("navtype", "communitynav");
-            model.addAttribute("smsEnable", smsEnable);
-            model.addAttribute("vaptcha_vid", vaptcha_vid);
+            model.addAttribute("user", user);
             return "user/account";
         }
         return "user/set";
