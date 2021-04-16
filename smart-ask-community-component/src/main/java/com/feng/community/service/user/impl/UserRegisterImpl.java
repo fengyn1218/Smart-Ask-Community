@@ -52,6 +52,7 @@ public class UserRegisterImpl implements UserRegisterService {
                 tbUser.setUserName("Aries社区_编号" + code);
                 // 明文密码加密
                 tbUser.setPassword(DigestUtils.md5DigestAsHex(password.getBytes()));
+                tbUser.setSex(1L); // 默认是男的吧
                 tbUser.setAvatarUrl("/images/avatar/default.png");
                 tbUser.setCreated(System.currentTimeMillis());
                 tbUser.setUpdated(System.currentTimeMillis());

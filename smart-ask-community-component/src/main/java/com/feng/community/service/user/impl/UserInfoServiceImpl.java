@@ -1,10 +1,12 @@
 package com.feng.community.service.user.impl;
 
 import com.feng.community.dao.TbUserMapper;
+import com.feng.community.dto.ResultView;
 import com.feng.community.entity.TbUser;
 import com.feng.community.service.user.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.DigestUtils;
 
 /**
  * @author: fengyunan
@@ -38,5 +40,19 @@ public class UserInfoServiceImpl implements UserInfoService {
         dbUser.setUpdated(tbUser.getUpdated());
         dbUser.setSignature(tbUser.getSignature());
         return tbUserMapper.updateByPrimaryKey(dbUser);
+    }
+
+    @Override
+    public ResultView updatePassword(String nowpass, String pass, String id) {
+        TbUser dbUser = selectUserByUserId(id);
+        // 明文密码加密
+        String now = DigestUtils.md5DigestAsHex(nowpass.getBytes());
+        if (!dbUser.getPassword().equals(now)) {
+            return ResultView.fail("你输入的原密码不正确哦！");
+        } else {
+            dbUser.setPassword(DigestUtils.md5DigestAsHex(pass.getBytes()));
+            tbUserMapper.updateByPrimaryKey(dbUser);
+            return ResultView.success("修改成功！");
+        }
     }
 }

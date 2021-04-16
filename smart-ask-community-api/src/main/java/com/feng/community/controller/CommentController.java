@@ -20,10 +20,6 @@ public class CommentController {
     @Autowired
     private CommentService commentService;
 
-    @GetMapping("test")
-    public String test() {
-        return "123";
-    }
 
     @GetMapping("/list")
     public ResultView list(@RequestParam(value = "id", required = false) Long id

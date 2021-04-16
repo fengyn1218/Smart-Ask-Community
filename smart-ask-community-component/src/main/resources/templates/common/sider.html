@@ -13,12 +13,6 @@
             账户中心
         </a>
     </li>
-    <li th:class="${section=='message'}?'layui-nav-item layui-this':'layui-nav-item'">
-        <a href="/user/message">
-            <i class="layui-icon">&#xe611;</i>
-            我的消息
-        </a>
-    </li>
     <li th:class="${section=='myPosts'||section=='likes'}?'layui-nav-item layui-this':'layui-nav-item'">
         <a href="/user/myPosts">
             <i class="layui-icon">&#xe62a;</i>

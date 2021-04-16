@@ -87,29 +87,28 @@
 
                 <div class="layui-form layui-form-pane layui-tab-item">
                     <div class="layui-form-item">
-                        <label for="L_nowpass" class="layui-form-label">当前密码</label>
+                        <label for="nowpass" class="layui-form-label">当前密码</label>
                         <div class="layui-input-inline">
-                            <input type="password" id="L_nowpass" name="nowpass" autocomplete="off" class="layui-input">
+                            <input type="password" id="nowpass" name="nowpass" autocomplete="off" class="layui-input">
                         </div>
-                        <div class="layui-form-mid layui-word-aux">如未设置过，请留空</div>
                     </div>
                     <div class="layui-form-item">
-                        <label for="L_pass" class="layui-form-label">新密码</label>
+                        <label for="pass" class="layui-form-label">新密码</label>
                         <div class="layui-input-inline">
-                            <input type="password" id="L_pass" name="pass" required lay-verify="required"
+                            <input type="password" id="pass" name="pass" required lay-verify="required"
                                    autocomplete="off" class="layui-input">
                         </div>
                         <div class="layui-form-mid layui-word-aux">6到16个字符</div>
                     </div>
                     <div class="layui-form-item">
-                        <label for="L_repass" class="layui-form-label">确认密码</label>
+                        <label for="repass" class="layui-form-label">确认密码</label>
                         <div class="layui-input-inline">
-                            <input type="password" id="L_repass" name="repass" required lay-verify="required"
+                            <input type="password" id="repass" name="repass" required lay-verify="required"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-form-item">
-                        <button class="layui-btn" key="set-mine" lay-filter="modifyPw" lay-submit>确认修改</button>
+                        <button class="layui-btn" key="set-mine" onclick="submitPass()">提交密码</button>
                     </div>
                 </div>
             </div>
@@ -236,8 +235,57 @@
                 });
             }
         });
+    }
 
+    function submitPass() {
 
+        var nowpass = document.getElementById("nowpass").value;
+        var pass = document.getElementById("pass").value;
+        var repass = document.getElementById("repass").value;
+        var id = document.getElementById("id").value;
+
+        if (pass != repass) {
+            swal({
+                title: "哎哟...",
+                text: "咋回事？两次输入的密码都不一样！",
+                icon: "error",
+                button: "确认",
+            });
+            document.getElementById("repass").value = "";
+            return false;
+        } else if (pass.length < 6 || pass.length > 15) {
+            swal({
+                title: "哎哟...",
+                text: "咋回事？你这密码长度不符合规格啊！",
+                icon: "error",
+                button: "确认",
+            });
+            document.getElementById("password").value = "";
+            return false;
+        }
+
+        $.post('/user/updatePass', {
+            nowpass: nowpass,
+            pass: pass,
+            id: id
+        }, function (result) {
+            if (result.code == 200) {
+                swal({
+                    title: "恭喜您!",
+                    text: "您已经成功修改啦，去登录叭!",
+                    icon: "success",
+                }).then((value) => {
+                    window.location.href = '/login';
+                });
+            } else {
+                swal({
+                    title: "修改失败!",
+                    text: result.message,
+                    icon: "error",
+                    button: "确认",
+                });
+            }
+        });
     }
 
 </script>

@@ -17,12 +17,6 @@
       基本设置
     </a>
   </li>
-  <li class="layui-nav-item">
-    <a href="message.html">
-      <i class="layui-icon">&#xe611;</i>
-      我的消息
-    </a>
-  </li>
 </ul>
 
 <div class="site-tree-mobile layui-hide">

@@ -4,6 +4,7 @@ import com.feng.community.annotation.NeedLoginToken;
 import com.feng.community.constant.ResultViewCode;
 import com.feng.community.dao.TbUserMapper;
 import com.feng.community.dto.PaginationDTO;
+import com.feng.community.dto.ResultView;
 import com.feng.community.entity.TbUser;
 import com.feng.community.exception.CustomizeException;
 import com.feng.community.service.post.PostService;
@@ -246,6 +247,16 @@ public class UserInfoController {
             map.put("data", null);
             return map;
         }
+    }
+
+    // 修改密码
+    @NeedLoginToken
+    @ResponseBody
+    @PostMapping("/user/updatePass")
+    public ResultView updatePass(@RequestParam("nowpass") String nowpass,
+                                 @RequestParam("pass") String pass,
+                                 @RequestParam("id") String id) {
+        return userInfoService.updatePassword(nowpass, pass, id);
     }
 
 }
