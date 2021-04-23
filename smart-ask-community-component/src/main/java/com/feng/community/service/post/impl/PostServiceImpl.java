@@ -1,15 +1,18 @@
 package com.feng.community.service.post.impl;
 
-import com.feng.community.constant.PostConstant;
+import com.feng.community.constant.ResultViewCode;
+import com.feng.community.dao.TbLikeMapper;
 import com.feng.community.dao.TbPostMapper;
 import com.feng.community.dao.TbUserMapper;
 import com.feng.community.dto.CommentDTO;
 import com.feng.community.dto.PaginationDTO;
 import com.feng.community.dto.PostDTO;
-import com.feng.community.entity.TbComment;
+import com.feng.community.entity.TbLike;
 import com.feng.community.entity.TbPost;
 import com.feng.community.entity.TbUser;
+import com.feng.community.exception.CustomizeException;
 import com.feng.community.service.comment.CommentService;
+import com.feng.community.service.like.LikeService;
 import com.feng.community.service.post.PostService;
 import com.feng.community.service.user.UserInfoService;
 import org.apache.commons.lang3.time.DateFormatUtils;
@@ -24,6 +27,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.feng.community.constant.LikeConstant.TYPE_COLLECTION;
+import static com.feng.community.constant.PageConstant.PAGE_ORDER_DEFAULT;
 import static com.feng.community.constant.PostConstant.VIEW_COUNT_STEP;
 import static com.feng.community.constant.TimeConstant.FORMAT;
 
@@ -38,11 +43,15 @@ public class PostServiceImpl implements PostService {
     private TbPostMapper tbPostMapper;
     @Autowired
     private TbUserMapper tbUserMapper;
+    @Autowired
+    private TbLikeMapper tbLikeMapper;
 
     @Autowired
     private CommentService commentService;
     @Autowired
     private UserInfoService userInfoService;
+    @Autowired
+    private LikeService likeService;
 
     @Override
     public List<TbPost> getTopPost(String search, String tag, String sort, Integer type) {
@@ -144,27 +153,140 @@ public class PostServiceImpl implements PostService {
             commentDTO.setUser(userInfoService.selectUserByUserId(String.valueOf(e.getAuthorId())));
             return commentDTO;
         }).collect(Collectors.toList());
-        //todo
-        PostDTO postDTO=new PostDTO();
-        BeanUtils.copyProperties(tbPost,postDTO);
+        PostDTO postDTO = new PostDTO();
+        BeanUtils.copyProperties(tbPost, postDTO);
         postDTO.setUser(userInfoService.selectUserByUserId(tbPost.getAuthorId().toString()));
         postDTO.setUpdatedStr(DateFormatUtils.format(postDTO.getUpdated(), FORMAT));
         postDTO.setViewCount(tbPost.getViewCount());
-        postDTO.setCommentCount(Integer.valueOf(tbPost.getCommentCount().toString()));
+        postDTO.setCommentCount(Long.valueOf(tbPost.getCommentCount().toString()));
         postDTO.setComments(collect);
 
-
-
         //登录用户信息
-        TbUser loginUser =  (TbUser)request.getAttribute("loginUser");
+        TbUser loginUser = (TbUser) request.getAttribute("loginUser");
 
-        if(loginUser.getId()==tbPost.getAuthorId()){
+        if (loginUser.getId().equals(tbPost.getAuthorId())) {
             postDTO.setCanEdit(true);
             postDTO.setCanDelete(true);
             postDTO.setEssence(true);
         }
-        tbPost.setViewCount(tbPost.getViewCount()+VIEW_COUNT_STEP);
+        tbPost.setViewCount(tbPost.getViewCount() + VIEW_COUNT_STEP);
         tbPostMapper.updateByPrimaryKey(tbPost);
         return postDTO;
     }
+
+    public PaginationDTO listByExample(Long userId, Integer page, Integer size, String likes) {
+        Integer totalPage;
+        Example example = new Example(TbLike.class);
+        example.createCriteria()
+                .andEqualTo("liker", userId)
+                .andEqualTo("type", TYPE_COLLECTION); // 帖子收藏
+
+        int totalCount = tbLikeMapper.selectCountByExample(example);
+
+        if (totalCount % size == 0) {
+            totalPage = totalCount / size;
+        } else {
+            totalPage = totalCount / size + 1;
+        }
+
+        if (page > totalPage) {
+            page = totalPage;
+        }
+
+        if (page < 1) {
+            page = 1;
+        }
+
+        Integer offset = size * (page - 1);
+        example.setOrderByClause("created" + " " + PAGE_ORDER_DEFAULT);
+        List<TbLike> tbLikes = tbLikeMapper.selectByExampleAndRowBounds(example, new RowBounds(offset, 10));
+
+        List<TbPost> tbPostList = new ArrayList<>();
+        PaginationDTO paginationDTO = new PaginationDTO();
+        List<PostDTO> postDTOList = new ArrayList<>();
+        TbPost post;
+        for (TbLike tbLike : tbLikes) {
+            TbPost tbPost = tbPostMapper.selectByPrimaryKey(tbLike.getTargetId());
+            if (tbPost != null)
+                tbPostList.add(tbPost);
+        }
+
+        for (TbPost tbPost : tbPostList) {
+            TbUser tbUser = tbUserMapper.selectByPrimaryKey(tbPost.getAuthorId());
+            PostDTO postDTO = new PostDTO();
+            BeanUtils.copyProperties(tbPost, postDTO);
+            postDTO.setUser(tbUser);
+            postDTO.setUpdatedStr(DateFormatUtils.format(postDTO.getUpdated(), FORMAT));
+            postDTOList.add(postDTO);
+        }
+
+        paginationDTO.setData(postDTOList);
+        paginationDTO.setTotalCount(totalCount);
+        paginationDTO.setPagination(totalPage, page);
+        return paginationDTO;
+    }
+
+    @Override
+    public PostDTO getById(Long id, TbUser user) {
+        TbPost post = tbPostMapper.selectByPrimaryKey(id);
+        if (post == null) {
+            throw new CustomizeException(ResultViewCode.QUESTION_NOT_FOUND);
+        }
+        PostDTO postDTO = new PostDTO();
+        BeanUtils.copyProperties(post, postDTO);
+        TbUser tbUser = tbUserMapper.selectByPrimaryKey(post.getAuthorId());
+
+        postDTO.setUser(tbUser);
+        postDTO = setStatuses(postDTO, 0L, user);
+        postDTO.setUpdatedStr(DateFormatUtils.format(postDTO.getUpdated(), FORMAT));
+        return postDTO;
+    }
+
+    @Override
+    public int delPostById(Long userId, Long postId) {
+        int c = 0;
+        TbPost tbPost = tbPostMapper.selectByPrimaryKey(postId);
+        if (tbPost.getAuthorId().equals(userId)) {
+            c = tbPostMapper.deleteByPrimaryKey(postId);
+        }
+        return c;
+    }
+
+    @Override
+    public List<PostDTO> getRelatedPosts(Long postId) {
+        TbPost post = tbPostMapper.selectByPrimaryKey(postId);
+
+        Example example = new Example(TbPost.class);
+        example.createCriteria().andEqualTo("authorId", post.getAuthorId());
+
+        return tbPostMapper.selectByExample(example).stream().map(e -> {
+            PostDTO postDTO = new PostDTO();
+            BeanUtils.copyProperties(e, postDTO);
+            TbUser tbUser = tbUserMapper.selectByPrimaryKey(post.getAuthorId());
+            postDTO.setUser(tbUser);
+            return postDTO;
+        }).collect(Collectors.toList());
+    }
+
+    private PostDTO setStatuses(PostDTO postDTO, Long viewUser_id, TbUser user) {
+        // 是否能编辑过
+        postDTO.setEdited(postDTO.getAuthorId().equals(user.getId()));
+        // 加精
+        if (postDTO.getStatus() == 3) postDTO.setEssence(true);
+        // 置顶
+        if (postDTO.getStatus() == 2) postDTO.setSticky(true);
+
+        if (viewUser_id != 0L) {
+            boolean liked = likeService.isLiked(user, postDTO.getId());
+            postDTO.setFavorite(liked);
+            if (postDTO.getAuthorId().equals(user.getId())) {
+                postDTO.setCanEdit(true);
+                postDTO.setCanClassify(true);
+                postDTO.setCanDelete(true);
+            }
+        }
+
+        return postDTO;
+    }
+
 }

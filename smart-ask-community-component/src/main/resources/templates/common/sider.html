@@ -14,7 +14,7 @@
         </a>
     </li>
     <li th:class="${section=='myPosts'||section=='likes'}?'layui-nav-item layui-this':'layui-nav-item'">
-        <a href="/user/myPosts">
+        <a href="/post/user/p/myPosts">
             <i class="layui-icon">&#xe62a;</i>
             帖子管理
         </a>
@@ -117,7 +117,7 @@
     <dl class="fly-panel fly-list-one">
         <dt class="fly-panel-title">相关帖子</dt>
         <dd th:each="related : ${relatedQuestions}">
-            <a th:href="@{'/p/'+ ${related.id}}" th:text="${related.title}">基于 layui 的极简社区页面模版</a>
+            <a th:href="@{'/p/'+ ${related.id}}" th:text="${related.title}">Aries社区</a>
             <span><i class="iconfont icon-pinglun1"></i> <span th:text="${related.commentCount}"></span></span>
         </dd>
 

@@ -238,7 +238,6 @@ public class UserInfoController {
             map.put("code", 0);
             map.put("msg", "");
             map.put("data", FILE_PATH + fileAfterName);
-            // System.out.println(map);
             return map;
         } catch (Exception e) {
             e.printStackTrace();

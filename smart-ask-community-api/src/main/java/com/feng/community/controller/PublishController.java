@@ -1,15 +1,20 @@
 package com.feng.community.controller;
 
 import com.feng.community.annotation.NeedLoginToken;
+import com.feng.community.constant.ResultViewCode;
 import com.feng.community.dao.TbPostMapper;
+import com.feng.community.dto.PostDTO;
 import com.feng.community.entity.TbPost;
 import com.feng.community.entity.TbUser;
+import com.feng.community.exception.CustomizeException;
+import com.feng.community.service.post.PostService;
 import com.feng.community.storage.TagsCache;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -25,6 +30,8 @@ public class PublishController {
     private TagsCache tagsCache;
     @Autowired
     private TbPostMapper tbPostMapper;
+    @Autowired
+    private PostService postService;
 
     @NeedLoginToken
     @GetMapping("publish/post")
@@ -39,6 +46,7 @@ public class PublishController {
                           @RequestParam("tag") String tag,
                           @RequestParam("type") Integer type,
                           @RequestParam("permission") Integer permission,
+                          @RequestParam("id") Integer id,
                           HttpServletRequest request,
                           Model model) {
         String defaultDescription = "<p id=\"descriptionP\"></p>";
@@ -49,7 +57,7 @@ public class PublishController {
         model.addAttribute("tag", tag);
         model.addAttribute("tags", tagsCache.getTags());
         model.addAttribute("type", type);
-      //  model.addAttribute("id", id);
+        //  model.addAttribute("id", id);
         model.addAttribute("navtype", "publishnav");
         model.addAttribute("permission", permission);
         TbUser loginUser = (TbUser) request.getAttribute("loginUser");
@@ -68,7 +76,7 @@ public class PublishController {
         }
         //审核 todo
         TbPost tbPost = new TbPost();
-      //  tbPost.setId(id);
+        tbPost.setId(Long.valueOf(id));
         tbPost.setType(Long.valueOf(type));
         tbPost.setCreated(System.currentTimeMillis());
         tbPost.setUpdated(System.currentTimeMillis());
@@ -81,9 +89,31 @@ public class PublishController {
         tbPost.setCommentCount(0L);
         tbPost.setTitle(title);
         tbPost.setDescription(description);
-
-        tbPostMapper.insert(tbPost);
+        if (tbPostMapper.selectByPrimaryKey(id) != null) {
+            tbPostMapper.updateByPrimaryKey(tbPost);
+        } else {
+            tbPostMapper.insert(tbPost);
+        }
         return "index";
+    }
+
+    @GetMapping("p/publish/{id}")
+    public String edit2(@PathVariable(name = "id") Long id,
+                        Model model,
+                        HttpServletRequest request) {
+        TbUser user = (TbUser) request.getAttribute("loginUser");
+        PostDTO postDTO = postService.getById(id, user);
+        if (postDTO.getAuthorId().longValue() != user.getId().longValue()) {
+            throw new CustomizeException(ResultViewCode.QUESTION_NOT_FOUND);
+        }
+        model.addAttribute("title", postDTO.getTitle());
+        model.addAttribute("description", postDTO.getDescription());
+        model.addAttribute("type", postDTO.getType());
+        model.addAttribute("tag", postDTO.getTag());
+        model.addAttribute("id", postDTO.getId());
+        model.addAttribute("tags", tagsCache.getTags());
+        model.addAttribute("navtype", "publishnav");
+        return "p/add";
     }
 
 

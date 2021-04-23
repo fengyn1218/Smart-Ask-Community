@@ -43,11 +43,6 @@ function comment2target(targetId, type, content,ip,token) {
 
             } else {
                 if (response.code == 2003) {
-                   /* var isAccepted = confirm(response.message);
-                    if (isAccepted) {
-                        window.open("https://github.com/login/oauth/authorize?client_id=b6ecb208ce93f679a75a&redirect_uri=http://localhost:8887/callback&scope=user&state=1");
-                        window.localStorage.setItem("closable", true);
-                    }*/
                     swal({
                         title: "错误："+response.code,
                         text: response.message,
@@ -117,7 +112,6 @@ function comment(e) {
     var inputBtn = $("#input-" + inputId);
     var content = inputBtn.attr('placeholder')+inputBtn.val();
     content=filterXSS(content);
-    //console.log('inputId:'+inputId+'commentId:'+commentId+'placeholder:'+inputBtn.attr('placeholder')+'c:'+content);
     if(content.length>1024)
         swal({
             title: "回复超过1024个字长!",

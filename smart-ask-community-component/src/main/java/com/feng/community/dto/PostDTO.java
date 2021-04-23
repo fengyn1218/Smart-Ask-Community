@@ -21,7 +21,7 @@ public class PostDTO {
     private String updatedStr;
     private Long authorId;
     private Integer viewCount;
-    private Integer commentCount;
+    private Long commentCount;
     private Integer likeCount;
     private TbUser user;
     private List<CommentDTO> comments;
@@ -30,7 +30,7 @@ public class PostDTO {
     private String gmtLatestCommentStr;
     private String shortDescription;
     private Integer isVisible;
-    private Integer status;
+    private Long status;
     private Integer type;
     private Integer permission;//阅读权限
 

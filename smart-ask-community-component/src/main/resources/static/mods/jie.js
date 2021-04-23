@@ -11,7 +11,7 @@ layui.define('fly', function(exports){
   var util = layui.util;
   var laytpl = layui.laytpl;
   var form = layui.form;
-  var fly = layui.fly;
+  fly = layui.fly;
   
   var gather = {}, dom = {
     jieda: $('#jieda')
@@ -20,20 +20,28 @@ layui.define('fly', function(exports){
   };
 
   //监听专栏选择
-  form.on('select(column)', function(obj){
+  form.on('select(type)', function(obj){
     var value = obj.value
-    ,elemQuiz = $('#LAY_quiz')
+   // ,elemQuiz = $('#LAY_quiz')
     ,tips = {
       tips: 1
       ,maxWidth: 250
       ,time: 10000
     };
-    elemQuiz.addClass('layui-hide');
-    if(value === '0'){
-      layer.tips('下面的信息将便于您获得更好的答案', obj.othis, tips);
-      elemQuiz.removeClass('layui-hide');
-    } else if(value === '99'){
-      layer.tips('系统会对【分享】类型的帖子予以飞吻奖励，但我们需要审核，通过后方可展示', obj.othis, tips);
+   // elemQuiz.addClass('layui-hide');
+    if(value === '1'){
+      layer.tips('为了得到更多人更加准确的回答，请务必保证问题详尽且清楚哦~', obj.othis, tips);
+    //  elemQuiz.removeClass('layui-hide');
+    } else if(value === '2'){
+      layer.tips('欢迎分享干货，好的帖子，大家可能会为你点赞加分哦！', obj.othis, tips);
+    }else if(value === '4'){
+      layer.tips('讨论是一种快速学习，加深印象的方法哦~', obj.othis, tips);
+    }else if(value === '3'){
+      layer.tips('有好建议，放肆提，一起完善社区！采纳后会收到站长的么么哒哦(づ￣ 3￣)づ', obj.othis, tips);
+    }else if(value === '5'){
+      layer.tips('这是站长和管理员专用的哦~', obj.othis, tips);
+    }else if(value === '6'){
+      layer.tips('新闻动态，科技前沿，可以选这里哦！', obj.othis, tips);
     }
   });
 
@@ -74,32 +82,34 @@ layui.define('fly', function(exports){
   gather.jieAdmin = {
     //删求解
     del: function(div){
-      layer.confirm('确认删除该求解么？', function(index){
+      layer.confirm('确认删除该贴么？删除后将无法恢复！', function(index){
         layer.close(index);
-        fly.json('/api/jie-delete/', {
+        $.post('/p/del/id', {
           id: div.data('id')
         }, function(res){
-          if(res.status === 0){
-            location.href = '/jie/';
-          } else {
-            layer.msg(res.msg);
-          }
+          if(res.code==200) {swal("Good job!", ""+res.msg, "success").then((value) => {
+            location.href = '/forum';});
+          }else swal("Oh,no!", ""+res.msg, "error");
         });
+
+
       });
     }
     
-    //设置置顶、状态
+    //设置置顶等状态于操作
     ,set: function(div){
       var othis = $(this);
-      fly.json('/api/jie-set/', {
+      $.post('/p/set/id', {
         id: div.data('id')
         ,rank: othis.attr('rank')
         ,field: othis.attr('field')
       }, function(res){
-        if(res.status === 0){
-          location.reload();
-        }
+        if(res.code==200) {swal("Good job!", ""+res.msg, "success").then((value) => {
+          location.reload();});
+        }else swal("Oh,no!", ""+res.msg, "error");
       });
+
+
     }
 
     //收藏
@@ -122,8 +132,89 @@ layui.define('fly', function(exports){
     gather.jieAdmin[type] && gather.jieAdmin[type].call(this, othis.parent());
   });
 
+
+  //说说管理
+  gather.talkAdmin = {
+    //删求解
+    del: function(div){
+      layer.confirm('确认删除该条说说么？删除后将无法恢复！', function(index){
+        layer.close(index);
+        $.ajax({
+          type: 'DELETE',
+          url: '/api/talk/delete',
+          data: {id:div.data('id')},//'ids='+arr+'&_method=delete',
+          success: function(res){
+            if(res.code==200) {swal("Good job!", ""+res.message, "success").then((value) => {
+              location.href = '/talk';});
+            }else swal("Oh,no!", ""+res.msg, "error");
+          },
+          error: function(res){
+            swal("Oh,no!", "请求失败："+res.msg, "error");
+          }
+        });
+      });
+    }
+
+    //设置置顶等状态于操作
+    ,set: function(div){
+      var othis = $(this);
+      $.post('/api/talk/set', {
+        id: div.data('id')
+        ,rank: othis.attr('rank')
+        ,field: othis.attr('field')
+      }, function(res){
+        if(res.code==200) {swal("Good job!", ""+res.message, "success").then((value) => {
+          location.reload();});
+        }else swal("Oh,no!", ""+res.msg, "error");
+      });
+    }
+
+    //收藏，喜欢
+    ,like: function(div){
+      var othis = $(this), type = othis.data('type');
+      var talkId = div.data('id');
+      var thumbtext = $("#talkLikeText-" + talkId);
+      var likecount = $("#talkLikeCount-" + talkId);
+      var thumbicon = $("#talkLikeIcon-" + talkId);
+      if('已'==thumbtext.text()){
+        /*swal({
+          title: "收藏失败!",
+          text: "请不要重复收藏哦!您可以在帖子管理页取消收藏",
+          icon: "error",
+          button: "确认",
+        });
+        return;*/
+        thumbtext.html('');
+        likecount.html(parseInt(likecount.text())-1);//点赞+1
+        thumbicon.html('&#xe68c;');
+        removeLike(talkId, 11);
+        return;
+      }
+      thumbtext.html('已');
+      likecount.html(parseInt(likecount.text())+1);//点赞+1
+      thumbicon.html('&#xe68f;');
+      like2target(talkId, 11);
+
+     /* fly.json('/collection/'+ type +'/', {
+        cid: div.data('id')
+      }, function(res){
+        if(type === 'add'){
+          othis.data('type', 'remove').html('取消收藏').addClass('layui-btn-danger');
+        } else if(type === 'remove'){
+          othis.data('type', 'add').html('收藏').removeClass('layui-btn-danger');
+        }
+      });*/
+    }
+  };
+
+  $('body').on('click', '.talk-admin', function(){
+    var othis = $(this), type = othis.attr('type');
+    gather.talkAdmin[type] && gather.talkAdmin[type].call(this, othis.parent());
+  });
+
+
   //异步渲染
-  var asyncRender = function(){
+  /*var asyncRender = function(){
     var div = $('.fly-admin-box'), jieAdmin = $('#LAY_jieAdmin');
     //查询帖子是否收藏
     if(jieAdmin[0] && layui.cache.user.uid != -1){
@@ -133,7 +224,14 @@ layui.define('fly', function(exports){
         jieAdmin.append('<span class="layui-btn layui-btn-xs jie-admin '+ (res.data.collection ? 'layui-btn-danger' : '') +'" type="collect" data-type="'+ (res.data.collection ? 'remove' : 'add') +'">'+ (res.data.collection ? '取消收藏' : '收藏') +'</span>');
       });
     }
-  }();
+  }();*/
+
+
+
+
+
+
+
 
   //解答操作
   gather.jiedaActive = {
@@ -204,26 +302,29 @@ layui.define('fly', function(exports){
       });
     }
     ,del: function(li){ //删除
-      layer.confirm('确认删除该回答么？', function(index){
+      layer.confirm('确认删除该回复么？删除后无法恢复！', function(index){
         layer.close(index);
-        fly.json('/api/jieda-delete/', {
-          id: li.data('id')
-        }, function(res){
-          if(res.status === 0){
-            var count = dom.jiedaCount.text()|0;
-            dom.jiedaCount.html(--count);
-            li.remove();
-            //如果删除了最佳答案
-            if(li.hasClass('jieda-daan')){
-              $('.jie-status').removeClass('jie-status-ok').text('求解中');
-            }
-          } else {
-            layer.msg(res.msg);
+        $.ajax({
+          type: 'DELETE',
+          url: '/api/comment/delete',
+          data: {
+            id:li.data('id')
+            ,type:1
+          },
+          success: function(res){
+            if(res.code==200) {
+              li.remove();
+              swal("Good job!", ""+res.message, "success");
+            }else swal("Oh,no!", ""+res.message, "error");
+          },
+          error: function(data){
+            alert("删除失败");
           }
         });
       });    
     }
   };
+
 
   $('.jieda-reply span').on('click', function(){
     var othis = $(this), type = othis.attr('type');
@@ -231,11 +332,39 @@ layui.define('fly', function(exports){
   });
 
 
+
+
+
+
   //定位分页
   if(/\/page\//.test(location.href) && !location.hash){
     var replyTop = $('#flyReply').offset().top - 80;
     $('html,body').scrollTop(replyTop);
   }
+
+  $('#admin-btn').on('click', function(){
+    layer.open({
+      title: '请下拉选择'
+      ,  type: 1
+      ,area:['auto','220px']
+      ,content: $("#admin-panel")
+    });
+  });
+
+  //监听提交
+  form.on('submit(submitAdmin)', function(data) {
+    $.post('/p/set/id', {
+      id: data.field.id
+      ,json: JSON.stringify(data.field)
+      ,field: 'admin'
+    }, function(res){
+      if(res.code==200) {
+        location.reload();
+      }else swal("Oh,no!", ""+res.msg, "error");
+    });
+
+    return false;
+  });
 
   exports('jie', null);
 });

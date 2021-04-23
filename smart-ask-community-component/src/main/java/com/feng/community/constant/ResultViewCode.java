@@ -14,6 +14,8 @@ public enum ResultViewCode {
     NEED_LOGIN(1030, "需要登录哦！"), //需要登录
 
     USER_IS_EMPTY(2040, "该用户不存在"),
+
+    QUESTION_NOT_FOUND(2001, "问题已经找不到了，已被删除或压根就不存在？"),
     ;
 
     private Integer code;
