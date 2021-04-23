@@ -5,9 +5,11 @@ import com.feng.community.dao.TbUserMapper;
 import com.feng.community.dto.CommentDTO;
 import com.feng.community.dto.CommentQueryDTO;
 import com.feng.community.dto.PaginationDTO;
+import com.feng.community.dto.ResultView;
 import com.feng.community.entity.TbComment;
 import com.feng.community.entity.TbUser;
 import com.feng.community.service.comment.CommentService;
+import com.feng.community.service.post.PostService;
 import com.feng.community.service.user.UserInfoService;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.ibatis.session.RowBounds;
@@ -36,6 +38,8 @@ public class CommentServiceImpl implements CommentService {
     private TbUserMapper tbUserMapper;
     @Autowired
     private UserInfoService userInfoService;
+    @Autowired
+    private PostService postService;
 
     @Override
     public PaginationDTO<CommentDTO> getCommentList(CommentQueryDTO commentQueryDTO) {
@@ -111,7 +115,25 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public List<TbComment> getCommentByPostId(Long postId) {
         Example example = new Example(TbComment.class);
-        example.createCriteria().andEqualTo("postId",postId);
+        example.createCriteria().andEqualTo("postId", postId);
         return tbCommentMapper.selectByExample(example);
+    }
+
+    @Override
+    public ResultView publish(Long postId, Long userId, String content) {
+        TbComment comment = new TbComment();
+        comment.setAuthorId(userId);
+        comment.setContent(content);
+        comment.setPostId(postId);
+        comment.setCreated(System.currentTimeMillis());
+        comment.setType(postService.getPostTypeById(postId));
+        comment.setLikeCount(0);
+
+        int insert = tbCommentMapper.insert(comment);
+        if (insert == 1) {
+            return ResultView.success("评论成功！");
+        } else {
+            return ResultView.fail("呀！评论失败了，请稍后后重试");
+        }
     }
 }

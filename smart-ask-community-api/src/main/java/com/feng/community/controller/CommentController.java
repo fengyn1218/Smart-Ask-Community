@@ -1,14 +1,16 @@
 package com.feng.community.controller;
 
+import com.feng.community.annotation.NeedLoginToken;
 import com.feng.community.constant.PageConstant;
 import com.feng.community.dto.CommentQueryDTO;
 import com.feng.community.dto.ResultView;
+import com.feng.community.entity.TbUser;
 import com.feng.community.service.comment.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author: fengyunan
@@ -41,5 +43,16 @@ public class CommentController {
         commentQueryDTO.setOrder(order);
         commentQueryDTO.convert();
         return ResultView.success(commentService.getCommentList(commentQueryDTO));
+    }
+
+    @NeedLoginToken
+    @ResponseBody
+    @PostMapping("publish")
+    public ResultView publish(@RequestParam(value = "postId", required = true) Long postId,
+                              @RequestParam(value = "content", required = true) String content,
+                              HttpServletRequest request
+    ) {
+        TbUser loginUser = (TbUser) request.getAttribute("loginUser");
+        return commentService.publish(postId, loginUser.getId(), content);
     }
 }

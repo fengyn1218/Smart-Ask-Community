@@ -244,6 +244,8 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public int delPostById(Long userId, Long postId) {
+        //todo 删除帖子相关东西，如评论等。。。
+
         int c = 0;
         TbPost tbPost = tbPostMapper.selectByPrimaryKey(postId);
         if (tbPost.getAuthorId().equals(userId)) {
@@ -266,6 +268,12 @@ public class PostServiceImpl implements PostService {
             postDTO.setUser(tbUser);
             return postDTO;
         }).collect(Collectors.toList());
+    }
+
+    @Override
+    public long getPostTypeById(long postId) {
+        TbPost tbPost = tbPostMapper.selectByPrimaryKey(postId);
+        return tbPost.getType();
     }
 
     private PostDTO setStatuses(PostDTO postDTO, Long viewUser_id, TbUser user) {

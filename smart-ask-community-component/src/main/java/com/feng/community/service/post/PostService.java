@@ -28,5 +28,9 @@ public interface PostService {
 
     int delPostById(Long userId, Long postId);
 
+    // 获取作者相关帖子，后续可用redis取人气最高的
     List<PostDTO> getRelatedPosts(Long postId);
+
+    // 根据id获取帖子所属分类
+    long getPostTypeById(long postId);
 }
