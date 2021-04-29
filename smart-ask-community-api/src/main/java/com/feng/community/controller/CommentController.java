@@ -7,7 +7,6 @@ import com.feng.community.dto.ResultView;
 import com.feng.community.entity.TbUser;
 import com.feng.community.service.comment.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -50,9 +49,27 @@ public class CommentController {
     @PostMapping("publish")
     public ResultView publish(@RequestParam(value = "postId", required = true) Long postId,
                               @RequestParam(value = "content", required = true) String content,
+                              @RequestParam(value = "isReComment", required = false, defaultValue = "false") Boolean isReComment,
                               HttpServletRequest request
     ) {
         TbUser loginUser = (TbUser) request.getAttribute("loginUser");
-        return commentService.publish(postId, loginUser.getId(), content);
+        return commentService.publish(postId, loginUser.getId(), content, isReComment);
     }
+
+    @NeedLoginToken
+    @ResponseBody
+    @PostMapping("delete")
+    public ResultView delete(@RequestParam(value = "postId", required = true) Long postId,
+                             @RequestParam(value = "commentId", required = true) Long commentId,
+                             HttpServletRequest request) {
+        TbUser loginUser = (TbUser) request.getAttribute("loginUser");
+        return commentService.delete(postId, loginUser.getId(), commentId);
+    }
+
+    @ResponseBody
+    @GetMapping(value = "/list/{id}")
+    public ResultView comments(@PathVariable(name = "id") Long id) {
+        return ResultView.success(commentService.listByTargetId(id));
+    }
+
 }

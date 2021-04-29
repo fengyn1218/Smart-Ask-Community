@@ -103,10 +103,9 @@
                                     <label class="layui-form-label">阅读权限</label>
                                     <div class="layui-input-inline" style="width: 190px;">
                                         <select lay-verify="required" id="permission" name="permission">
-                                            <option value="0" th:selected="${permission==null||permission==0}">
-                                                默认，所有用户可见
-                                            </option>
-                                            <option value="1" th:selected="${permission==1}">其他人不可见</option>
+                                            <option></option>
+                                            <option value="1" th:selected="${permission==1}">所有用户可见</option>
+                                            <option value="2" th:selected="${permission==2}">其他人不可见</option>
                                         </select>
                                     </div>
                                     <div class="layui-form-mid layui-word-aux">说点悄悄话<a></a>

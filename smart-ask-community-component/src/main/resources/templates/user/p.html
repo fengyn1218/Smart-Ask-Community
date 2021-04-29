@@ -46,13 +46,13 @@
                 </div>
                 <div id="mine-view" th:class="${section=='likes'}?'layui-tab-item layui-show ':'layui-tab-item'">
                     <ul th:each="question : ${pagination.data}" class="mine-like-p jie-row">
-                        <li th:data-id="${question.id}">
+                        <li th:data-id="${question.id}" th:value="${question.id}" id="postId">
                             <a class="jie-title" th:href="@{'/post/'+ ${question.id}}" th:text="${question.title}"></a>
                             <i th:text="${question.updatedStr}"></i>
                             <a th:if="${loginUser!=null&&loginUser.id == question.authorId}" class="mine-edit"
                                th:href="@{'/p/publish/'+${question.id}}">编辑</a>
                             <a style="cursor:pointer;margin-left:10px; padding:0 6px; background-color: #ff6200; color:#fff; font-size:12px;"
-                               class="NT-remove-like-p" href="javascript:;">取消</a>
+                               class="NT-remove-like-p" onclick="cancelLike()">取消</a>
                             <em th:text="${question.commentCount+'个回复 •'+question.viewCount+'次浏览 •'+question.LikeCount+'人收藏'}"></em>
                         </li>
                     </ul>
@@ -100,6 +100,32 @@
         fly: 'index'
     }).use('fly');
 </script>
-
+<script>
+    function cancelLike() {
+        //todo 未登录
+        var postId = document.getElementById("postId").getAttribute("value");
+        $.post('/like/cancel', {
+            postId: postId,
+        }, function (res) {
+            if (res.code == 200) {
+                swal({
+                    title: "已经取消收藏!",
+                    text: "点击确认后即可刷新页面!",
+                    icon: "success",
+                    button: "确认",
+                }).then((value) => {
+                    window.location.reload();
+                });
+            } else if (res.code == 2023) {
+                swal({
+                    title: "取消失败!",
+                    text: "请稍后重试！",
+                    icon: "error",
+                    button: "确认",
+                });
+            }
+        });
+    }
+</script>
 </body>
 </html>

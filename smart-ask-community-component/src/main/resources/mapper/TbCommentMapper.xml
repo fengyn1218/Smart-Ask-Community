@@ -12,5 +12,6 @@
     <result column="created" jdbcType="BIGINT" property="created" />
     <result column="like_count" jdbcType="INTEGER" property="likeCount" />
     <result column="type" jdbcType="BIGINT" property="type" />
+    <result column="comment_count" jdbcType="BIGINT" property="commentCount" />
   </resultMap>
 </mapper>

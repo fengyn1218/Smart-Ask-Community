@@ -1,12 +1,14 @@
 package com.feng.community.service.post.impl;
 
 import com.feng.community.constant.ResultViewCode;
+import com.feng.community.dao.TbCommentMapper;
 import com.feng.community.dao.TbLikeMapper;
 import com.feng.community.dao.TbPostMapper;
 import com.feng.community.dao.TbUserMapper;
 import com.feng.community.dto.CommentDTO;
 import com.feng.community.dto.PaginationDTO;
 import com.feng.community.dto.PostDTO;
+import com.feng.community.entity.TbComment;
 import com.feng.community.entity.TbLike;
 import com.feng.community.entity.TbPost;
 import com.feng.community.entity.TbUser;
@@ -25,6 +27,7 @@ import tk.mybatis.mapper.entity.Example;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static com.feng.community.constant.LikeConstant.TYPE_COLLECTION;
@@ -45,6 +48,8 @@ public class PostServiceImpl implements PostService {
     private TbUserMapper tbUserMapper;
     @Autowired
     private TbLikeMapper tbLikeMapper;
+    @Autowired
+    private TbCommentMapper tbCommentMapper;
 
     @Autowired
     private CommentService commentService;
@@ -163,6 +168,9 @@ public class PostServiceImpl implements PostService {
 
         //登录用户信息
         TbUser loginUser = (TbUser) request.getAttribute("loginUser");
+        //是否关注、收藏
+        postDTO.setFavorite(likeService.isLiked(loginUser, postId));
+        // 是否可以编辑、删除
 
         if (loginUser.getId().equals(tbPost.getAuthorId())) {
             postDTO.setCanEdit(true);
@@ -244,12 +252,28 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public int delPostById(Long userId, Long postId) {
-        //todo 删除帖子相关东西，如评论等。。。
-
         int c = 0;
         TbPost tbPost = tbPostMapper.selectByPrimaryKey(postId);
         if (tbPost.getAuthorId().equals(userId)) {
             c = tbPostMapper.deleteByPrimaryKey(postId);
+            // 删除评论
+            Example example = new Example(TbComment.class);
+            example.createCriteria().andEqualTo("postId", postId);
+            List<TbComment> tbComments = tbCommentMapper.selectByExample(example);
+            tbComments.forEach(e -> {
+                Example example1 = new Example(TbComment.class);
+                example1.createCriteria().andEqualTo("postId", e.getId());
+                if (tbCommentMapper.selectByExample(example1).size() != 0) {
+                    // 删除二级评论
+                    tbCommentMapper.deleteByExample(example1);
+                }
+            });
+            // 删除收藏信息
+            Example example1 = new Example(TbLike.class);
+            example1.createCriteria().andEqualTo("targetId", postId);
+            tbLikeMapper.deleteByExample(example1);
+
+            tbCommentMapper.deleteByExample(example);
         }
         return c;
     }
@@ -273,7 +297,8 @@ public class PostServiceImpl implements PostService {
     @Override
     public long getPostTypeById(long postId) {
         TbPost tbPost = tbPostMapper.selectByPrimaryKey(postId);
-        return tbPost.getType();
+        // 9为兼容二级评论的类型
+        return Optional.ofNullable(tbPost).map(TbPost::getType).orElse(9L);
     }
 
     private PostDTO setStatuses(PostDTO postDTO, Long viewUser_id, TbUser user) {
@@ -284,7 +309,7 @@ public class PostServiceImpl implements PostService {
         // 置顶
         if (postDTO.getStatus() == 2) postDTO.setSticky(true);
 
-        if (viewUser_id != 0L) {
+        if (viewUser_id == 0L) {
             boolean liked = likeService.isLiked(user, postDTO.getId());
             postDTO.setFavorite(liked);
             if (postDTO.getAuthorId().equals(user.getId())) {

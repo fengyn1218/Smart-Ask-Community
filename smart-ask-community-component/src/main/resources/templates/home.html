@@ -58,8 +58,7 @@
                             <a th:href="'/post/' + ${post.id}" th:text="${post.title}"
                                class="jie-title"></a>
                             <i th:text="${'于 '+post.updatedStr}"></i>
-                            <!--em class="layui-hide-xs" th:text="${question.commentCount+'个回复 •'+question.viewCount+'次浏览 •'+question.LikeCount+'人收藏'}"></em-->
-                        </li>
+                            </li>
                     </th:block>
                 </ul>
                 <div style="text-align: center">
@@ -151,7 +150,7 @@
                             layui.each(response.data.data, function (index, item) {
                                 var titleLabel = "<p>\n" +
                                     "   <span>他在 " + item.createdStr + "</span>\n" +
-                                    "   回答了以下内容，快去<a href=\"/p/" + item.postId + "#comment-body-" + item.id + "\" target=\"_blank\" class='fly-link'>围观</a>吧：\n" +
+                                    "   回答了以下内容，快去<a href=\"/post/" + item.postId + "#comment-body-" + item.id + "\" target=\"_blank\" class='fly-link'>围观</a>吧：\n" +
                                     "   </p>";
                                 var ContentLabel = "          <div class=\"reply-body-" + page + " home-dacontent \">" +
                                     item.content +

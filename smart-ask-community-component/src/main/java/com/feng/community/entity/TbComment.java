@@ -32,6 +32,9 @@ public class TbComment {
 
     private Long type;
 
+    @Column(name = "comment_count")
+    private Long commentCount;
+
     /**
      * @return id
      */
@@ -140,5 +143,19 @@ public class TbComment {
      */
     public void setType(Long type) {
         this.type = type;
+    }
+
+    /**
+     * @return comment_count
+     */
+    public Long getCommentCount() {
+        return commentCount;
+    }
+
+    /**
+     * @param commentCount
+     */
+    public void setCommentCount(Long commentCount) {
+        this.commentCount = commentCount;
     }
 }

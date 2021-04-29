@@ -26,8 +26,10 @@ public class PostController {
     @Autowired
     private PostService postService;
 
+    @NeedLoginToken
     @GetMapping("{postId}")
     public String getPostInfo(@PathVariable Long postId, Model model, HttpServletRequest request) {
+        // todo 处理尽自己可见问题
         model.addAttribute("postDTO", postService.getPostById(postId, request));
         model.addAttribute("relatedQuestions", postService.getRelatedPosts(postId));
         return "/p/detail";

@@ -1,125 +1,60 @@
-function post(ip,token) {
+function post(ip, token) {
     //console.log(ip+"--2--"+token);
     var questionId = $("#question_id").val();
     var content = $("#comment_content").val();
-    if(content.length>1024)
+    if (content.length > 1024)
         swal({
             title: "回复超过1024个字长!",
-            text: "你的回复字数为:"+content.length+"，请精简您的发言!",
+            text: "你的回复字数为:" + content.length + "，请精简您的发言!",
             icon: "warning",
             button: "确认",
         });
-    else comment2target(questionId, 1, content,ip,token);
+    else comment2target(questionId, 1, content, ip, token);
 }
 
-function comment2target(targetId, type, content,ip,token) {
+function comment2target(targetId, type, content, ip, token) {
     if (!content) {
         //alert("不能回复空内容~~~");
         sweetAlert("出错啦...", "不能回复空内容~~~", "error");
         return;
     }
 
-    $.ajax({
-        type: "POST",
-        url: "/api/comment/insert",
-        contentType: 'application/json',
-        data: JSON.stringify({
-            "parentId": targetId,
-            "content": content,
-            "type": type,
-            "ip":ip,
-            "token":token
-        }),
-        success: function (response) {
-            if (response.code == 200) {
-                swal({
-                    title: "回复成功!",
-                    text: "点击确认后即可刷新页面!",
-                    icon: "success",
-                    button: "确认",
-                }).then((value) => {
-                    window.location.reload();
+    $.post('/comment/publish', {
+        postId: targetId,
+        content: content,
+        isReComment: true,
+    }, function (res) {
+        if (res.code === 200) {
+            swal({
+                title: "回复成功!",
+                text: "点击确认后即可刷新页面!",
+                icon: "success",
+                button: "确认",
+            }).then((value) => {
+                window.location.reload();
             });
-
-            } else {
-                if (response.code == 2003) {
-                    swal({
-                        title: "错误："+response.code,
-                        text: response.message,
-                        icon: "warning",
-                        buttons: true,
-                        dangerMode: true,
-                    })
-                        .then((willDelete) => {
-                        if (willDelete) {
-                            window.open("/sso/login");
-                            window.localStorage.setItem("closable", true);
-
-                            var interval = setInterval(function(){
-                                var loginState = window.localStorage.getItem("loginState");
-                                if (loginState == "true") {
-                                    window.localStorage.removeItem("loginState");
-                                  //  console.log("0");
-                                    clearInterval(interval);
-                                   // location.reload();
-                                   // $("#comment_content").val(content);
-                                    swal({
-                                        title: "登陆成功!",
-                                        text: "您可以提交回复啦!",
-                                        icon: "success",
-                                        button: "好的",
-                                    });
-
-                                    //$("#navigation").load("#navigation");
-
-                                    return;
-                                }
-                               // console.log("1");
-                               // document.getElementById("comment_content").value=content;
-//do whatever here..
-                            }, 2000);
-
-
-                        } else {
-                            swal({
-                                     title: "已取消登录!",
-                                     text: "取消登陆后，无法成功回复!",
-                                     icon: "error",
-                                     button: "确认",
-                                 });
-                }
-                });
-                }
-                else {
-                    sweetAlert("错误："+response.code, response.message, "error");
-                }
-            }
-        },
-        error:function(XMLHttpRequest, textStatus, errorThrown){
-            swal(textStatus, "错误："+XMLHttpRequest.status, "error");
-        },
-        dataType: "json"
+        } else swal("Oh,no!", "" + res.msg, "error");
     });
 }
 
 function comment(e) {
     var commentId = e.getAttribute("data-id");
     var btnId = e.getAttribute("id");
-    var strs= new Array();
-    strs=btnId.split("-");
+    var strs = new Array();
+    strs = btnId.split("-");
     var inputId = strs[1];
     var commentType = e.getAttribute("data-type");
     var inputBtn = $("#input-" + inputId);
-    var content = inputBtn.attr('placeholder')+inputBtn.val();
-    content=filterXSS(content);
-    if(content.length>1024)
+    var content = inputBtn.attr('placeholder') + inputBtn.val();
+    content = filterXSS(content);
+    if (content.length > 1024)
         swal({
             title: "回复超过1024个字长!",
-            text: "你的回复字数为:"+content.length+"，请精简您的发言!",
+            text: "你的回复字数为:" + content.length + "，请精简您的发言!",
             icon: "warning",
             button: "确认",
         });
-    else comment2target(commentId, commentType, content,returnCitySN["cip"],"commentType2");
+    else comment2target(commentId, commentType, content, returnCitySN["cip"], "commentType2");
 
 
 }
@@ -127,7 +62,7 @@ function comment(e) {
 function like_comment(e) {
     var commentId = e.getAttribute("data-id");
     var thumbicon = $("#thumbicon-" + commentId);
-    if(thumbicon.attr('class').indexOf('zanok')!=-1){
+    if (thumbicon.attr('class').indexOf('zanok') != -1) {
         swal({
             title: "点赞失败!",
             text: "请不要重复点赞哦!",
@@ -147,7 +82,7 @@ function like_subComment(e) {
 function like_question(e) {
     var questionId = e.getAttribute("data-id");
     var thumbtext = $("#questionLikeText-" + questionId);
-    if('已'==thumbtext.text()){
+    if ('已' == thumbtext.text()) {
         swal({
             title: "收藏失败!",
             text: "请不要重复收藏哦!您可以在帖子管理页取消收藏",
@@ -159,8 +94,8 @@ function like_question(e) {
     like2target(questionId, 1);
 }
 
-function removeLike(targetId, type){
-    layer.confirm('确定取消收藏吗？', function(index){
+function removeLike(targetId, type) {
+    layer.confirm('确定取消收藏吗？', function (index) {
         $.ajax({
             type: 'DELETE',
             url: '/api/like/remove',
@@ -170,156 +105,93 @@ function removeLike(targetId, type){
                 "targetId": targetId,
                 "type": type
             }),
-            success: function(res){
+            success: function (res) {
                 layer.close(index);
-                if(res.code==200) {
-                    swal("成功!", ""+res.message, "success");
-                }else swal("Oh,no!", ""+res.message, "error");
+                if (res.code == 200) {
+                    swal("成功!", "" + res.message, "success");
+                } else swal("Oh,no!", "" + res.message, "error");
             },
-            error: function(data){
-                swal("取消失败!", ""+res.message, "error");
+            error: function (data) {
+                swal("取消失败!", "" + res.message, "error");
                 //alert("删除失败");
             }
         });
 
 
-
     });
 }
 
 
+function like2target(targetId, type) {
 
+    var thumbicon = $("#thumbicon-" + targetId);
+    thumbicon.addClass("zanok");
 
-
-function like2target(targetId, type){
-    $.ajax({
-        type: "POST",
-        url: "/api/like/insert",
-        contentType: 'application/json',
-        data: JSON.stringify({
-            "targetId": targetId,
-            "type": type
-        }),
-        success: function (response) {
-            if (response.code == 200) {//点赞成功
-                swal({
-                    title: ""+response.message,
-                    text: "感谢您的支持，作者将会收到通知!",
-                    icon: "success",
-                    button: "确认",
-                });
-                if(type==2||type==3||type==11){//点赞评论时
+    $.post('/like/comment', {
+        commentId: targetId,
+    }, function (response) {
+        if (response.code == 200) {//点赞成功
+            swal({
+                title: "" + response.message,
+                text: "感谢您的支持，继续发现好文章吧！",
+                icon: "success",
+                button: "确认",
+            });
+            if (type == 2 || type == 3 || type == 11) {//点赞评论时
                 var thumbicon = $("#thumbicon-" + targetId);
                 thumbicon.addClass("zanok");
                 var likecount = $("#likecount-" + targetId);
-                likecount.html(parseInt(likecount.text())+1);//点赞+1
-                }
-                if(type==1){//收藏问题时
-                    var thumbicon = $("#questionLikeIcon-" + targetId);
-                    thumbicon.html('&#xe658;');
-                    var thumbtext = $("#questionLikeText-" + targetId);
-                    thumbtext.html('已');
-                   /* thumbicon.removeClass("glyphicon-heart-empty");
-                    thumbicon.addClass("glyphicon-heart");*/
-                    var likecount = $("#questionlikecount-" + targetId);
-                    likecount.html(parseInt(likecount.text())+1);//点赞+1
-                }
-            } else {
-                if (response.code == 2003) {
+                likecount.html(parseInt(likecount.text()) + 1);//点赞+1
+            }
+        } else {
+            if (response.code == 2003) {
 
-                    swal({
-                        title: "错误："+response.code,
-                        text: response.message,
-                        icon: "warning",
-                        buttons: true,
-                        dangerMode: true,
-                    })
-                        .then((willDelete) => {
-                        if (willDelete) {
-                            window.open("https://github.com/login/oauth/authorize?client_id=b6ecb208ce93f679a75a&redirect_uri=" + document.location.origin + "/callback&scope=user&state=1");
-                            window.localStorage.setItem("closable", true);
-
-                            var interval = setInterval(function(){
-                                var loginState = window.localStorage.getItem("loginState");
-                                if (loginState == "true") {
-                                    window.localStorage.removeItem("loginState");
-                                    //  console.log("0");
-                                    clearInterval(interval);
-                                    // location.reload();
-                                    // $("#comment_content").val(content);
-                                    swal({
-                                        title: "登陆成功!",
-                                        text: "您可以点赞啦!",
-                                        icon: "success",
-                                        button: "好的",
-                                    });
-
-                                    //$("#navigation").load("#navigation");
-
-                                    return;
-                                }
-                                // console.log("1");
-                                // document.getElementById("comment_content").value=content;
-//do whatever here..
-                            }, 2000);
-
-
-                        } else {
-                            swal({
-                                     title: "已取消登录!",
-                                     text: "取消登陆后，无法成功回复!",
-                                     icon: "error",
-                                     button: "确认",
-                                 });
-                }
-                });
-                }
-                else if (response.code == 2022) {
-                    if(type==2||type==11){//点赞评论时
+                swal({
+                    title: "错误：" + response.code,
+                    text: response.message,
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+            } else if (response.code == 2022) {
+                if (type == 2 || type == 11) {//点赞评论时
                     var thumbicon = $("#thumbicon-" + targetId);
                     thumbicon.addClass("zanok");
-                    }
-                    swal({
-                        title: "点赞失败!",
-                        text: "请不要重复点赞/收藏哦!",
-                        icon: "error",
-                        button: "确认",
-                    });
                 }
-                else if (response.code == 2023) {
-                  /*  var thumbicon = $("#questionlikespan-" + targetId);
-                    thumbicon.removeClass("glyphicon-heart-empty");
-                    thumbicon.addClass("glyphicon-heart");*/
-                    swal({
-                        title: "收藏失败!",
-                        text: "请不要重复收藏哦!您可以在帖子管理页面取消收藏",
-                        icon: "error",
-                        button: "确认",
-                    });
-                }
-                else {
-                    sweetAlert("错误："+response.code, response.message, "error");
-                }
+                swal({
+                    title: "点赞失败!",
+                    text: "请不要重复点赞/收藏哦!",
+                    icon: "error",
+                    button: "确认",
+                });
+            } else if (response.code == 2023) {
+                swal({
+                    title: "点赞失败!",
+                    text: "请不要重复点赞哦!",
+                    icon: "error",
+                    button: "确认",
+                });
+            } else {
+                sweetAlert("错误：" + response.code, response.message, "error");
             }
-        },
-        dataType: "json"
+        }
+
     });
+
 }
 
 /**
  * 展开二级评论
  */
-function collapseComments(e,type) {
+function collapseComments(e, type) {
     var id = e.getAttribute("data-id");
     var comments = $("#comment-" + id);  //获取二级评论元素
 
     var inputComments2 = $("#input-" + id);
     var btnComments2 = $("#btn-" + id);
-    inputComments2.attr('placeholder','');
-    //inputComments2.attr('id','input-'+id);
-    //btnComments2.attr('id','btn-'+id);
-    btnComments2.attr('data-id',id);
-    btnComments2.attr('data-type',type);
+    inputComments2.attr('placeholder', '');
+    btnComments2.attr('data-id', id);
+    btnComments2.attr('data-type', type);
     // 获取一下二级评论的展开状态
     var collapse = e.getAttribute("data-collapse");
     if (collapse) {
@@ -336,11 +208,11 @@ function collapseComments(e,type) {
             e.setAttribute("data-collapse", "in");
             e.classList.add("active");
         } else {
-            $.getJSON("/api/comment/list/" + id, function (data) {
+            $.getJSON("/comment/list/" + id, function (data) {
                 $.each(data.data.reverse(), function (index, comment) {
                     var mediaLeftElement = $("<a/>", {
                         "class": "fly-avatar niter-avatar",
-                        "href":"/user/"+comment.user.id
+                        "href": "/user/" + comment.user.id
                     }).append($("<img/>", {
                         "class": "img-rounded",
                         "src": comment.user.avatarUrl,
@@ -351,38 +223,36 @@ function collapseComments(e,type) {
                         "class": "fly-detail-user"
                     }).append($("<a/>", {
                         "class": "fly-link",
-                        "href": "/user/"+comment.user.id
+                        "href": "/user/" + comment.user.id
                     }).append($("<span/>", {
                         "class": "menu"
                     }).append($("<cite/>", {
                         "html": comment.user.userName
                     }))));
-                  var timeElement = $("<div/>", {
+                    var timeElement = $("<div/>", {
                         "class": "detail-hits"
                     }).append($("<span/>", {
                         "class": "",
                         "html": comment.gmtModifiedStr
                     })).append($("<span/>", {
-                      "class": "rightbtn",
-                      "style":"cursor: pointer;",
-                      "data-id": comment.id,
-                      "data-name": comment.user.userName,
-                      "id": "comment-"+comment.id,
-                      "onclick" :"collapseSubComments("+id+","+comment.id+","+type+");"
-                  }).append($("<i/>", {
-                      "class": "iconfont icon-svgmoban53"
-                  })));
+                        "class": "rightbtn",
+                        "style": "cursor: pointer;",
+                        "data-id": comment.id,
+                        "data-name": comment.user.userName,
+                        "id": "comment-" + comment.id,
+                        "onclick": "collapseSubComments(" + id + "," + comment.id + "," + type + ");"
+                    }).append($("<i/>", {
+                        "class": "iconfont icon-svgmoban53"
+                    })));
                     var filterHtml = filterXSS(comment.content);
                     var contentElement = $("<div/>", {
                         "class": "detail-body sub-detail-body jieda-body photos",
-                        "html":filterHtml
+                        "html": filterHtml
                     });
 
                     var infoElement = $("<div/>", {
                         "class": "detail-about detail-about-reply"
                     }).append(mediaLeftElement).append(mediaBodyElement).append(timeElement).append(contentElement);
-
-
 
 
                     var commentElement = $("<div/>", {
@@ -403,9 +273,9 @@ function collapseComments(e,type) {
                         "class": "pull-right",
                         "html": moment(comment.gmtCreate).format('YYYY-MM-DD  HH:mm')
                     })));
-                 /*   var comment2Element = $("<div/>", {
-                        "class": "col-lg-12 col-md-12 col-sm-12 col-xs-12 comments"
-                    }).append(mediaElement);*/
+                    /*   var comment2Element = $("<div/>", {
+                           "class": "col-lg-12 col-md-12 col-sm-12 col-xs-12 comments"
+                       }).append(mediaElement);*/
 
                     subCommentContainer.prepend(commentElement);
                     console.log("00")
@@ -417,7 +287,7 @@ function collapseComments(e,type) {
                 e.setAttribute("data-collapse", "in");
                 e.classList.add("active");
 
-                $('.sub-detail-body').each(function(){
+                $('.sub-detail-body').each(function () {
                     var othis = $(this), html = othis.html();
                     othis.html(fly.content(html));
                 });
@@ -426,33 +296,18 @@ function collapseComments(e,type) {
     }
 }
 
-function collapseSubComments(upId,subId,type) {
-   // e1.removeClass("layui-show");
-   // var subId = e2.getAttribute("data-id");
-   // alert("subId:"+subId+"upId"+upId);
+function collapseSubComments(upId, subId, type) {
+
     var thisComment = $("#comment-" + subId);
     var upComments = $("#comment-" + upId);
     var inputComments = $("#input-" + upId);
     var btnComments = $("#btn-" + upId);
-    var upName = '回复 @'+thisComment.attr('data-name')+' ：';
+    var upName = '回复 @' + thisComment.attr('data-name') + ' ：';
     //alert(upName);
-    inputComments.attr('placeholder',upName);
-   // inputComments.attr('id','input-'+subId);
-   // upComments.attr('id','comment-'+subId);
-   // btnComments.attr('id','btn-'+subId);
-    btnComments.attr('data-id',subId);
-    btnComments.attr('data-type',type+1);
+    inputComments.attr('placeholder', upName);
+    btnComments.attr('data-id', upId);
+    btnComments.attr('data-type', type + 1);
 
-    // if(inputComments==Object)
-
-   // alert(thisComment.attr('data-name'));
-    //upComments.removeClass("layui-show");
-    //thisComment.removeClass("rightbtn");
-    /* if(thisComment==Object)
-     var upId = thisComment.getAttribute("data-upid")
-     alert("upId:"+upId);
-     var upComment = $("#comment-" + upid);
-     upComment.removeClass("layui-show");*/
 
 }
 

@@ -1,12 +1,16 @@
 package com.feng.community.service.comment.impl;
 
 import com.feng.community.dao.TbCommentMapper;
+import com.feng.community.dao.TbLikeMapper;
+import com.feng.community.dao.TbPostMapper;
 import com.feng.community.dao.TbUserMapper;
 import com.feng.community.dto.CommentDTO;
 import com.feng.community.dto.CommentQueryDTO;
 import com.feng.community.dto.PaginationDTO;
 import com.feng.community.dto.ResultView;
 import com.feng.community.entity.TbComment;
+import com.feng.community.entity.TbLike;
+import com.feng.community.entity.TbPost;
 import com.feng.community.entity.TbUser;
 import com.feng.community.service.comment.CommentService;
 import com.feng.community.service.post.PostService;
@@ -24,6 +28,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static com.feng.community.constant.CommentConstant.*;
 import static com.feng.community.constant.TimeConstant.FORMAT;
 
 /**
@@ -36,6 +41,10 @@ public class CommentServiceImpl implements CommentService {
     private TbCommentMapper tbCommentMapper;
     @Autowired
     private TbUserMapper tbUserMapper;
+    @Autowired
+    private TbPostMapper tbPostMapper;
+    @Autowired
+    private TbLikeMapper tbLikeMapper;
     @Autowired
     private UserInfoService userInfoService;
     @Autowired
@@ -93,7 +102,6 @@ public class CommentServiceImpl implements CommentService {
         userExample.createCriteria().andEqualTo("id", userIds);
         List<TbUser> users = tbUserMapper.selectByExample(userExample);
         Map<Long, TbUser> userMap = users.stream().collect(Collectors.toMap(TbUser::getId, user -> user));
-
         // 转换 comment 为 commentDTO
         List<CommentDTO> commentDTOS = tbComments
                 .stream()
@@ -120,20 +128,98 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public ResultView publish(Long postId, Long userId, String content) {
+    public ResultView publish(Long postId, Long userId, String content, boolean isReComment) {
         TbComment comment = new TbComment();
         comment.setAuthorId(userId);
         comment.setContent(content);
         comment.setPostId(postId);
         comment.setCreated(System.currentTimeMillis());
-        comment.setType(postService.getPostTypeById(postId));
-        comment.setLikeCount(0);
+        comment.setCommentCount(COMMENT_LIKE_COUNT);
+        // 单独处理二级评论
+        if (isReComment) {
+            comment.setType(RE_COMMENT_TYPE);
+        } else {
+            comment.setType(postService.getPostTypeById(postId));
+        }
+        comment.setLikeCount(DEFAULT_COMMENT_LIKE_COUNT);
 
         int insert = tbCommentMapper.insert(comment);
         if (insert == 1) {
+            if (isReComment) {
+                // 评论数加一
+                TbComment comment1 = tbCommentMapper.selectByPrimaryKey(postId);
+                comment1.setCommentCount(comment1.getCommentCount() + COMMENT_STEP);
+                tbCommentMapper.updateByPrimaryKey(comment1);
+            } else {
+                // 评论数加一
+                TbPost tbPost = tbPostMapper.selectByPrimaryKey(postId);
+                tbPost.setCommentCount(tbPost.getCommentCount() + COMMENT_STEP);
+                tbPostMapper.updateByPrimaryKey(tbPost);
+            }
+
             return ResultView.success("评论成功！");
         } else {
             return ResultView.fail("呀！评论失败了，请稍后后重试");
         }
+    }
+
+    @Override
+    public ResultView delete(Long postId, Long userId, Long commentId) {
+        TbComment comment = tbCommentMapper.selectByPrimaryKey(commentId);
+        TbPost tbPost = tbPostMapper.selectByPrimaryKey(postId);
+        // 帖子作者/评论作者可以删除评论
+        if (comment.getAuthorId().equals(userId) || tbPost.getAuthorId().equals(userId)) {
+            int i = tbCommentMapper.deleteByPrimaryKey(comment);
+            if (i == 1) {
+                // 评论数减一
+                tbPost.setCommentCount(tbPost.getCommentCount() - COMMENT_STEP);
+                tbPostMapper.updateByPrimaryKey(tbPost);
+                // 删除二级评论
+                Example example = new Example(TbComment.class);
+                example.createCriteria().andEqualTo("postId", commentId);
+                tbCommentMapper.deleteByExample(example);
+                // 删除点赞信息
+                Example example1 = new Example(TbLike.class);
+                example1.createCriteria().andEqualTo("targetId", comment.getId());
+                tbLikeMapper.deleteByExample(example1);
+                return ResultView.success("删除成功！");
+            } else {
+                return ResultView.fail("删除失败，请重试！");
+            }
+        } else {
+            return ResultView.fail("您无法删除该评论，没有权限！");
+        }
+    }
+
+    @Override
+    public List<CommentDTO> listByTargetId(Long id) {
+        Example example = new Example(TbComment.class);
+        example.createCriteria().andEqualTo("postId", id);
+        List<TbComment> tbComments = tbCommentMapper.selectByExample(example);
+
+        if (tbComments.size() == 0) {
+            return new ArrayList<>();
+        }
+        // 获取去重的评论人
+        Set<Long> commentators = tbComments.stream().map(TbComment::getAuthorId).collect(Collectors.toSet());
+        List<Long> userIds = new ArrayList();
+        userIds.addAll(commentators);
+
+        // 获取评论人并转换为 Map
+        Example example1 = new Example(TbUser.class);
+        example1.createCriteria().andIn("id", userIds);
+        List<TbUser> tbUsers = tbUserMapper.selectByExample(example1);
+
+        Map<Long, TbUser> userMap = tbUsers.stream().collect(Collectors.toMap(TbUser::getId, user -> user));
+        // 转换 comment 为 commentDTO
+        List<CommentDTO> commentDTOS = tbComments.stream().map(comment -> {
+            CommentDTO commentDTO = new CommentDTO();
+            BeanUtils.copyProperties(comment, commentDTO);
+
+            commentDTO.setUser(userInfoService.selectUserByUserId(String.valueOf(comment.getAuthorId())));
+            commentDTO.setCreatedStr(DateFormatUtils.format(comment.getCreated(), FORMAT));
+            return commentDTO;
+        }).collect(Collectors.toList());
+        return commentDTOS;
     }
 }

@@ -15,8 +15,8 @@ public class CommentDTO {
     private Long authorId;
     private Long created;
     private String createdStr; // 评论没必要更新操作
-    private Long likeCount = 0L;
-    private Integer commentCount = 0;
+    private Integer likeCount = 0;
+    private Long commentCount = 0L;
     private String content;
     private TbUser user;
 }

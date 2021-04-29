@@ -13,5 +13,9 @@ public interface CommentService {
 
     List<TbComment> getCommentByPostId(Long postId);
 
-    ResultView publish(Long postId, Long userId, String content);
+    ResultView publish(Long postId, Long userId, String content, boolean isReComment);
+
+    ResultView delete(Long postId, Long userId, Long commentId);
+
+    List<CommentDTO> listByTargetId(Long id);
 }

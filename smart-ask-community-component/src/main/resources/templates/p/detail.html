@@ -83,7 +83,7 @@
                      id="descriptionP" th:text="${postDTO.description}">
                 </div>
                 <div style="text-align: center;margin-top: 10px">
-                    <span th:data-id="${postDTO.id}" onclick="like_postDTO(this)"
+                    <span th:data-id="${postDTO.id}" onclick="like_postDTO()"
                           style="font-size: 15px; color: #FFB800;cursor: pointer"><i
                             th:id="${'postDTOLikeIcon-'+postDTO.id}" class="layui-icon"
                             th:text="${postDTO.favorite?'&#xe658;':'&#xe600;'}"></i><span
@@ -140,9 +140,10 @@
                 <i class="iconfont icon-svgmoban53"></i>
                <em th:text="${comment.commentCount}" th:class="${comment.commentCount != 0}? 'zanok' : ''"></em>
               </span>
-                            <div class="jieda-admin" th:if="${loginUser!=null}">
-                                <span type="edit" th:if="${comment.authorId==loginUser.id}">编辑</span>
-                                <span type="del" th:if="${comment.authorId==loginUser.id}">删除</span>
+                            <div class="jieda-admin" th:if="${loginUser!=null}" id="commentId" th:value="${comment.id}">
+                                <span type="del"
+                                      th:if="${comment.authorId==loginUser.id||postDTO.user.id==loginUser.id}"
+                                      onclick="delComment()">删除</span>
                                 <span class="jieda-accept" type="accept"
                                       th:if="${comment.postId==loginUser.id}">采纳</span>
                             </div>
@@ -190,7 +191,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label" style="padding: 9px 0px;text-align: center">所在专栏</label>
                     <div class="layui-input-block" style="margin-left: 80px">
-                        <select lay-verify="required" id="column2" name="column2">
+                        <select lay-verify="required" id="type" name="type">
                             <option></option>
                             <option value="1" th:selected="${postDTO.type==1}">提问</option>
                             <option value="2" th:selected="${postDTO.type==2}">分享</option>
@@ -207,8 +208,8 @@
                         <label class="layui-form-label" style="padding: 9px 0px;text-align: center">阅读权限</label>
                         <div class="layui-input-block" style="margin-left: 80px;">
                             <select lay-verify="required" id="permission" name="permission">
-                                <option value="0" th:selected="${postDTO.permission==0}">默认，所有用户可见</option>
-                                <option value="1" th:selected="${postDTO.permission==1}">不可见</option>
+                                <option value="1" th:selected="${postDTO.permission==1}">所有用户可见</option>
+                                <option value="2" th:selected="${postDTO.permission==2}">不可见</option>
                             </select>
                         </div>
                     </div>
@@ -291,6 +292,34 @@
 <script src="/layui/layui.js"></script>
 
 <script type="text/javascript">
+    function like_postDTO() {
+        var postId = document.getElementById("fun").getAttribute("value");
+
+        $.post('/like/post', {
+            postId: postId,
+        }, function (res) {
+            if (res.code == 200) {
+                swal({
+                    title: "收藏成功,感谢您的支持!",
+                    text: "点击确认后即可刷新页面!",
+                    icon: "success",
+                    button: "确认",
+                }).then((value) => {
+                    window.location.reload();
+                });
+            } else if (res.code == 2023) {
+                swal({
+                    title: "收藏失败!",
+                    text: "请不要重复收藏哦!您可以在帖子管理页面取消收藏",
+                    icon: "error",
+                    button: "确认",
+                });
+            }
+        });
+    }
+</script>
+
+<script type="text/javascript">
     function delPost() {
         var id = document.getElementById("fun").getAttribute("value");
 
@@ -310,13 +339,33 @@
 </script>
 
 <script>
+    function delComment() {
+        var postId = document.getElementById("fun").getAttribute("value");
+        var commentId = document.getElementById("commentId").getAttribute("value");
+
+        $.post('/comment/delete', {
+            postId: postId,
+            commentId: commentId,
+        }, function (res) {
+            if (res.code == 200) {
+                swal({
+                    title: "删除评论成功!",
+                    text: "点击确认后即可刷新页面!",
+                    icon: "success",
+                    button: "确认",
+                }).then((value) => {
+                    window.location.reload();
+                });
+            } else swal("Oh,no!", "" + res.msg, "error");
+        });
+    }
+</script>
+
+<script>
 
     function commentClick() {
         let content = document.getElementById("comment_content").value;
         let postId = document.getElementById("postDTO_id").getAttribute("value");
-
-        console.log(content);
-        console.log(postId);
 
         $.post('/comment/publish', {
             postId: postId,
