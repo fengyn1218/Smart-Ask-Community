@@ -503,7 +503,7 @@ layui.define(['layer', 'laytpl', 'form', 'element', 'upload', 'util'], function(
             ,shadeClose: true
             ,maxWidth: 10000
             ,skin: 'fly-layer-search'
-            ,content: ['<form action="/">'
+            ,content: ['<form action="/index">'
                 ,'<input autocomplete="off" placeholder="搜索内容，回车跳转" type="text" name="search">'
                 ,'</form>'].join('')
             ,success: function(layero){

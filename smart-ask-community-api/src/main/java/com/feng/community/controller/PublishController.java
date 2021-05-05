@@ -102,7 +102,14 @@ public class PublishController {
         tbPost.setDescription(description);
         if (id != null) {
             // 更新
-            tbPostMapper.updateByPrimaryKey(tbPost);
+            TbPost tbPost1 = tbPostMapper.selectByPrimaryKey(id);
+            tbPost1.setTag(tag);
+            tbPost1.setPermission(permission);
+            tbPost1.setTitle(title);
+            tbPost1.setDescription(description);
+            tbPost1.setType(Long.valueOf(type));
+            tbPost1.setUpdated(System.currentTimeMillis());
+            tbPostMapper.updateByPrimaryKey(tbPost1);
         } else {
             // 新增
             tbPost.setCreated(System.currentTimeMillis());

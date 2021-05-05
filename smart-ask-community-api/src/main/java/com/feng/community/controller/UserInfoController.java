@@ -98,7 +98,6 @@ public class UserInfoController {
         }
         try {
             Map<String, Object> stringObjectMap = MapperUtils.json2map(json);
-
             // 修改其他信息
             TbUser tbUser = new TbUser();
             String city = stringObjectMap.get("P1") + "-" + stringObjectMap.get("C1") + "-" + stringObjectMap.get("A1");

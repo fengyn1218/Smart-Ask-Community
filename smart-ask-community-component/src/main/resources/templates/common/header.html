@@ -50,10 +50,10 @@
                 <a href="/index"><i class="layui-icon">&#xe68e;</i>主页</a>
             </li>
             <li th:class="${'talknav' == navtype}? 'layui-nav-item layui-this' : 'layui-nav-item'">
-                <a href="/talk"><i class="layui-icon">&#xe63a;</i>许愿墙</a>
+                <a href="http://59.110.23.184:8081/"><i class="layui-icon">&#xe63a;</i>作者主页</a>
             </li>
             <li th:class="${'newsnav' == navtype}? 'layui-nav-item layui-this' : 'layui-nav-item'">
-                <a href="/news"><i class="layui-icon">&#xe705;</i>看看</a>
+                <a href="https://vip.bljiex.com/"><i class="layui-icon">&#xe705;</i>看个电影</a>
             </li>
             <li th:class="${'newsnav' == navtype}? 'layui-nav-item layui-this' : 'layui-nav-item'">
                 <a href="#"><i class="layui-icon">&#xe705;</i>教务系统</a>
@@ -106,14 +106,14 @@
 <div th:fragment="sub_nav" class="fly-panel fly-column">
     <div class="layui-container">
         <ul class="layui-clear">
-            <li th:class="${type == null}? 'layui-this' : ''"><a href="/index">首页</a></li>
-            <li th:class="${type == 1}? 'layui-this' : ''"><a href="/index?type=1">提问</a></li>
-            <li th:class="${type == 2}? 'layui-this' : ''"><a href="/index?type=2">分享</a></li>
-            <li th:class="${type == 3}? 'layui-this' : ''"><a href="/index?type=3">建议</a></li>
-            <li th:class="${type == 4}? 'layui-this' : ''"><a href="/index?type=4">讨论</a></li>
-            <li th:class="${type == 5}? 'layui-this' : ''"><a href="/index?type=5">公告</a></li>
-            <li th:class="${type == 6}? 'layui-this' : ''"><a href="/index?type=6">动态</a></li>
-            <li th:class="${type == 9}? 'layui-this' : ''"><a href="/index?type=9">其它</a></li>
+            <li th:class="${column == null}? 'layui-this' : ''"><a href="/index">首页</a></li>
+            <li th:class="${column == 1}? 'layui-this' : ''"><a href="/index?type=1">提问</a></li>
+            <li th:class="${column == 2}? 'layui-this' : ''"><a href="/index?type=2">分享</a></li>
+            <li th:class="${column == 3}? 'layui-this' : ''"><a href="/index?type=3">建议</a></li>
+            <li th:class="${column == 4}? 'layui-this' : ''"><a href="/index?type=4">讨论</a></li>
+            <li th:class="${column == 5}? 'layui-this' : ''"><a href="/index?type=5">公告</a></li>
+            <li th:class="${column == 6}? 'layui-this' : ''"><a href="/index?type=6">动态</a></li>
+            <li th:class="${column == 9}? 'layui-this' : ''"><a href="/index?type=9">其它</a></li>
             <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><span class="fly-mid"></span></li>
 
             <!-- 用户登入后显示 -->
