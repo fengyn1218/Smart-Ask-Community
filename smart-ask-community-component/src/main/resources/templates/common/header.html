@@ -79,8 +79,8 @@
 
                 <li class="layui-nav-item">
                     <a class="fly-nav-avatar niter-avatar" href="javascript:;">
-                        <i class="layui-icon fly-list-kiss layui-hide-xs"       title="test">&#xe735</i>
-                       <cite class="fly-list-kiss" th:text="${loginUser.userName}"></cite>
+                        <i class="layui-icon fly-list-kiss layui-hide-xs" title="test">&#xe735</i>
+                        <cite class="fly-list-kiss" th:text="${loginUser.userName}"></cite>
                         <img th:src="${loginUser.avatarUrl}">
                     </a>
                     <dl class="layui-nav-child">
@@ -103,14 +103,12 @@
 </div>
 
 
-
 <div th:fragment="sub_nav" class="fly-panel fly-column">
     <div class="layui-container">
         <ul class="layui-clear">
             <li th:class="${type == null}? 'layui-this' : ''"><a href="/index">首页</a></li>
             <li th:class="${type == 1}? 'layui-this' : ''"><a href="/index?type=1">提问</a></li>
-            <li th:class="${type == 2}? 'layui-this' : ''"><a href="/index?type=2">分享<span
-                    class="layui-badge-dot"></span></a></li>
+            <li th:class="${type == 2}? 'layui-this' : ''"><a href="/index?type=2">分享</a></li>
             <li th:class="${type == 3}? 'layui-this' : ''"><a href="/index?type=3">建议</a></li>
             <li th:class="${type == 4}? 'layui-this' : ''"><a href="/index?type=4">讨论</a></li>
             <li th:class="${type == 5}? 'layui-this' : ''"><a href="/index?type=5">公告</a></li>

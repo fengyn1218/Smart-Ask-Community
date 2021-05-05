@@ -1,6 +1,5 @@
 package com.feng.community.dto;
 
-import com.feng.community.entity.TbComment;
 import com.feng.community.entity.TbUser;
 import lombok.Data;
 
@@ -20,7 +19,7 @@ public class PostDTO {
     private Long updated;
     private String updatedStr;
     private Long authorId;
-    private Integer viewCount;
+    private Long viewCount;
     private Long commentCount;
     private Integer likeCount;
     private TbUser user;

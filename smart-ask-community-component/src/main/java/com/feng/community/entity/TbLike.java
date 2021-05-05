@@ -8,9 +8,6 @@ public class TbLike {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    /**
-     * 点赞目标id
-     */
     @Column(name = "target_id")
     private Long targetId;
 
@@ -21,14 +18,8 @@ public class TbLike {
      */
     private Integer type;
 
-    /**
-     * 点赞人
-     */
     private Long liker;
 
-    /**
-     * 点赞时间
-     */
     private Long created;
 
     /**
@@ -46,18 +37,14 @@ public class TbLike {
     }
 
     /**
-     * 获取点赞目标id
-     *
-     * @return target_id - 点赞目标id
+     * @return target_id
      */
     public Long getTargetId() {
         return targetId;
     }
 
     /**
-     * 设置点赞目标id
-     *
-     * @param targetId 点赞目标id
+     * @param targetId
      */
     public void setTargetId(Long targetId) {
         this.targetId = targetId;
@@ -90,36 +77,28 @@ public class TbLike {
     }
 
     /**
-     * 获取点赞人
-     *
-     * @return liker - 点赞人
+     * @return liker
      */
     public Long getLiker() {
         return liker;
     }
 
     /**
-     * 设置点赞人
-     *
-     * @param liker 点赞人
+     * @param liker
      */
     public void setLiker(Long liker) {
         this.liker = liker;
     }
 
     /**
-     * 获取点赞时间
-     *
-     * @return created - 点赞时间
+     * @return created
      */
     public Long getCreated() {
         return created;
     }
 
     /**
-     * 设置点赞时间
-     *
-     * @param created 点赞时间
+     * @param created
      */
     public void setCreated(Long created) {
         this.created = created;

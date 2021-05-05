@@ -14,7 +14,7 @@ spring:
   # druid 数据源配置
   datasource:
     druid:
-      url: jdbc:mysql://59.110.23.184:3306/smart-ask-community?useUnicode=true&characterEncoding=utf-8&useSSL=false
+      url: jdbc:mysql://59.110.23.184:3306/ask-community?useUnicode=true&characterEncoding=utf-8&useSSL=false
       username: root
       password: fyn12181218.
       initial-size: 1
@@ -24,7 +24,7 @@ spring:
       driver-class-name: com.mysql.cj.jdbc.Driver
   # 加载多个配置文件
   profiles:
-    active: redis,email
+    active: redis,email,http
 
 # mybatis 配置
 mybatis:

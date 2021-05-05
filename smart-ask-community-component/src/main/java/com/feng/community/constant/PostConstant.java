@@ -8,6 +8,13 @@ public class PostConstant {
     // 观看人数增加频率
     public static final int VIEW_COUNT_STEP = 1;
 
+    // 排序规则
+    public static final String HOT30 = "hot30";
+    public static final String HOT7 = "hot7";
+    public static final String NO = "no";
+    public static final String NEW = "new";
+    public static final String GOOD = "good";
+
     /**
      * 所属专栏 ：
      * 1：提问

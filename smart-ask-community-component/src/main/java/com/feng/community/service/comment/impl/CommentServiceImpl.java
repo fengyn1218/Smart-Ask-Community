@@ -13,8 +13,10 @@ import com.feng.community.entity.TbLike;
 import com.feng.community.entity.TbPost;
 import com.feng.community.entity.TbUser;
 import com.feng.community.service.comment.CommentService;
+import com.feng.community.service.examine.ExamineService;
 import com.feng.community.service.post.PostService;
 import com.feng.community.service.user.UserInfoService;
+import com.feng.community.storage.ZeroCommentPostCache;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.BeanUtils;
@@ -49,6 +51,10 @@ public class CommentServiceImpl implements CommentService {
     private UserInfoService userInfoService;
     @Autowired
     private PostService postService;
+    @Autowired
+    private ExamineService examineService;
+    @Autowired
+    private ZeroCommentPostCache zeroCommentPostCache;
 
     @Override
     public PaginationDTO<CommentDTO> getCommentList(CommentQueryDTO commentQueryDTO) {
@@ -129,6 +135,10 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public ResultView publish(Long postId, Long userId, String content, boolean isReComment) {
+        // 过文本审核
+        if (!examineService.isNormal(content)) {
+            return ResultView.fail("您输入的内容不符合规定哦！");
+        }
         TbComment comment = new TbComment();
         comment.setAuthorId(userId);
         comment.setContent(content);
@@ -145,6 +155,7 @@ public class CommentServiceImpl implements CommentService {
 
         int insert = tbCommentMapper.insert(comment);
         if (insert == 1) {
+            zeroCommentPostCache.delZeroCommentPosts(postId);
             if (isReComment) {
                 // 评论数加一
                 TbComment comment1 = tbCommentMapper.selectByPrimaryKey(postId);

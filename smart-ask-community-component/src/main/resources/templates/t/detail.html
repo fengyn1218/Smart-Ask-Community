@@ -1,16 +1,12 @@
-
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title th:text="${talk.user.userName+'与'+talk.gmtModifiedStr+'发表的说说：'+@environment.getProperty('site.main.titleInfo')}"></title>
+    <title th:text="${talk.user.userName+'发表的心里话：'"></title>
     <script src="/js/moment.js" type="application/javascript"></script>
-    <!--script src="/js/talk.js" type="application/javascript"></script-->
     <th:block th:insert="~{common/header :: head}"></th:block>
     <script src="/js/xss.min.js?v=1.5" type="application/javascript"></script>
     <script src="/js/clipboard.js" type="application/javascript"></script>
-    <!--link href="http://cdn.bootcss.com/highlight.js/8.0/styles/monokai_sublime.min.css" rel="stylesheet">
-    <script src="http://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script-->
+
 </head>
 <body>
 
@@ -33,16 +29,22 @@
                     <div class="fly-admin-box" th:data-id="${talk.id}" th:if="${loginUser!=null}">
                         <span th:if="${talk.canDelete}" class="layui-btn layui-btn-xs talk-admin" type="del">删除</span>
 
-                        <span th:if="${talk.canSticky&&(!talk.sticky)}" class="layui-btn layui-btn-xs talk-admin" type="set" field="stick" rank="1">置顶</span>
-                        <span th:if="${talk.sticky&&talk.canSticky}" class="layui-btn layui-btn-xs talk-admin" type="set" field="stick" rank="0" style="background-color:#ccc;">取消置顶</span>
+                        <span th:if="${talk.canSticky&&(!talk.sticky)}" class="layui-btn layui-btn-xs talk-admin"
+                              type="set" field="stick" rank="1">置顶</span>
+                        <span th:if="${talk.sticky&&talk.canSticky}" class="layui-btn layui-btn-xs talk-admin"
+                              type="set" field="stick" rank="0" style="background-color:#ccc;">取消置顶</span>
 
-                        <span th:if="${talk.canEssence&&(!talk.essence)}" class="layui-btn layui-btn-xs talk-admin" type="set" field="essence" rank="1">加精</span>
-                        <span th:if="${talk.canEssence&&(talk.essence)}" class="layui-btn layui-btn-xs talk-admin" type="set" field="essence" rank="0" style="background-color:#ccc;">取消加精</span>
-                        <span th:if="${talk.canPromote}" class="layui-btn layui-btn-xs talk-admin" type="set" field="promote" rank="1">提升</span>
+                        <span th:if="${talk.canEssence&&(!talk.essence)}" class="layui-btn layui-btn-xs talk-admin"
+                              type="set" field="essence" rank="1">加精</span>
+                        <span th:if="${talk.canEssence&&(talk.essence)}" class="layui-btn layui-btn-xs talk-admin"
+                              type="set" field="essence" rank="0" style="background-color:#ccc;">取消加精</span>
+                        <span th:if="${talk.canPromote}" class="layui-btn layui-btn-xs talk-admin" type="set"
+                              field="promote" rank="1">提升</span>
                         <!--span th:if="${talk.canClassify}" class="layui-btn layui-btn-xs talk-admin" id="admin-btn">快改</span-->
                     </div>
                     <span class="fly-list-nums">
-            <a href="#comment"><i class="iconfont" title="回复">&#xe60c;</i><span th:text="${talk.commentCount}"></span></a>
+            <a href="#comment"><i class="iconfont" title="回复">&#xe60c;</i><span
+                    th:text="${talk.commentCount}"></span></a>
             <i class="iconfont" title="浏览">&#xe60b;</i><span th:text="${talk.viewCount}"></span>
           </span>
                 </div>
@@ -54,21 +56,29 @@
                     <div class="fly-detail-user">
                         <a th:href="${'/user/'+talk.user.id}" class="fly-link" target="_blank">
                             <i th:if="${talk.user.vipRank==1}" class="layui-icon fly-list-kiss" title="红砖会员等级：LV1">&#xe735</i>
-                            <cite th:class="${talk.user.vipRank==1? 'fly-list-kiss':''}" th:text="${talk.user.userName}"></cite>
+                            <cite th:class="${talk.user.vipRank==1? 'fly-list-kiss':''}"
+                                  th:text="${talk.user.userName}"></cite>
                             <i class="layui-badge fly-badge-vip layui-bg-gray" th:text="${talk.user.groupStr}"></i>
                         </a>
-                        <span th:text="${talk.gmtModifiedStr}"></span><th:block th:text="${talk.edited?' 编辑':' 发表'}"></th:block>
+                        <span th:text="${talk.gmtModifiedStr}"></span>
+                        <th:block th:text="${talk.edited?' 编辑':' 发表'}"></th:block>
                     </div>
                     <div class="detail-hits" id="LAY_jieAdmin" data-id="123">
-                        <span style="padding-right: 10px; color: #FF7200" >点击群号免费加入尼特社区交流群：<a target="_blank" th:href="${@environment.getProperty('site.info.contactQunUrl')}" th:text="${@environment.getProperty('site.info.contactQun')}"></a>。</span>
+                        <span style="padding-right: 10px; color: #FF7200">点击群号免费加入尼特社区交流群：<a target="_blank"
+                                                                                             th:href="${@environment.getProperty('site.info.contactQunUrl')}"
+                                                                                             th:text="${@environment.getProperty('site.info.contactQun')}"></a>。</span>
                         <!--span th:if="${loginUser!=null&&question.canEdit}" class="layui-btn layui-btn-xs jie-admin" type="edit"><a th:href="@{'/p/publish/'+${question.id}}" style="margin-left: -5px;"><i class="layui-icon">&#xe642;</i>编辑</a></span-->
                         <!--span th:data-id="${question.id}" onclick="like_question(this)" class="layui-btn layui-btn-xs layui-btn-warm"><i class="layui-icon">&#xe600;</i><th:block th:text="${question.favorite?'已':''}"></th:block>收藏(<span th:id="${'questionlikecount-'+question.id}" th:text="${question.likeCount}"></span>)</span-->
                     </div>
                 </div>
-                <div style="margin-top: 5px;margin-bottom: -15px;text-align: center" class="html5plus-hide layui-hide-sm">
-                    <a class="layui-btn layui-btn-radius layui-btn-primary layui-btn-fluid" href="javascript:downloadApp()" style="color: red">打开或者下载<i class="layui-icon">&#xe63b;</i>APP，畅享极致体验</a>
+                <div style="margin-top: 5px;margin-bottom: -15px;text-align: center"
+                     class="html5plus-hide layui-hide-sm">
+                    <a class="layui-btn layui-btn-radius layui-btn-primary layui-btn-fluid"
+                       href="javascript:downloadApp()" style="color: red">打开或者下载<i class="layui-icon">&#xe63b;</i>APP，畅享极致体验</a>
                 </div>
-                <div style="margin-top: 20px;margin-bottom: 20px;min-height:30px" class="detail-body layui-text layui-table photos p-detail" id="descriptionP" th:text="${talk.description}">
+                <div style="margin-top: 20px;margin-bottom: 20px;min-height:30px"
+                     class="detail-body layui-text layui-table photos p-detail" id="descriptionP"
+                     th:text="${talk.description}">
                 </div>
                 <div id="layer-photos-t" class="layer-photos-t">
                     <ul class="jieda" id="jieda" th:each="image : ${talk.imageUrls}">
@@ -77,8 +87,14 @@
                 </div>
                 <div th:data-id="${talk.id}" style="text-align: center;margin-top: 10px">
                     <!--span th:id="${'thumbicon-'+talk.id}" th:data-id="${talk.id}" onclick="like_question(this)" style="font-size: 15px; color: #FFB800;cursor: pointer"><i class="layui-icon">&#xe68c;</i>喜欢(<span th:id="${'likecount-'+talk.id}" th:text="${talk.likeCount}"></span>)</span-->
-                    <span class="talk-admin" type="like" th:id="${'thumbicon-'+talk.id}"  style="font-size: 15px; color: #FFB800;cursor: pointer"><i th:id="${'talkLikeIcon-'+talk.id}" class="layui-icon" th:text="${talk.favorite?'&#xe68f;':'&#xe68c;'}">&#xe68c;</i><span th:id="${'talkLikeText-'+talk.id}" th:text="${talk.favorite?'已':''}"></span>喜欢(<span th:id="${'talkLikeCount-'+talk.id}" th:text="${talk.likeCount}"></span>)</span>
-                    <span class="copyshare"><i class="layui-icon" style="font-size: 15px; color: #1E9FFF;cursor: pointer">&#xe641; 分享</i></span>
+                    <span class="talk-admin" type="like" th:id="${'thumbicon-'+talk.id}"
+                          style="font-size: 15px; color: #FFB800;cursor: pointer"><i th:id="${'talkLikeIcon-'+talk.id}"
+                                                                                     class="layui-icon"
+                                                                                     th:text="${talk.favorite?'&#xe68f;':'&#xe68c;'}">&#xe68c;</i><span
+                            th:id="${'talkLikeText-'+talk.id}" th:text="${talk.favorite?'已':''}"></span>喜欢(<span
+                            th:id="${'talkLikeCount-'+talk.id}" th:text="${talk.likeCount}"></span>)</span>
+                    <span class="copyshare"><i class="layui-icon"
+                                               style="font-size: 15px; color: #1E9FFF;cursor: pointer">&#xe641; 分享</i></span>
                 </div><!--分享-->
             </div>
 
@@ -96,9 +112,12 @@
                             </a>
                             <div class="fly-detail-user">
                                 <a th:href="${'/user/'+comment.user.id}" class="fly-link" target="_blank">
-                                    <i th:if="${comment.user.vipRank==1}" class="layui-icon fly-list-kiss" title="红砖会员等级：LV1">&#xe735</i>
-                                    <cite th:class="${comment.user.vipRank==1? 'fly-list-kiss':''}" th:text="${comment.user.userName}"></cite>
-                                    <i class="layui-badge fly-badge-vip layui-bg-gray" th:text="${comment.user.groupStr}"></i>
+                                    <i th:if="${comment.user.vipRank==1}" class="layui-icon fly-list-kiss"
+                                       title="红砖会员等级：LV1">&#xe735</i>
+                                    <cite th:class="${comment.user.vipRank==1? 'fly-list-kiss':''}"
+                                          th:text="${comment.user.userName}"></cite>
+                                    <i class="layui-badge fly-badge-vip layui-bg-gray"
+                                       th:text="${comment.user.groupStr}"></i>
                                 </a>
                                 <span th:if="${comment.user.id == talk.user.id}">(作者)</span>
                                 <!--
@@ -120,9 +139,10 @@
 
                         </div>
                         <div class="jieda-reply">
-              <span class="jieda-zan"  th:id="${'thumbicon-'+comment.id}">
+              <span class="jieda-zan" th:id="${'thumbicon-'+comment.id}">
                 <i class="iconfont icon-zan" th:data-id="${comment.id}" onclick="like_comment(this)"></i>
-                <em th:id="${'likecount-'+comment.id}" th:text="${comment.likeCount}" th:class="${comment.likeCount != 0}? 'zanok' : ''"></em>
+                <em th:id="${'likecount-'+comment.id}" th:text="${comment.likeCount}"
+                    th:class="${comment.likeCount != 0}? 'zanok' : ''"></em>
               </span>
                             <span th:data-id="${comment.id}" onclick="collapseComments(this,12)">
                 <i class="iconfont icon-svgmoban53"></i>
@@ -130,7 +150,8 @@
               </span>
                             <div class="jieda-admin" th:if="${loginUser!=null}">
                                 <span type="edit" th:if="${comment.commentator==loginUser.id}">编辑</span>
-                                <span type="del" th:if="${loginUser.groupId>18||comment.commentator==loginUser.id}">删除</span>
+                                <span type="del"
+                                      th:if="${loginUser.groupId>18||comment.commentator==loginUser.id}">删除</span>
                                 <span class="jieda-accept" type="accept" th:if="${loginUser.groupId>18}">采纳</span>
                             </div>
                         </div>
@@ -142,8 +163,9 @@
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <input type="text" class="form-control layui-input" placeholder=""
                                        th:id="${'input-'+comment.id}">
-                                <button th:id="${'btn-'+comment.id}" type="button" class="layui-btn  rightbtn" onclick="comment(this)"
-                                        th:data-id="${comment.id}" data-type=12 >评论
+                                <button th:id="${'btn-'+comment.id}" type="button" class="layui-btn  rightbtn"
+                                        onclick="comment(this)"
+                                        th:data-id="${comment.id}" data-type=12>评论
                                 </button>
                             </div>
                         </div>
@@ -161,12 +183,14 @@
                     <div class="layui-form-item layui-form-text">
                         <a name="comment"></a>
                         <div class="layui-input-block">
-                            <textarea id="comment_content" name="content" required lay-verify="required" placeholder="请输入内容"  class="layui-textarea fly-editor" style="height: 150px;"></textarea>
+                            <textarea id="comment_content" name="content" required lay-verify="required"
+                                      placeholder="请输入内容" class="layui-textarea fly-editor"
+                                      style="height: 150px;"></textarea>
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <input type="hidden" name="jid" value="123">
-                        <button id="commentTalkBtn" class="layui-btn" lay-filter="*" >回复</button>
+                        <button id="commentTalkBtn" class="layui-btn" lay-filter="*">回复</button>
                     </div>
                     <!--div id="commentQBtn" style="width: 100px;height: 36px;">
                         <div class="vaptcha-init-main">
@@ -190,7 +214,7 @@
 <script src="https://v.vaptcha.com/v3.js"></script>
 <script type="text/javascript">
     //token = '';
-    userIp=returnCitySN["cip"];
+    userIp = returnCitySN["cip"];
     vaptcha({
         vid: '[[${vaptcha_vid}]]', // 验证单元id
         type: "invisible", // 显示类型 隐藏式
@@ -217,10 +241,10 @@
                 vaptchaObj.reset(); //重置验证码
                 return;
             }
-            if (comment_content.length>1023) {
+            if (comment_content.length > 1023) {
                 swal({
                     title: "回复超过1024个字长!",
-                    text: "你的回复字数为:"+content.length+"，请精简您的发言!",
+                    text: "你的回复字数为:" + content.length + "，请精简您的发言!",
                     icon: "warning",
                     button: "确认",
                 });
@@ -243,7 +267,7 @@
                 success: function (data) {
                     if (data.success == 1) {
                         //成功
-                        comment2target(talk_id,11,comment_content,userIp, token);
+                        comment2target(talk_id, 11, comment_content, userIp, token);
                         //    token = vaptchaObj.getToken();
                         //    console.log("token:"+token);
                     } else if (data.success == 0) {
@@ -279,11 +303,11 @@
     });
 
 
-
 </script>
 <script type="text/javascript">
     //addHtml5Plus();
-    var con = '我在尼特社区找到一篇好文章《'+document.title+'》，快来戳后面的链接来围观吧！---';
+    var con = '我在尼特社区找到一篇好文章《' + document.title + '》，快来戳后面的链接来围观吧！---';
+
     function myPlusShare() {
         window.plusShare({
             title: document.title,//应用名字或者文章标题
@@ -291,15 +315,17 @@
             href: location.href,//分享出去后，点击跳转地址
             thumbs: ["https://niter.cn/images/N80.png"], //分享缩略图
             //pic :["https://niter.cn/images/N80.png"],//分享图片
-        }, function(result) {
+        }, function (result) {
             //分享回调
-        });  }
+        });
+    }
+
     var clipboard = new ClipboardJS('.copyshare', {
-        text: function() {
+        text: function () {
             //     var con = '我在凯文社区找到一篇好文章《'+document.title+'》，快来围观吧！---'+this.location.href;
             //alert("进来了"+document.title+this.location.href);
             //alert(con);
-            if(navigator.userAgent.indexOf("Html5Plus") > -1) {
+            if (navigator.userAgent.indexOf("Html5Plus") > -1) {
                 //5+ 原生分享
                 myPlusShare();
             } else {
@@ -307,15 +333,15 @@
                 swal("复制成功!", "赶快去粘贴分享文章吧~", "success");
             }
             //swal("复制成功!", "赶快去分享文章吧~", "success");
-            return con+location.href+' ';
+            return con + location.href + ' ';
         }
     });
 
-    clipboard.on('success', function(e) {
+    clipboard.on('success', function (e) {
         console.log(e);
     });
 
-    clipboard.on('error', function(e) {
+    clipboard.on('error', function (e) {
         console.log(e);
     });
 </script>
@@ -326,19 +352,19 @@
     layui.cache.page = 'jie';
     layui.cache.user = {
         name: '[[${loginUser!=null?loginuser.userName:"匿名用户"}]]'
-        ,uid: [[${loginUser!=null?loginUser.id:-1}]]
-        ,avatar: '[[${loginUser!=null?loginUser.avatarUrl:"/images/avatar/default.png"}]]'
-        ,experience: 83
-        ,sex: '男'
+        , uid: [[${loginUser!=null?loginUser.id:-1}]]
+        , avatar: '[[${loginUser!=null?loginUser.avatarUrl:"/images/avatar/default.png"}]]'
+        , experience: 83
+        , sex: '男'
     };
     layui.config({
         version: "3.0.0"
-        ,base: '/mods/'
+        , base: '/mods/'
     }).extend({
         fly: 'index2'
-    }).use(['fly', 'face','element', 'layer', 'util'], function(){
+    }).use(['fly', 'face', 'element', 'layer', 'util'], function () {
         var $ = layui.$
-            ,fly = layui.fly;
+            , fly = layui.fly;
         var element = layui.element;
         var layer = layui.layer;
         var util = layui.util;
@@ -346,25 +372,25 @@
 
         //如果你是采用模版自带的编辑器，你需要开启以下语句来解析。
 
-        $('.detail-body').each(function(){
+        $('.detail-body').each(function () {
             var othis = $(this), html = othis.html();
             othis.html(fly.content(html));
         });
 
         //监听折叠
-        element.on('collapse(sub-comments)', function(data){
-            layer.msg('展开状态：'+ data.show);
+        element.on('collapse(sub-comments)', function (data) {
+            layer.msg('展开状态：' + data.show);
         });
 
         layer.photos({
             photos: '#layer-photos-t'
-            ,anim: 1 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
+            , anim: 1 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
         });
         util.fixbar({
             bar1: '&#xe611;'
-            ,bgcolor: '#009688'
-            ,click: function(type){
-                if(type === 'bar1'){
+            , bgcolor: '#009688'
+            , click: function (type) {
+                if (type === 'bar1') {
                     //layer.msg('打开 index.js，开启发表新帖的路径');
                     location.href = '#comment';
                 }

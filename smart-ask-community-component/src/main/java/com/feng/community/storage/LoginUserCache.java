@@ -12,10 +12,10 @@ import tk.mybatis.mapper.entity.Example;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import static com.feng.community.constant.RedisKey.LOGIN_USERS;
+import static com.feng.community.constant.StorageIndexEnum.*;
 
 /**
  * 暂时用作网站最近访客
@@ -35,7 +35,6 @@ public class LoginUserCache {
 
     private List<TbUser> loginUsers = new ArrayList<>();
     public static final long LOGIN_USER_EXPIRE_TIME = 10 * 60; // 缓存过期时间
-    public static final int ZSET_MAX_SIZE = 15;
 
     public void updateLoginUsers(List<TbUser> loginUsers) {
         this.loginUsers = loginUsers;
@@ -49,7 +48,7 @@ public class LoginUserCache {
     }
 
     public Map<Object, Object> getLoginUserMap() {
-        return redisHelper.getZSetRank(LOGIN_USERS.getPrefix(), 0, -1)
+        return redisHelper.getZSetRank(LOGIN_USERS.getPrefix(), REDIS_START_INDEX.getIndex(), REDIS_END_INDEX.getIndex())
                 .stream()
                 .collect(
                         Collectors.toMap(ZSetOperations.TypedTuple::getValue,
@@ -75,8 +74,8 @@ public class LoginUserCache {
         String key = LOGIN_USERS.getPrefix();
         long zSetSize = redisHelper.getZSetSize(key);
         // 之保留缓存内15个最近登录用户
-        if (zSetSize > ZSET_MAX_SIZE) {
-            redisHelper.removeZsetByRange(key, 0, zSetSize - ZSET_MAX_SIZE);
+        if (zSetSize > REDIS_ZSET_MAX.getIndex()) {
+            redisHelper.removeZsetByRange(key, 0, zSetSize - REDIS_ZSET_MAX.getIndex());
         }
     }
 }

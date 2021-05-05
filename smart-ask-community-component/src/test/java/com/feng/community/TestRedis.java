@@ -1,5 +1,6 @@
 package com.feng.community;
 
+import static com.feng.community.constant.RedisKey.HOT_TAGS;
 import static com.feng.community.constant.RedisKey.SEND_MAIL_CODE;
 
 import com.feng.community.entity.TbUser;
@@ -9,8 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.feng.community.helper.RedisHelper;
+import org.springframework.data.redis.core.ZSetOperations;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author fengyunan
@@ -37,6 +40,12 @@ public class TestRedis {
     public void set() {
         redisHelper.set("123", "456");
         System.out.println(redisHelper.get("123"));
+    }
+
+    @Test
+    public void getZset(){
+        Set<ZSetOperations.TypedTuple<Object>> zSetRank = redisHelper.getZSetRank(HOT_TAGS.getPrefix(), 0, -1);
+        System.out.println(zSetRank);
     }
 
     @Test

@@ -7,7 +7,6 @@
     -->
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="type" jdbcType="BIGINT" property="type" />
-    <result column="gold" jdbcType="INTEGER" property="gold" />
     <result column="created" jdbcType="BIGINT" property="created" />
     <result column="updated" jdbcType="BIGINT" property="updated" />
     <result column="status" jdbcType="BIGINT" property="status" />
@@ -15,10 +14,10 @@
     <result column="tag" jdbcType="VARCHAR" property="tag" />
     <result column="permission" jdbcType="INTEGER" property="permission" />
     <result column="like_count" jdbcType="INTEGER" property="likeCount" />
-    <result column="view_count" jdbcType="INTEGER" property="viewCount" />
+    <result column="view_count" jdbcType="BIGINT" property="viewCount" />
     <result column="gmt_latest_comment" jdbcType="BIGINT" property="gmtLatestComment" />
     <result column="comment_count" jdbcType="BIGINT" property="commentCount" />
-    <result column="title" jdbcType="LONGVARCHAR" property="title" />
-    <result column="description" jdbcType="LONGVARCHAR" property="description" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
   </resultMap>
 </mapper>

@@ -587,6 +587,11 @@ public class RedisHelper {
         return redisTemplate.opsForZSet().size(key);
     }
 
+    // 移除指定value
+    public void removeZsetByValue(String key, Object... value) {
+        redisTemplate.opsForZSet().remove(key, value);
+    }
+
     // remove 指定数量
     public long removeZsetByRange(String key, long start, long end) {
         return redisTemplate.opsForZSet().removeRange(key, start, end);

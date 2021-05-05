@@ -19,11 +19,6 @@ public class TbPost {
      */
     private Long type;
 
-    /**
-     * 悬赏金币
-     */
-    private Integer gold;
-
     private Long created;
 
     private Long updated;
@@ -33,30 +28,18 @@ public class TbPost {
      */
     private Long status;
 
-    /**
-     * 作者id
-     */
     @Column(name = "author_id")
     private Long authorId;
 
-    /**
-     * 标签
-     */
     private String tag;
 
     private Integer permission;
 
-    /**
-     * 收藏数
-     */
     @Column(name = "like_count")
     private Integer likeCount;
 
-    /**
-     * 点击量
-     */
     @Column(name = "view_count")
-    private Integer viewCount;
+    private Long viewCount;
 
     @Column(name = "gmt_latest_comment")
     private Long gmtLatestComment;
@@ -64,9 +47,6 @@ public class TbPost {
     @Column(name = "comment_count")
     private Long commentCount;
 
-    /**
-     * 标题
-     */
     private String title;
 
     private String description;
@@ -128,24 +108,6 @@ public class TbPost {
     }
 
     /**
-     * 获取悬赏金币
-     *
-     * @return gold - 悬赏金币
-     */
-    public Integer getGold() {
-        return gold;
-    }
-
-    /**
-     * 设置悬赏金币
-     *
-     * @param gold 悬赏金币
-     */
-    public void setGold(Integer gold) {
-        this.gold = gold;
-    }
-
-    /**
      * @return created
      */
     public Long getCreated() {
@@ -192,36 +154,28 @@ public class TbPost {
     }
 
     /**
-     * 获取作者id
-     *
-     * @return author_id - 作者id
+     * @return author_id
      */
     public Long getAuthorId() {
         return authorId;
     }
 
     /**
-     * 设置作者id
-     *
-     * @param authorId 作者id
+     * @param authorId
      */
     public void setAuthorId(Long authorId) {
         this.authorId = authorId;
     }
 
     /**
-     * 获取标签
-     *
-     * @return tag - 标签
+     * @return tag
      */
     public String getTag() {
         return tag;
     }
 
     /**
-     * 设置标签
-     *
-     * @param tag 标签
+     * @param tag
      */
     public void setTag(String tag) {
         this.tag = tag;
@@ -242,38 +196,30 @@ public class TbPost {
     }
 
     /**
-     * 获取收藏数
-     *
-     * @return like_count - 收藏数
+     * @return like_count
      */
     public Integer getLikeCount() {
         return likeCount;
     }
 
     /**
-     * 设置收藏数
-     *
-     * @param likeCount 收藏数
+     * @param likeCount
      */
     public void setLikeCount(Integer likeCount) {
         this.likeCount = likeCount;
     }
 
     /**
-     * 获取点击量
-     *
-     * @return view_count - 点击量
+     * @return view_count
      */
-    public Integer getViewCount() {
+    public Long getViewCount() {
         return viewCount;
     }
 
     /**
-     * 设置点击量
-     *
-     * @param viewCount 点击量
+     * @param viewCount
      */
-    public void setViewCount(Integer viewCount) {
+    public void setViewCount(Long viewCount) {
         this.viewCount = viewCount;
     }
 
@@ -306,18 +252,14 @@ public class TbPost {
     }
 
     /**
-     * 获取标题
-     *
-     * @return title - 标题
+     * @return title
      */
     public String getTitle() {
         return title;
     }
 
     /**
-     * 设置标题
-     *
-     * @param title 标题
+     * @param title
      */
     public void setTitle(String title) {
         this.title = title;

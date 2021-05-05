@@ -17,6 +17,12 @@ import com.feng.community.service.comment.CommentService;
 import com.feng.community.service.like.LikeService;
 import com.feng.community.service.post.PostService;
 import com.feng.community.service.user.UserInfoService;
+import com.feng.community.storage.HotPostCache;
+import com.feng.community.storage.HotTagCache;
+import com.feng.community.storage.TopPostsCache;
+import com.feng.community.storage.ZeroCommentPostCache;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.BeanUtils;
@@ -28,11 +34,12 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static com.feng.community.constant.LikeConstant.TYPE_COLLECTION;
 import static com.feng.community.constant.PageConstant.PAGE_ORDER_DEFAULT;
-import static com.feng.community.constant.PostConstant.VIEW_COUNT_STEP;
+import static com.feng.community.constant.PostConstant.*;
 import static com.feng.community.constant.TimeConstant.FORMAT;
 
 /**
@@ -57,55 +64,192 @@ public class PostServiceImpl implements PostService {
     private UserInfoService userInfoService;
     @Autowired
     private LikeService likeService;
+    @Autowired
+    private TopPostsCache topPostsCache;
+    @Autowired
+    private HotTagCache hotTagCache;
+    @Autowired
+    private ZeroCommentPostCache zeroCommentPostCache;
+    @Autowired
+    private HotPostCache hotPostCache;
+
 
     @Override
-    public List<TbPost> getTopPost(String search, String tag, String sort, Integer type) {
-        Example example = new Example(TbPost.class);
-        example.createCriteria().andEqualTo("type", type);
-        List<TbPost> tbPosts = tbPostMapper.selectByExample(example);
-        return tbPosts;
+    public List<PostDTO> getTopPost(String search, String tag, String sort, Integer type) {
+        // 从redis获取topPosts
+        List<TbPost> posts = topPostsCache.getTopPosts().stream().map(e -> {
+            Long postId = Long.valueOf(String.valueOf(e));
+            Example example = new Example(TbPost.class);
+            example.createCriteria().andEqualTo("id", postId);
+            List<TbPost> tbPosts = tbPostMapper.selectByExample(example);
+            return tbPosts.get(0);
+        }).collect(Collectors.toList());
+        // 处理搜索
+        if (!StringUtils.isBlank(search)) {
+            for (int i = 0; i < posts.size(); i++) {
+                TbPost tbPost = posts.get(i);
+                if (!tbPost.getTitle().contains(search)) {
+                    posts.remove(tbPost);
+                    i--;
+                }
+            }
+        }
+        // 处理标签
+        if (!StringUtils.isBlank(tag)) {
+            for (int i = 0; i < posts.size(); i++) {
+                TbPost tbPost = posts.get(i);
+                String[] tags = StringUtils.split(tbPost.getTag(), ",");
+                if (!ArrayUtils.contains(tags, tag)) {
+                    posts.remove(tbPost);
+                    i--;
+                }
+            }
+        }
+        // 处理type
+        if (type != null) {
+            for (int i = 0; i < posts.size(); i++) {
+                TbPost tbPost = posts.get(i);
+                if (!tbPost.getType().equals(Long.valueOf(type))) {
+                    posts.remove(tbPost);
+                    i--;
+                }
+            }
+        }
+        return posts.stream().map(e -> {
+            PostDTO postDTO = new PostDTO();
+            TbUser user = tbUserMapper.selectByPrimaryKey(e.getAuthorId());
+            BeanUtils.copyProperties(e, postDTO);
+            postDTO.setUser(user);
+            postDTO.setUpdatedStr(DateFormatUtils.format(postDTO.getUpdated(), FORMAT));
+            return postDTO;
+        }).collect(Collectors.toList());
     }
 
     @Override
     public PaginationDTO getPostByType(String search, String tag, String sort, Integer page, Integer size, Integer type) {
         PaginationDTO<PostDTO> paginationDTO = new PaginationDTO<>();
 
-        Integer totalPage;
+        Integer totalPage = 0;
         Example example = new Example(TbPost.class);
-        example.createCriteria().andEqualTo("type", type);
-        int totalCount = tbPostMapper.selectCountByExample(example);
-        if (totalCount % size == 0) {
-            totalPage = totalCount / size;
-        } else {
-            totalPage = totalCount / size + 1;
+        Example.Criteria criteria = example.createCriteria();
+        if (type != null) {
+            criteria.andEqualTo("type", type);
         }
-        if (page < 1) {
-            page = 1;
-        }
-        if (page > totalPage) {
-            page = totalPage;
+        if (search != null && !search.equals("")) {
+            criteria.andLike("title", search);
         }
 
-        //   Example example = new Example(TbPost.class);
-        //  example.createCriteria().andEqualTo("type", type);
-        List<TbPost> tbPosts = tbPostMapper.selectByExample(example);
+        List<Long> postIds = null;
 
-        List<PostDTO> postDTOList = tbPosts.stream().map(e -> {
-            PostDTO postDTO = new PostDTO();
-            BeanUtils.copyProperties(e, postDTO);
+        if (sort != null) {
+            switch (sort) {
+                case HOT7:
+                    postIds = hotPostCache.getHot7Posts()
+                            .stream()
+                            .map(e -> Long.valueOf(String.valueOf(e)))
+                            .collect(Collectors.toList());
+                    break;
+                case HOT30:
+                    postIds = hotPostCache.getHot30Posts()
+                            .stream()
+                            .map(e -> Long.valueOf(String.valueOf(e)))
+                            .collect(Collectors.toList());
+                    break;
+                case NO:
+                    postIds = zeroCommentPostCache.getZeroCommentPosts()
+                            .stream()
+                            .map(e -> Long.valueOf(String.valueOf(e)))
+                            .collect(Collectors.toList());
+                    break;
+            }
+        }
+        List<TbPost> tbPosts = new ArrayList<>();
+        List<PostDTO> postDTOList = null;
+        int totalCount = 0;
+        // 榜单帖子,从缓存里拿
+        if (postIds != null) {
+            List<TbPost> result = new ArrayList<>();
+            List<TbPost> tbPosts1 = tbPostMapper.selectByExample(example);
+            for (TbPost tbPost : tbPosts1) {
+                for (Long postId : postIds) {
+                    if (tbPost.getId().equals(postId)) {
+                        tbPosts.add(tbPost);
+                    }
+                }
+            }
+            totalCount = tbPosts.size();
 
-            TbUser tbUser = tbUserMapper.selectByPrimaryKey(e.getAuthorId());
+            if (totalCount % size == 0) {
+                totalPage = totalCount / size;
+            } else {
+                totalPage = totalCount / size + 1;
+            }
+            if (page < 1) {
+                page = 1;
+            }
+            if (page > totalPage) {
+                page = totalPage;
+            }
+            int start = page < 1 ? 0 : size * (page - 1);
+            if (totalCount < size) {
+                result = tbPosts;
+            } else if (totalCount % size == 0) {
+                for (int i = start; i < size; i++) {
+                    result.add(tbPosts.get(i));
+                }
+            } else {
+                if (page.equals(totalPage)) {
+                    for (int i = start; i < totalCount - size * (totalPage - 1); i++) {
+                        result.add(tbPosts.get(i));
+                    }
+                } else {
+                    for (int i = start; i < size; i++) {
+                        result.add(tbPosts.get(i));
+                    }
+                }
+            }
 
 
-            postDTO.setUser(tbUser);
-            return postDTO;
-        }).collect(Collectors.toList());
+            postDTOList = result.stream().map(e -> {
+                PostDTO postDTO = new PostDTO();
+                BeanUtils.copyProperties(e, postDTO);
+                TbUser tbUser = tbUserMapper.selectByPrimaryKey(e.getAuthorId());
+                postDTO.setUser(tbUser);
+                return postDTO;
+            }).collect(Collectors.toList());
+
+        }
+        // 非榜单
+        else {
+            totalCount = tbPostMapper.selectCountByExample(example);
+
+            if (totalCount % size == 0) {
+                totalPage = totalCount / size;
+            } else {
+                totalPage = totalCount / size + 1;
+            }
+            if (page < 1) {
+                page = 1;
+            }
+            if (page > totalPage) {
+                page = totalPage;
+            }
+
+            Integer offset = page < 1 ? 0 : size * (page - 1);
+            tbPosts = tbPostMapper.selectByExampleAndRowBounds(example, new RowBounds(offset, size));
+
+            postDTOList = tbPosts.stream().map(e -> {
+                PostDTO postDTO = new PostDTO();
+                BeanUtils.copyProperties(e, postDTO);
+                TbUser tbUser = tbUserMapper.selectByPrimaryKey(e.getAuthorId());
+                postDTO.setUser(tbUser);
+                return postDTO;
+            }).collect(Collectors.toList());
+
+        }
 
         paginationDTO.setData(postDTOList);
-
-
         paginationDTO.setPagination(totalPage, page);
-
         return paginationDTO;
     }
 
@@ -114,7 +258,7 @@ public class PostServiceImpl implements PostService {
         Integer totalPage;
         Example example = new Example(TbPost.class);
         example.createCriteria().andEqualTo("authorId", userId);
-        Integer totalCount = (int) tbPostMapper.selectCountByExample(example);
+        Integer totalCount = tbPostMapper.selectCountByExample(example);
         if (totalCount % size == 0) {
             totalPage = totalCount / size;
         } else {
@@ -171,7 +315,6 @@ public class PostServiceImpl implements PostService {
         //是否关注、收藏
         postDTO.setFavorite(likeService.isLiked(loginUser, postId));
         // 是否可以编辑、删除
-
         if (loginUser.getId().equals(tbPost.getAuthorId())) {
             postDTO.setCanEdit(true);
             postDTO.setCanDelete(true);
@@ -256,6 +399,16 @@ public class PostServiceImpl implements PostService {
         TbPost tbPost = tbPostMapper.selectByPrimaryKey(postId);
         if (tbPost.getAuthorId().equals(userId)) {
             c = tbPostMapper.deleteByPrimaryKey(postId);
+            // 同步redis
+            if (c != 0) {
+                // 移除topPost
+                topPostsCache.delTopPost(postId);
+                String[] split = tbPost.getTag().split(",");
+                for (int i = 0; i < split.length; i++) {
+                    // 移除hotTags
+                    hotTagCache.delHotTag(split[i]);
+                }
+            }
             // 删除评论
             Example example = new Example(TbComment.class);
             example.createCriteria().andEqualTo("postId", postId);

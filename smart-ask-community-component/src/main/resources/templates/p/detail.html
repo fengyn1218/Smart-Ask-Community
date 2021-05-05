@@ -144,8 +144,8 @@
                                 <span type="del"
                                       th:if="${comment.authorId==loginUser.id||postDTO.user.id==loginUser.id}"
                                       onclick="delComment()">删除</span>
-                                <span class="jieda-accept" type="accept"
-                                      th:if="${comment.postId==loginUser.id}">采纳</span>
+<!--                                <span class="jieda-accept" type="accept"-->
+<!--                                      th:if="${comment.postId==loginUser.id}">采纳</span>-->
                             </div>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 layui-colla-content sub-comments"
@@ -356,7 +356,7 @@
                 }).then((value) => {
                     window.location.reload();
                 });
-            } else swal("Oh,no!", "" + res.msg, "error");
+            } else swal("Oh,no!", "" + res.message, "error");
         });
     }
 </script>
@@ -380,7 +380,7 @@
                 }).then((value) => {
                     window.location.reload();
                 });
-            } else swal("Oh,no!", "" + res.msg, "error");
+            } else swal("Oh,no!", "" + res.message, "error");
         });
 
     }

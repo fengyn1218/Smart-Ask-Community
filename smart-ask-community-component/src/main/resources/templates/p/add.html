@@ -8,6 +8,22 @@
     <th:block th:insert="~{common/header :: head}"></th:block>
     <!--script src="/js/community.js" type="application/javascript"></script-->
     <script src="/js/moment.js" type="application/javascript"></script>
+    <script>
+        function error() {
+            var error = document.getElementById('error');
+            if (error == null) {
+                return;
+            }
+            var msg = error.textContent;
+            document.getElementById('title').value = '';
+            swal({
+                title: "哎哟...",
+                text: msg,
+                icon: "error",
+                button: "确认",
+            });
+        }
+    </script>
 </head>
 <body>
 
@@ -19,14 +35,13 @@
         <div class="layui-form layui-form-pane">
             <div class="layui-tab layui-tab-brief" lay-filter="user">
                 <ul class="layui-tab-title">
-                    <li class="layui-this">发表新帖 <span class="layui-bg-red" th:if="${error!=null}" th:text="${error}"
-                                                      id="error"></span></li>
+                    <li class="layui-this">发表新帖</li>
                 </ul>
                 <div class="layui-form layui-tab-content" id="LAY_ucm" style="padding: 20px 0;">
                     <div class="layui-tab-item layui-show">
                         <form action="/publish/post" method="post">
                             <div class="layui-row layui-col-space15 layui-form-item">
-                             <input type="hidden" name="id" th:value="${id}">
+                                <input type="hidden" name="id" th:value="${id}">
 
                                 <div class="">
                                     <label for="title" class="layui-form-label">标题</label>
@@ -46,7 +61,7 @@
                                           class="form-control"
                                           cols="30"
                                           rows="10"
-                                          style="display:none;"
+                                          style="display:none; "
                                 ></textarea>
                             </div>
 
@@ -115,6 +130,7 @@
                             <div class="layui-form-item">
                                 <button class="layui-btn" lay-submit>立即发布</button>
                                 <span class="layui-bg-red" th:if="${error!=null}" th:text="${error}" id="error"></span>
+                                <script>error()</script>
                             </div>
                         </form>
                     </div>
@@ -128,6 +144,7 @@
 <script type="text/javascript" src="/js/wangEditor3.min.js?v=1.92"></script>
 <script src="/js/myeditor.min.js?v=1.5"></script>
 <script src="/layui/layui.js"></script>
+
 <script>
 
     layui.config({

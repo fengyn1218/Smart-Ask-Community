@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.feng.community.dao.TalkMapper">
+  <resultMap id="BaseResultMap" type="com.feng.community.entity.Talk">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="tag" jdbcType="VARCHAR" property="tag" />
+    <result column="images" jdbcType="VARCHAR" property="images" />
+    <result column="video" jdbcType="VARCHAR" property="video" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="permission" jdbcType="INTEGER" property="permission" />
+    <result column="creator" jdbcType="BIGINT" property="creator" />
+    <result column="view_count" jdbcType="INTEGER" property="viewCount" />
+    <result column="comment_count" jdbcType="INTEGER" property="commentCount" />
+    <result column="like_count" jdbcType="INTEGER" property="likeCount" />
+    <result column="gmt_latest_comment" jdbcType="BIGINT" property="gmtLatestComment" />
+    <result column="created" jdbcType="BIGINT" property="created" />
+    <result column="updated" jdbcType="BIGINT" property="updated" />
+  </resultMap>
+</mapper>
