@@ -58,10 +58,10 @@ public class PublishController {
         String defaultDescription = "<p id=\"descriptionP\"></p>";
         description = description.replaceAll("<p id=\"descriptionP\"></p>", ""); //剔出每次编辑产生的冗余p标签
         // 审核用,提取出汉字
-        String reg = "[^\u4e00-\u9fa5]";
-        String des = description.replaceAll(reg, "");
-        title = title.trim();
-        tag = tag.trim();
+//        String reg = "[^\u4e00-\u9fa5]";
+//        String des = description.replaceAll(reg, "");
+//        title = title.trim();
+//        tag = tag.trim();
         model.addAttribute("title", title);
         model.addAttribute("tag", tag);
         model.addAttribute("tags", tagsCache.getTags());
@@ -83,11 +83,11 @@ public class PublishController {
             model.addAttribute("error", "标签不能为空");
             return "p/add";
         }
-        //审核
-        if (!examineService.isNormal(title) || !examineService.isNormal(des)) {
-            model.addAttribute("error", "您输入的内容不符合规定呦！");
-            return "p/add";
-        }
+//        //审核
+//        if (!examineService.isNormal(title) || !examineService.isNormal(des)) {
+//            model.addAttribute("error", "您输入的内容不符合规定呦！");
+//            return "p/add";
+//        }
         TbPost tbPost = new TbPost();
         if (id != null) {
             tbPost.setId(Long.valueOf(id));

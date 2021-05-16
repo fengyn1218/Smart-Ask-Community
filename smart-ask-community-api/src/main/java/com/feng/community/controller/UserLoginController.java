@@ -33,8 +33,10 @@ public class UserLoginController {
     }
 
     @PostMapping("login")
-    public String login(@RequestParam(required = true) String email, @RequestParam(required = true) String password,
+    public String login(@RequestParam(required = true) String email,
+                        @RequestParam(required = true) String password,
                         Model model, HttpServletRequest request, HttpServletResponse response) {
+        // 登录逻辑（放入缓存、更新最后登录时间）
         TbUser tbUser = userLoginService.login(email, password);
         //登录失败
         if (null == tbUser) {

@@ -135,10 +135,10 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public ResultView publish(Long postId, Long userId, String content, boolean isReComment) {
-        // 过文本审核
-        if (!examineService.isNormal(content)) {
-            return ResultView.fail("您输入的内容不符合规定哦！");
-        }
+//        // 过文本审核
+//        if (!examineService.isNormal(content)) {
+//            return ResultView.fail("您输入的内容不符合规定哦！");
+//        }
         TbComment comment = new TbComment();
         comment.setAuthorId(userId);
         comment.setContent(content);

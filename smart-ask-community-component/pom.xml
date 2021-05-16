@@ -15,7 +15,7 @@
     <artifactId>smart-ask-community-component</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <!--    <packaging>jar</packaging>-->
+        <packaging>jar</packaging>
 
     <dependencies>
         <dependency>

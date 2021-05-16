@@ -42,6 +42,7 @@ public class SendMailServiceImpl implements SendMailService {
     public ResultView updateEmail(String email, String code, String id) {
         Example example = new Example(TbUser.class);
         example.createCriteria().andEqualTo("email", email);
+        // 从数据库拿到信息
         List<TbUser> tbUsers = tbUserMapper.selectByExample(example);
         // 邮箱重复
         if (!CollectionUtils.isEmpty(tbUsers)) {

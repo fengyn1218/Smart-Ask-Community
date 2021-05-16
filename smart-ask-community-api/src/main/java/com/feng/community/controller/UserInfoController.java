@@ -191,7 +191,6 @@ public class UserInfoController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
             map.put("status", 0);
             map.put("msg", "");
             map.put("url", FILE_PATH + fileAfterName);

@@ -10,7 +10,6 @@ package com.feng.community.constant;
  * Created on 2021-03-08
  */
 public enum RedisKey {
-
     SEND_MAIL_CODE("send-mail-code"), // 邮箱验证码缓存
 
     LOGIN_USERS("login-user"), // 最近登录用户缓存
@@ -19,7 +18,6 @@ public enum RedisKey {
     TOP_POSTS("top-posts"), // 首页topPosts缓存
     HOT_WEEK_RANK("hot-7-rank"), // 周榜帖子
     HOT_MONTH_RANK("hot-30-rank"), // 月榜帖子
-
     ZERO_COMMENT_POSTS("zero-comment-posts"), //0评论帖子 (用作抢沙发)
 
     TAGS_COMMON("tags-common"), // 常用标签缓存
@@ -29,7 +27,6 @@ public enum RedisKey {
     TAGS_DB("tags-db"), // 数据库标签缓存
     TAGS_OTHER("tags-other"), // 其他标签缓存
     ;
-
     private String prefix;
 
     public String of(String string) {

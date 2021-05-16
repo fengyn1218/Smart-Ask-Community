@@ -58,6 +58,7 @@ public class SessionInterceptor implements HandlerInterceptor {
         Cookie[] cookies = request.getCookies();
         boolean hashToken = false;
 
+        // 验证Cookie中是否存在token，并进行校验
         if (cookies != null && cookies.length != 0) {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("token")) {
