@@ -1,6 +1,8 @@
 # Smart-Ask-Community
 一个智能问答社区，所谓“智能”，乃调用AI用作文本审核
 
+Ask [![这是个按钮 Status](http://59.110.23.184:8081/)](https://github.com/fengyn1218) [![Coverage Status](https://coveralls.io/repos/PhantomThief/buffer-trigger/badge.svg?branch=master)](https://coveralls.io/r/PhantomThief/buffer-trigger?branch=master)
+
 # 技术栈
 - JDK1.8开发环境（Intellij IDEA）
 - Spring Boot：底层支持框架(分模块架构，便于后续拆分微服务模块)
